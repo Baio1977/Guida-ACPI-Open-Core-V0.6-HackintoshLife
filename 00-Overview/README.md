@@ -1,33 +1,33 @@
-# Overview
+# Panoramica
 
-## ACPI Rename and Patch
+## Rinomina e patch ACPI
 
-- The rename method is not recommended, try to avoid it, e.g. `HDAS rename HDEF` , `EC0 rename EC` , `SSDT-OC-XOSI`. A special **caution** for those renaming `MethodObj` (e.g _STA、 _OSI).
-- Generally speaking:
-  - The OS patch is not neccessary. If components are restricted by a specific OS, please modify the ACPI patch accordingly. **Caution** for `OS Patch`
+-Il metodo di rinomina non è raccomandato, cerca di evitarlo, ad esempio `HDAS rename HDEF`,` EC0 rename EC`, `SSDT-OC-XOSI`. Una ** cautela ** speciale per coloro che rinominano` MethodObj` (ad esempio _STA , _OSI).
+-Parlando in generale:
+  -La patch del sistema operativo non è necessaria. Se i componenti sono limitati da un sistema operativo specifico, modificare la patch ACPI di conseguenza. ** Attenzione ** per `OS Patch`
 
-  - The keyboard brightness keys patch is not necessary for some machines. Applying `PS2 Keyboard Mapping & Brightness Function` instead.
+  -La patch per i tasti di luminosità della tastiera non è necessaria per alcune macchine.Applicando invece "PS2 Keyboard Mapping & Brightness Function".
 
-  - So far, the overwhelming majority of machines solve `instant wake` through `0D6D patch`.
+  -Finora, la stragrande maggioranza delle macchine risolve il "risveglio istantaneo" tramite la "patch 0D6D".
 
-  - For batterys, if data splitting is required, the renames and patches for the battery are neccessary.
+  -Per le batterie, se è richiesta la suddivisione dei dati, le ridenominazioni e le patch per la batteria sono necessarie.
   
-  - Most of Thinkpad machines require `PTSWAK extensional patch` to solve the problems that related to the breathing light.
+  -La maggior parte delle macchine Thinkpad richiede la "patch estensionale PTSWAK" per risolvere i problemi relativi alla luce respiratoria.
   
-  - The `PNP0C0E Sleep Adjust Method` is useful for those machines have the 💤 or 🌙 key. 
+  -Il "Metodo di regolazione del sonno PNP0C0E" è utile per quelle macchine che hanno il tasto 💤 o 🌙.
   
 
-- You may need to disable or enable a component to solve a spcific problem. The methods are:
-  - `Binary Renames & Preset Variables`-----the binary rename method is espcially effective. **Caution**, you should evaluate the negative impacts for multi-systems, since the binary rename applys for all systems.
+-Potrebbe essere necessario disabilitare o abilitare un componente per risolvere un problema specifico. I metodi sono:
+  -`Binary Renames & Preset Variables` ----- il metodo binary rename è particolarmente efficace. ** Attenzione **, dovresti valutare gli impatti negativi per i multi-sistemi, poiché il binary rename si applica a tutti i sistemi.
   
-  - The `Fake Devices` method is reliable. **Recommend** 
+  -Il metodo "Fake Devices" è affidabile. ** Consiglia **
 
-## Important Patches
+## Patch importanti
 
-- ***SSDT-RTC0***  ——under`Fake Devices`
+- *** SSDT-RTC0 *** —— in "Dispositivi falsi"
 
-  RTC【PNP0B00】in some machines is disabled, leading to panic on the very early stage. Use ***SSDT-RTC0***  to patch it.
+  RTC 【PNP0B00】 in alcune macchine è disabilitato, causando il panico nella fase iniziale. Usa *** SSDT-RTC0 *** per patcharlo.
 
-- ***SSDT-EC*** ——Under`Fake EC`
+- *** SSDT-EC *** ——Under`Fake EC`
 
-  For **MacOS 10.15+**,***SSDT-EC*** is neccessary if the `Embedded Controller` is not named as `EC`, otherwise, panic.
+  Per ** MacOS 10.15 + **, *** SSDT-EC *** è necessario se "Embedded Controller" non è denominato "EC", altrimenti, panico.

@@ -1,6 +1,6 @@
-# ACPI 二进制与 ASL 对照表
+# Tabella comparativa binaria ACPI e ASL
 
-> ASL 是 ACPI Sourse Language 的简写，字面意思是 `ACPI 源码`
+> ASL è l'abbreviazione di ACPI Sourse Language, che letteralmente significa "codice sorgente ACPI"
 
 |          ASL           |   Binary    |
 | :--------------------: | :---------: |

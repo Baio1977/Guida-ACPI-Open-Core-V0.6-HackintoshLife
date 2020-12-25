@@ -1,65 +1,65 @@
-# AOAC 总述
+# Panoramica AOAC
 
-## AOAC 技术
+## Tecnologia AOAC
 
-- 新的笔记本电脑引入了一项新技术—— `AOAC` ，即：*Always On/Always Connected* 。 `AOAC` 由 `Intel` 公司提出，旨在电脑在睡眠或者休眠模式下仍然保持网络连接及资料传输。简单的说，  `AOAC` 的引入使笔记本像我们的手机一样，永不关机，永远在线。
+-Il nuovo laptop introduce una nuova tecnologia-"AOAC", ovvero: * Sempre attivo / Sempre connesso *. "AOAC" è stato proposto dalla società "Intel", con l'obiettivo di mantenere la connessione di rete e la trasmissione dei dati quando il computer è in modalità di sospensione o ibernazione. In poche parole, l'introduzione di "AOAC" rende i notebook come i nostri telefoni cellulari, mai spenti e sempre online.
 
-### `AOAC` 机器的判断方法
+### Come giudicare la macchina "AOAC"
 
-- 用 MaciASL 打开 `ACPI` 的 `FACP.aml` ，搜索 `Low Power S0 Idle` ，如果=1即属于 `AOAC` 机器。如：
+-Apri `FACP.aml` di` ACPI` con MaciASL, cerca `Low Power S0 Idle`, se = 1, appartiene alla macchina` AOAC`. Ad esempio:
 
-  ```asl
-  Low Power S0 Idle (V5) : 1
-  ```
+  `` asl
+  Bassa potenza S0 inattivo (V5): 1
+  `` `
 
-- 有关 `AOAC` 方面的内容请百度 `AOAC` 、 `联想AOAC` 、 `AOAC网卡` 等。
+-Per il contenuto di "AOAC", Baidu "AOAC", "Lenovo AOAC", "scheda di rete AOAC" ecc.
 
-## AOAC 问题
+## Problema di AOAC
 
-### 睡眠失败问题
+### Problema di interruzione del sonno
 
-- 由于 `AOAC` 和 `S3` 本身相矛盾，采用了 `AOAC` 技术的机器不具有 `S3` 睡眠功能，如 `Lenovo PRO13` 。这样的机器一旦进入 `S3` 睡眠就会 **睡眠失败** 。 **睡眠失败** 主要表现为：睡眠后无法被唤醒，呈现死机状态，只能强制关机。**睡眠失败** 本质是机器一直停滞在睡眠过程，始终没有睡眠成功。
-- 有关 `S3` 睡眠方面内容参见《ACPI 规范》。
+-A causa della contraddizione tra "AOAC" e "S3", la macchina che utilizza la tecnologia "AOAC" non dispone della funzione sleep "S3", come "Lenovo PRO13". Una macchina del genere ** interrompe il sonno ** una volta che entra in modalità di sospensione `S3`. ** Insufficienza del sonno ** Le manifestazioni principali sono: impossibilità di essere risvegliato dopo il sonno, mostrando uno stato morto, solo spegnimento forzato. ** Interruzione del sonno ** L'essenza è che la macchina è rimasta bloccata nel processo di sospensione e non è mai riuscita a dormire.
+-Fare riferimento a "Specifiche ACPI" per i contenuti del sonno "S3".
 
-### 待机时间问题
+### Problema di tempo di standby
 
-- **禁止`S3`睡眠** 可以解决 **睡眠失败** 问题，但是机器将不再睡眠。没有了睡眠随之而来的问题是：在电池供电模式下，机器待机时间大大缩短。比如，在"菜单睡眠"、"自动睡眠"、"盒盖睡眠"等情况下，电池耗电量较大，大约每小时耗电5%--10%。
+- ** Forbid `S3`sleep ** può risolvere il problema ** sleep failure **, ma la macchina non dormirà più. Il problema derivante dall'assenza di sospensione è che in modalità alimentata a batteria, il tempo di standby della macchina è notevolmente ridotto. Ad esempio, nel caso di "menu sleep", "auto sleep", "lid sleep", ecc., La batteria consuma molta energia, circa il 5% -10% all'ora.
 
-## AOAC解决方案
+## Soluzione AOAC
 
-- 禁止 `S3` 睡眠
-- 关闭独显的供电电源
-- 电源空闲管理
-- 选择品质较好的 SSD：SLC>MLC>TLC>QLC（不确定）
-- 可能的话更新 SSD 固件以提高电源管理的效能
-- 使用 NVMeFix.kext 开启 SSD 的 APST
-- 启用 ASPM（BIOS 高级选项启用ASPM、补丁启用 L1）
+-Disabilita il sonno "S3"
+-Spegnere l'alimentazione del display indipendente
+-Power gestione del minimo
+-Scegli un SSD di qualità migliore: SLC> MLC> TLC> QLC (non sicuro)
+-Aggiorna il firmware SSD, se possibile, per migliorare le prestazioni di gestione dell'alimentazione
+-Usa NVMeFix.kext per abilitare APST di SSD
+-Abilita ASPM (le opzioni avanzate del BIOS abilitano ASPM, patch abilita L1)
 
-## AOAC 睡眠、唤醒
+## AOAC dormi, svegliati
 
-- `AOAC` 睡眠
+-`AOAC` sonno
 
-  以上方案可以使机器睡眠，这种睡眠叫 `AOAC` 睡眠 。 `AOAC` 睡眠本质是系统、硬件进入了空闲状态，非传统意义上的 `S3` 睡眠。
+  Lo schema sopra può far dormire la macchina, questo tipo di sonno è chiamato sleep `AOAC`. L'essenza del sonno `AOAC` è che il sistema e l'hardware entrano nello stato di inattività, che non è il senso tradizionale del sonno` S3`.
 
-- `AOAC` 唤醒
+-`AOAC` sveglia
 
-  机器进入 `AOAC` 睡眠后唤醒它会比较困难，通常需要电源键唤醒。某些机器可能需要电源键 + `PNP0C0D` 方法来唤醒机器。
+  È più difficile riattivare la macchina dopo che è entrata in modalità sleep AOAC, di solito è necessario il pulsante di accensione per riattivarla. Alcune macchine potrebbero aver bisogno del pulsante di accensione + metodo `PNP0C0D` per riattivare la macchina.
 
-## AOAC 补丁
+## Patch AOAC
 
-- 禁止 `S3` 睡眠——参见《禁止S3睡眠》
-- 禁用独显补丁——参见《AOAC禁止独显》
-- 电源空闲管理补丁——参见《电源空闲管理》
-- AOAC唤醒补丁——参见《AOAC唤醒方法》
-- 秒醒补丁——参见《060D补丁》
-- 启用设备 LI ——参见《设置ASPM工作模式》，感谢 @iStar丶Forever 提供方法
-- 管控蓝牙WIFI——参见《睡眠自动关闭蓝牙WIFI》，感谢 @i5 ex900 0.66%/h 华星 OC Dreamn 提供方法
+-Proibisci il sonno `S3`-vedi" Proibisci il sonno S3 "
+-Disattivare la patch di visualizzazione indipendente: vedere "AOAC vieta la visualizzazione indipendente"
+-Patch Power Idle Management-Vedi "Power Idle Management"
+-Patch di attivazione AOAC - vedere "Metodo di attivazione AOAC"
+-Seconda patch di riattivazione: vedere "patch 060D"
+-Abilita dispositivo LI —— vedere "Impostazione della modalità di lavoro ASPM", grazie @iStar 丶 Forever per aver fornito il metodo
+-Controllo Bluetooth WIFI —— vedere "Sleep per disattivare automaticamente Bluetooth WIFI", grazie @ i5 ex900 0,66% / h Huaxing OC Dreamn per aver fornito il metodo
 
-## 注意事项
+## Precauzioni
 
-- `AOAC` 解决方案是临时解决方案。随着 `AOAC` 技术的广泛应用，可能将来会有更好的解决方法。
-- `AOAC` 睡眠、唤醒和 `S3` 睡眠、唤醒不同，以下补丁不在适用
-  - 《PTSWAK综合扩展补丁》
-  - 《PNP0C0E睡眠修正方法》
-- 同上原因，`AOAC` 睡眠期间无法正确显示工作状态，如睡眠期间无呼吸灯闪烁。
-- 非 `AOAC` 机器也可尝试本方法。
+-La soluzione "AOAC" è una soluzione temporanea. Con l'applicazione diffusa della tecnologia "AOAC", potrebbero esserci soluzioni migliori in futuro.
+-`AOAC` sonno e risveglio sono diversi da `S3` sonno e risveglio, le seguenti patch non sono applicabili
+  - "Patch di estensione completa PTSWAK"
+  - "Metodo di correzione del sonno PNP0C0E"
+-Per lo stesso motivo di cui sopra, "AOAC" non può visualizzare correttamente lo stato di funzionamento durante il sonno, ad esempio la spia che non respira lampeggia durante il sonno.
+-Le macchine non-`AOAC` possono anche provare questo metodo。

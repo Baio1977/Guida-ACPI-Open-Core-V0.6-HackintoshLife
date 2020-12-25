@@ -1,26 +1,30 @@
+auto_awesome
+Traduci da: Inglese
+1637 / 5000
+Risultati della traduzione
 # ACPI Source Language
 
-> This guide is quoted from PCBeta, Published at 2011-11-21 11:16:20,Author:suhetao.
+> Questa guida è citata da PCBeta, Pubblicato il 2011-11-21 11:16:20, Autore: suhetao.
 >
-> Markdowned and proofread by Bat.bat(williambj1) on 2020-2-14.
+> Contrassegnato e corretto da Bat.bat (williambj1) il 14-2-2020.
 >
 > <http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1>
 
-## Foreword
+## Prefazione
 
-I am not a BIOS developer, the following contents are based on the understanding of `ACPI Specification` ~~<http://www.acpi.info/>~~ [Invalid, has been transfered to <https://uefi.org>]. As such, I am not able to avoid some misunderstandings and mistaken views, and hope you are able to adjust and improve them.
+Non sono uno sviluppatore di BIOS, i seguenti contenuti si basano sulla comprensione di `Specifiche ACPI` ~~ <http://www.acpi.info/> ~~ [Non valido, è stato trasferito a <https: // uefi. org>] In quanto tale, non sono in grado di evitare incomprensioni e opinioni errate e spero che tu sia in grado di adattarli e migliorarli.
 
 ## Descrption
 
-First of all, it is neccessary to differentiate DSDT (Differentiated System Description Table Fields) and SSDT (Secondary System Description Table Fields). They are all forms of `Advanced Configuration & Power Interface`, of which is abbreviated as `ACPI`. Literally, we perceive it as a series of tables to describe the interfaces. As a result, the major function of `ACPI` is to provide operating systems some serivces and information. DSDT and SSDT are not excepted. A notable feature of `ACPI` is using a specific language to make ACPI tables. This language, ASL (ACPI Source Language), is the core of this article. We compile ASL to AML(ACPI Machine Language) by specific softwares, in turn, executed by the operating system. Since ASL is a type of language, it must have its roles.
+Prima di tutto, è necessario differenziare DSDT (Campi della tabella di descrizione del sistema differenziato) e SSDT (Campi della tabella di descrizione del sistema secondario). Sono tutte forme di "Configurazione avanzata e interfaccia di alimentazione", di cui è abbreviato in "ACPI". , lo percepiamo come una serie di tabelle per descrivere le interfacce. Di conseguenza, la funzione principale di `ACPI` è quella di fornire ai sistemi operativi alcuni servizi e informazioni. DSDT e SSDT non sono esclusi. Una caratteristica notevole di` ACPI` è utilizzando un linguaggio specifico per creare tabelle ACPI. Questo linguaggio, ASL (ACPI Source Language), è il fulcro di questo articolo. Compiliamo ASL to AML (ACPI Machine Language) da software specifici, a loro volta, eseguiti dal sistema operativo. L'ASL è un tipo di linguaggio, deve avere i suoi ruoli.
 
 
-## ASL Roles
+## Ruoli ASL
 
-1. The variable must not exceed 4 
-characters, and not begin with digitals. Just check any DSDT/SSDT, no exceptions.
+1. La variabile non deve superare 4
+caratteri e non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, senza eccezioni.
 
-1. `Scope` is similar to `{}`. There is one and there is only one `Scope`. Therefore, DSDT begins with
+1. "Scope" è simile a "{}". Ce n'è uno e solo uno "Scope". Pertanto, DSDT inizia con
 
    ```swift
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
@@ -33,14 +37,14 @@ characters, and not begin with digitals. Just check any DSDT/SSDT, no exceptions
    }
    ```
 
-   This is `root Scope`.
+Questo è "root Scope".
 
-   `xxxx` parameters refer to `File Name`、`OEMID`、`Table ID`、`OEM Version`. The third parameter is based on the second parameter. As shown above, if the second parameter is **`DSDT`**, in turn, the third parameter is`0x02`. Other parameters are free to fill in.
+    I parametri `xxxx` si riferiscono a` Nome file`, `OEMID`,` ID tabella`, `Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è **` DSDT` * *, a sua volta, il terzo parametro è `0x02`. Altri parametri possono essere inseriti liberamente.
 
-2. Those methods and variables begin with `_` are reserved by operating systems. that is why some ASL tables contain `_T_X` trigger warnings after decompilation.
+2. Quei metodi e le variabili che iniziano con "_" sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione "_T_X" dopo la decompilazione.
 
    
-3. `Method` can be defined followed by `Device` or `Scope`. As such, `method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
+3. "Method" può essere definito seguito da "Device" o "Scope". Pertanto, "method" non può essere definito senza "Scope" e le istanze elencate di seguito sono ** non valide **.
 
    ```swift
    Method (xxxx, 0, NotSerialized)
@@ -61,7 +65,7 @@ characters, and not begin with digitals. Just check any DSDT/SSDT, no exceptions
    - `\_SI` --- System indicator
    - `\_TZ` --- Thermal zone
 
-   > **Components with different atrributes place under corresponding scopes. For examples:**
+ > ** I componenti con attributi diversi si trovano negli ambiti corrispondenti. Per esempi: **
 
    - `Device (PCI0)` places under `Scope (\_SB)`
 
@@ -76,9 +80,9 @@ characters, and not begin with digitals. Just check any DSDT/SSDT, no exceptions
      }
      ```
 
-   - Components relate to CPU place under
+-I componenti si riferiscono alla posizione della CPU sotto
 
-     > different CPUs place variously, common scopes for instance `_PR`,`_SB`,`SCK0`
+      > CPU diverse posizionano ambiti comuni in modo diverso, ad esempio `_PR`,` _SB`, `SCK0`
 
      ```swift
      Scope (_PR)
@@ -104,19 +108,19 @@ characters, and not begin with digitals. Just check any DSDT/SSDT, no exceptions
       }
       ```
 
-      Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
+Sì, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con ** `_` ** sono riservati dai sistemi operativi.
 
-5. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
+5. Anche "Device (xxxx)" può essere riconosciuto come ambito, contiene varie descrizioni dei dispositivi, ad esempio "_ADR", "_CID", "_UID", "_DSM", "_STA".
 
-6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
+6. Il simbolo "\" cita l'ambito radice; "^" cita l'ambito superiore. Allo stesso modo, "^" è superiore a "^^".
 
-7. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
+7. Il simbolo "_" non ha significato, completa solo i 4 caratteri, ad esempio "_OSI".
 
-8. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
+8. Per una migliore comprensione, ACPI rilascia "ASL + (ASL2.0)", introduce il linguaggio C "+ - * / =", "<<", ">>" e il giudizio logico "==", "! =" eccetera.
 
-9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customised.
+9. I metodi in ASL possono accettare fino a 7 argomenti, sono rappresentati da `Arg0` a` Arg6` e non possono essere personalizzati.
 
-10. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialised, in other words, assignment is needed.
+10. Le variabili locali in ASL possono accettare fino a 8 argomenti, sono rappresentate da `Local0` ~` Local7` Le definizioni non sono necessarie, ma dovrebbero essere inizializzate, in altre parole, è necessaria l'assegnazione.
 
 ## ASL Common Type of Data
 
@@ -174,7 +178,7 @@ characters, and not begin with digitals. Just check any DSDT/SSDT, no exceptions
   CreateField (LLLL, Local0, 0x38, MMMM)
   ```
 
-It is not necessary to announce its type when defining a variable.
+Non è necessario annunciare il suo tipo quando si definisce una variabile.
 
 ## ASL Assignment
 
@@ -183,7 +187,7 @@ Store (a,b) /* legacy ASL */
 b = a      /*   ASL+  */
 ```
 
-Examples:
+Esempio:
 
 ```swift
 Store (0, Local0)
@@ -193,7 +197,7 @@ Store (Local0, Local1)
 Local1 = Local0
 ```
 
-## ASL Calculation
+## Calcolo ASL
 
 |  ASL+  |  Legacy ASL  |     Examples                                                         |
 | :----: | :--------: | :----------------------------------------------------------- |
