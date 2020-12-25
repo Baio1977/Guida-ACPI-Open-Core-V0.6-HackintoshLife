@@ -1,18 +1,12 @@
-# ACPI亮度补丁
+### Patch: *** SSDT-PNLF-ACPI ***
 
-## 说明
+Potrebbe essere necessario modificare la patch in base alle proprie esigenze. Metodo di modifica:
 
-常用注入方法不起作用时，尝试本方法。
+-Estrarre ACPI nativi
+-Cercare `_BCL`,` _BCM`, `_BQC` in tutti i file ACPI e registrare il nome del dispositivo a cui appartengono, ad esempio` LCD`.
+-Modificare "DD1F" nel file patch con il nome registrato in precedenza ("DD1F" viene sostituito con "LCD"). Fare riferimento a *** 《Diagramma modificato》 ***.
+-Modifica la "IGPU" del file di patch con il nome della scheda grafica ACPI (per esempio, sostituisci "IGPU" con "GFX0").
 
-### 补丁：***SSDT-PNLF-ACPI***
+### Guidare
 
-补丁可能需要修改才适合你。修改方法：
-
-- 提取本机 ACPI
-- 所有 ACPI 文件中搜索 `_BCL`, `_BCM`, `_BQC`，记录它们所属设备名称，如 `LCD` 。
-- 修改补丁文件中的 `DD1F` 为前面记录的名称（`DD1F` 替换为 `LCD`）。参考 ***《修改图示》***。
-- 修改补丁文件的 `IGPU` 为 ACPI 的显卡名称（如 `IGPU` 替换为 `GFX0`）。
-
-### 驱动
-
-- ACPIBacklight.kext
+-ACPIBacklight.kext
