@@ -1,7 +1,3 @@
-auto_awesome
-Traduci da: Inglese
-450 / 5000
-Risultati della traduzione
 # Sequenza di caricamento SSDT
 
 -In generale, applichiamo SSDT per una macchina specifica (il suo DSDT o altri SSDT), la sequenza di caricamento dell'ACPI originale ha una priorità maggiore rispetto alle patch SSDT che abbiamo creato. Pertanto, le patch SSDT ** non hanno ** un sequenza di caricamento sotto "Aggiungi".

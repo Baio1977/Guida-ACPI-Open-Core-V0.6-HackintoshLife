@@ -66,6 +66,6 @@ Provalo tu stesso secondo il principio di driver + patch.
 
   `` testo
   // Da PNLF a XNLF
-  Trova: 504E 4C46
-  Sostituisci: 584E 4C46
+  Find: 504E 4C46
+  Replace: 584E 4C46
   `` `

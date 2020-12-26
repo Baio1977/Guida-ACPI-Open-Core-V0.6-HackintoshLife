@@ -1,12 +1,12 @@
-# 注入X86
+# Iniettare X86
 
-## 描述
+## Descrizione
 
-注入 X86，实现 CPU 电源管理。
+Iniettare X86 per realizzare la gestione energetica della CPU.
 
-## 使用说明
+## Istruzioni per l'uso
 
-- DSDT中搜索 `Processor`，如：
+-Cerca "Processore" in DSDT, come ad esempio:
 
   ```Swift
       Scope (_PR)
@@ -22,9 +22,9 @@
       }
   ```
 
-  根据查询结果，选择注入文件 ***SSDT-PLUG-_PR.CPU0***
+In base al risultato della query, seleziona il file di iniezione *** SSDT-PLUG-_PR.CPU0 ***
 
-  再如：
+   Un altro esempio:
 
   ```Swift
       Scope (_SB)
@@ -48,10 +48,10 @@
       }
   ```
 
-  根据查询结果，选择注入文件：***SSDT-PLUG-_SB.PR00***
+In base al risultato della query, seleziona il file di iniezione: *** SSDT-PLUG-_SB.PR00 ***
 
-- 如果查询结果和补丁文件名 **无法对应** ，请任选一个文件作为样本，自行修改补丁文件相关内容。
+-Se il risultato della query e il nome del file della patch ** non possono corrispondere **, scegliere un file come campione e modificare il contenuto del file della patch da soli.
 
-## 注意
+## Nota
 
-2 代，3 代机器无需注入 X86。
+Non è necessario iniettare X86 nelle macchine di seconda e terza generazione.

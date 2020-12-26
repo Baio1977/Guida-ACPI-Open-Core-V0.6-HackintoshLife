@@ -1,7 +1,3 @@
-auto_awesome
-Traduci da: Inglese
-1637 / 5000
-Risultati della traduzione
 # ACPI Source Language
 
 > Questa guida è citata da PCBeta, Pubblicato il 2011-11-21 11:16:20, Autore: suhetao.

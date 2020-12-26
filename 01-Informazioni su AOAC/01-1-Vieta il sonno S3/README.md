@@ -9,8 +9,8 @@
 -Rinominato: `_S3 in XS3`
 
    `` testo
-   Trova 5F53335F
-   Sostituisci 5853335F
+   Find    5F53335F
+   Replace 5853335F
    `` `
 
 -Patch

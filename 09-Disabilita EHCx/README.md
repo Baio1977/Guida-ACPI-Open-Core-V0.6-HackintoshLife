@@ -1,6 +1,6 @@
 # Disabilita EHCx
 
-## descrizione
+## Descrizione
 
 I bus EHC1 ed EHC2 devono essere disabilitati in una delle seguenti situazioni:
 

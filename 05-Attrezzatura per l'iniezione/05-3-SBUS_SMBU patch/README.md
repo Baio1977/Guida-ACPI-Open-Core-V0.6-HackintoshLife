@@ -1,15 +1,15 @@
-# SSDT-SBUS(SMBU) patch
+# Patch SSDT-SBUS (SMBU)
 
-## Device name
+## Nome del dispositivo
 
-DSDT Search for `0x001F0003` (before the 6th generation) or `0x001F0004` (for the 6th generation and later) in DSDT to view the name of the device to which it belongs.
+DSDT Cerca "0x001F0003" (prima della sesta generazione) o "0x001F0004" (per la sesta generazione e successive) in DSDT per visualizzare il nome del dispositivo a cui appartiene.
 
 ## patch
 
-- The device name is `SBUS`，使用 ***SSDT-SBUS***
-- The device name is `SMBU`，使用  ***SSDT-SMBU***
-- The device name is another name, modify the patch related content by yourself
+- Il nome del dispositivo è "SBUS" ， 使用 *** SSDT-SBUS ***
+- Il nome del dispositivo è `SMBU` ， 使用 *** SSDT-SMBU ***
+- Il nome del dispositivo è un altro nome, modifica da solo il contenuto relativo alla patch
 
-## Remarks
+## Osservazioni
 
-TP machines are mostly `SMBU`。
+Le macchine TP sono per lo più `SMBU`。

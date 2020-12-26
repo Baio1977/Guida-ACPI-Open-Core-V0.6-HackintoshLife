@@ -1,73 +1,75 @@
-# 0D/6D 补丁
+Patch # 0D / 6D
 
-## 概述
+## Panoramica
 
-- `_PRW` 定义了一个部件的唤醒方法。其 `Return` 2 个或者 2 个以上字节组成的数据包。有关 `_PRW` 详细的内容参见 ACPI 规范。
-- 有这么一些部件，由于他们的 `_PRW` 和 macOS 发生了冲突从而导致机器刚刚睡眠成功就被立即唤醒。为了解决问题，必须对这些部件实施补丁。这些部件 `_PRW` 数据包的第 1 个字节是 `0D` 或者 `6D`。因此，这种补丁被称为 `0D/6D补丁`，也叫`秒醒补丁`，也叫`睡了即醒补丁`。为了描述方便，以下统一称之为 `0D/6D补丁`。
-- `_PRW` 数据包的第 2 个字节多为 `03` 或者 `04`，将这个字节修正为 `0` 即完成了 `0D/6D补丁`。
-- 不同的机器对 `_PRW` 定义的方法可能不同，其数据包的内容、形式也可能多样化。实际的 `0D/6D补丁` 应视具体情况而定。见后文的描述。
-- 我们期待 OpenCore 后续版本能够解决 `0D/6D` 问题。
+-`_PRW` definisce il metodo di attivazione di un componente. Il "Return" è un pacchetto composto da 2 o più byte. Per i dettagli su "_PRW", fare riferimento alla specifica ACPI.
+-Ci sono alcuni componenti il ​​cui `_PRW` è in conflitto con macOS, il che fa sì che la macchina si riattivi non appena si dorme con successo. Per risolvere il problema, è necessario applicare patch a questi componenti. Questi componenti "_PRW" Il primo byte del pacchetto di dati è "0D" o "6D". Pertanto, questo tipo di patch è chiamato `0D / 6D patch`, chiamato anche` seconda patch di attivazione`, anche chiamato `sleep-and-wake patch`. Per comodità di descrizione, i seguenti elementi vengono indicati collettivamente come "patch 0D / 6D".
+-Il secondo byte del pacchetto di dati "_PRW" è principalmente "03" o "04". La correzione di questo byte a "0" completa la "patch 0D / 6D".
+-Diverse macchine possono definire metodi differenti per `_PRW`, e il contenuto e la forma dei pacchetti di dati possono essere diversificati. L'attuale "patch 0D / 6D" dipende dalla situazione specifica. Vedere la descrizione di seguito.
+-Ci aspettiamo che le versioni successive di OpenCore risolvano il problema "0D / 6D".
 
-### 可能需要 `0D/6D补丁` 的部件
+### Parti che potrebbero richiedere la "patch 0D / 6D"
 
-- USB 类设备
-  - `ADR` 地址：`0x001D0000`, 部件名称：`EHC1`。
-  - `ADR` 地址：`0x001A0000`, 部件名称：`EHC2`。
-  - `ADR` 地址：`0x00140000`, 部件名称：`XHC`, `XHCI`, `XHC1` 等。
-  - `ADR` 地址：`0x00140001`, 部件名称：`XDCI`。
-  - `ADR` 地址：`0x00140003`, 部件名称：`CNVW`。
+-Dispositivo USB
+  -`ADR` indirizzo: `0x001D0000`, nome parte:` EHC1`.
+  -`ADR` indirizzo: `0x001A0000`, nome parte:` EHC2`.
+  -`ADR` indirizzo: `0x00140000`, nome parte:` XHC`, `XHCI`,` XHC1` ecc.
+  -`ADR` indirizzo: `0x00140001`, nome parte:` XDCI`.
+  -`ADR` indirizzo: `0x00140003`, nome parte:` CNVW`.
 
-- 以太网
+-Ethernet
 
-  - 6 代以前，`ADR` 地址：`0x00190000`, 部件名称：`GLAN`, `IGBE` 等。
-  - 6 代及 6 代以后，`ADR` 地址：`0x001F0006`, 部件名称：`GLAN`, `IGBE` 等。
+  -Prima della 6a generazione, indirizzo `ADR`:` 0x00190000`, nome della parte: `GLAN`,` IGBE`, ecc.
+  -6a generazione e successive, indirizzo `ADR`:` 0x001F0006`, nome della parte: `GLAN`,` IGBE` ecc.
 
-- 声卡
+-Scheda audio
 
-  - 6 代以前，`ADR` 地址：`0x001B0000`, 部件名称：`HDEF`, `AZAL` 等。
-  - 6 代及 6 代以后，`ADR` 地址：`0x001F0003`, 部件名称：`HDAS`, `AZAL` 等。
+  -Prima della 6a generazione, indirizzo `ADR`:` 0x001B0000`, nome della parte: `HDEF`,` AZAL`, ecc.
+  -6a generazione e successive, indirizzo `ADR`:` 0x001F0003`, nome della parte: `HDAS`,` AZAL` ecc.
 
-  **注意1**：通过查找名称确认上述部件的方法并不可靠。可靠的方法是搜索 `ADR 地址`, `_PRW`。
+  ** Nota 1 **: Il metodo per confermare le parti precedenti cercando il nome non è affidabile. Il metodo affidabile è cercare "indirizzo ADR", "_PRW".
 
-  **注意2**：新发布的机器可能会有新的部件需要 `0D/6D补丁`。
+  ** Nota 2 **: Le macchine appena rilasciate potrebbero avere nuove parti che richiedono `0D / 6D patch`.
 
-## `_PRW` 的多样性和对应的补丁方法
+## La diversità di `_PRW` e il corrispondente metodo di patch
 
-- `Name 类型`
+-` Tipo di nome`
 
   ```Swift
     Name (_PRW, Package (0x02)
     {
-        0x0D, /* 可能是0x6D */
-        0x03，/* 可能是0x04 */
+        0x0D, /* may be 0x6D */
+        0x03, /* may be 0x04 */
         ...
     })
   ```
 
-  这种类型的 `0D/6D补丁` 适合用二进制更名方法修正 `0x03`（或 `0x04`）为 `0x00`。文件包提供了：
+Questo tipo di "patch 0D / 6D" è adatto per modificare "0x03" (o "0x04") in "0x00" mediante la ridenominazione binaria. Il pacchetto prevede:
 
-  - Name-0D 更名 .plist
-    - `Name0D-03` to `00`
-    - `Name0D-04` to `00`
-  - Name-6D 更名 .plist
-    - `Name6D-03` to `00`
-    - `Name6D-04` to `00`
+   -Name-0D rinominato .plist
+     -`Name0D-03` a `00`
+     -`Name0D-04` a `00`
+   -Nome-6D rinominato in .plist
+     -`Name6D-03` a `00`
+     -`Name6D-04` a `00`
 
-- `Method 类型` 之一：`GPRW(UPRW)`
+-Uno di "Tipo di metodo": "GPRW (UPRW)"
 
   ```Swift
     Method (_PRW, 0, NotSerialized)
     {
-      Return (GPRW (0x6D, 0x04)) /* 或者Return (UPRW (0x6D, 0x04)) */
+      Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
     }
   ```
 
-  较新的机器大多数属于这种情况。按常规方法（更名-补丁）即可。文件包提供了：
+268 / 5000
+Risultati della traduzione
+La maggior parte delle macchine più recenti cade in questa situazione. Segui il solito metodo (rinominato-patch). Il pacchetto prevede:
 
-  - ***SSDT-GPRW***（补丁文件内有二进制更名数据）
-  - ***SSDT-UPRW***（补丁文件内有二进制更名数据）
+   - *** SSDT-GPRW *** (Sono presenti dati di ridenominazione binari nel file patch)
+   - *** SSDT-UPRW *** (Sono presenti dati di ridenominazione binari nel file patch)
 
-- `Method 类型`之二：`Scope`
+-` Tipo di metodo` due: `Scope`
 
   ```Swift
     Scope (_SB.PCI0.XHC)
@@ -100,13 +102,13 @@
     }
   ```
 
-  这种情况并不常见。对于示例的情况，使用二进制更名 ***Name6D-03 to 00*** 即可。其他形式内容自行尝试。
+Questa situazione non è comune. Per il caso dell'esempio, utilizzare il nome binario per rinominare *** Name6D-03 in 00 ***. Prova altre forme di contenuto da solo.
 
-- `Name 类型`, `Method 类型`混合方式
+-`Name type`, `Method type` metodo misto
 
-  对于多数 TP 机器，涉及 `0D/6D补丁` 的部件既有 `Name 类型`，也有 `Method 类型`。采用各自类型的补丁即可。**需要注意的是**二进制更名补丁不可滥用，有些不需要 `0D/6D补丁` 的部件 `_PRW` 也可能是 `0D` 或 `6D`。为防止这种错误，应提取 `System DSDT` 文件加以验证、核实。
+   Per la maggior parte delle macchine TP, le parti coinvolte nella "patch 0D / 6D" hanno sia "tipo di nome" che "tipo di metodo". Usa i rispettivi tipi di patch. ** Nota che ** La patch di ridenominazione binaria non può essere utilizzata in modo improprio. Alcune parti "_PRW" che non richiedono "0D / 6D patch" possono anche essere "0D" o "6D". Per evitare questo tipo di errore, il file `System DSDT` dovrebbe essere estratto per verifica e verifica.
 
-### 注意事项
+### Precauzioni
 
-- 本文描述的方法适用于Hotpatch。
-- 凡是用到了二进制更名，应提取 `System DSDT` 文件加以验证。
+-Il metodo descritto in questo articolo è applicabile a Hotpatch.
+-Per qualsiasi ridenominazione binaria utilizzata, il file `System DSDT` dovrebbe essere estratto per la verifica.

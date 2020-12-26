@@ -66,34 +66,35 @@ Method (_LID, 0, NotSerialized)
 {
     if(\_SB.PCI9.FNOK==1)
     {
-        Return (0) /* 返回 Zero, 满足 PNP0C0D 睡眠条件之一 */
+        Return (0) /* Return to Zero, meeting one of the PNP0C0D sleep conditions*/
     }
     Else
     {
-        Return (\_SB.LID0.XLID()) /* 返回原始值 */
+        Return (\_SB.LID0.XLID()) /* return to original value*/
     }
 }
 ```
 
+
 Quanto segue è il contenuto principale della *** patch del pulsante di sospensione ***:
 
 ```Swift
-If (\_SB.PCI9.MODE == 1) /* PNP0C0E 睡眠 */
+If (\_SB.PCI9.MODE == 1) /* PNP0C0E sleep*/
 {
-    \_SB.PCI9.FNOK =1 /* 按下睡眠按键 */
-    \_SB.PCI0.LPCB.EC.XQ13() /* 原始睡眠按键位置，示例是 TP 机器 */
+    \_SB.PCI9.FNOK =1 /* Press the sleep button*/
+    \_SB.PCI0.LPCB.EC.XQ13() /* Original sleep button position, the example is TP machine*/
 }
-Else /* PNP0C0D 睡眠 */
+Else /* PNP0C0D sleep*/
 {
     If (\_SB.PCI9.FNOK!=1)
     {
-            \_SB.PCI9.FNOK =1 /* 按下睡眠按键 */
+            \_SB.PCI9.FNOK =1 /* Press the sleep button*/
     }
     Else
     {
-            \_SB.PCI9.FNOK =0 /* 再次按下睡眠按键 */
+            \_SB.PCI9.FNOK =0 /* press the sleep button again*/
     }
-    Notify (\_SB.LID, 0x80) /* 执行 PNP0C0D 睡眠 */
+    Notify (\_SB.LID, 0x80) /* Execute PNP0C0D sleep*/
 }
 ```
 
@@ -101,7 +102,7 @@ Else /* PNP0C0D 睡眠 */
 
 - ** Dell Latitude 5480 **
 
-  PTSWAK è stato rinominato: `_PTS` in` ZPTS`, `_WAK` in` ZWAK`.
+  PTSWAK è stato rinominato: `_PTS` in` ZPTS`,` _WAK` in` ZWAK`.
 
   Stato del coperchio rinominato: `_LID` in` XLID`
 
@@ -109,13 +110,13 @@ Else /* PNP0C0D 睡眠 */
 
   Combinazione di patch:
 
-  - *** SSDT-PTSWAK ***: patch completa. Imposta "MODALITÀ" in base alle tue esigenze.
+  - *** SSDT-PTSWAK ***: patch completa Imposta "MODALITÀ" in base alle tue esigenze.
   - *** SSDT-LIDpatch ***: patch di stato del coperchio.
   - *** SSDT-FnInsert_BTNV-dell ***: patch pulsante di sospensione.
 
 - ** ThinkPad X1C5th **
 
-  PTSWAK è stato rinominato: `_PTS` in` ZPTS`, `_WAK` in` ZWAK`.
+  PTSWAK è stato rinominato: `_PTS` in` ZPTS`,` _WAK` in` ZWAK`.
 
   Stato del coperchio rinominato: `_LID` in` XLID`
 
@@ -123,8 +124,8 @@ Else /* PNP0C0D 睡眠 */
   
   Combinazione di patch:
   
-  - *** SSDT-PTSWAK ***: patch completa. Imposta "MODALITÀ" in base alle tue esigenze.
-  - *** SSDT-LIDpatch ***: patch di stato del coperchio. Modifica "LID0" in "LID" nella patch.
+  - *** SSDT-PTSWAK ***: patch completa Imposta "MODALITÀ" in base alle tue esigenze.
+  - *** SSDT-LIDpatch ***: patch di stato del coperchio Modifica "LID0" in "LID" nella patch.
   - *** SSDT-FnF4_Q13-X1C5th ***: patch pulsante di sospensione.
   
   ** Nota 1 **: il pulsante di sospensione di X1C5th è Fn + 4 e il pulsante di sospensione di alcuni TP è Fn + F4.
@@ -133,7 +134,7 @@ Else /* PNP0C0D 睡眠 */
 
 ### Altre macchine riparano il sonno `PNP0C0E`
 
--Usa la patch: *** SSDT-PTSWAK ***; rinominata: `_PTS` in` ZPTS`, `_WAK` in` ZWAK`. Vedere "Patch di estensione completa per PTSWAK".
+-Usa la patch: *** SSDT-PTSWAK ***; rinominata: `_PTS` in` ZPTS`,` _WAK` in` ZWAK` Vedere "Patch di estensione completa per PTSWAK".
 
   Modifica la "MODALITÀ" in base alle tue esigenze.
 
@@ -143,10 +144,10 @@ Else /* PNP0C0D 睡眠 */
 
 -Trova la posizione del pulsante sleep, crea *** patch pulsante sleep ***
 
-  -Normalmente, il pulsante di sospensione è `_Qxx` sotto` EC`, questo `_Qxx` contiene il comando` Notify (***. SLPB, 0x80) `. Se non può essere trovato, DSDT cercherà il testo completo "Notifica (***. SLPB, 0x80)" per trovare la sua posizione, e gradualmente troverà la posizione originale verso l'alto.
+  -Normalmente, il pulsante di sospensione è `_Qxx` sotto` EC`, questo` _Qxx` contiene il comando` Notify (***. SLPB, 0x80) `. Se non può essere trovato, DSDT cercherà il testo completo" Notifica ( ***. SLPB, 0x80) "per trovare la sua posizione, e gradualmente troverà la posizione originale verso l'alto.
   -Fai la patch del pulsante di sospensione e rinomina se necessario con riferimento all'esempio.
 
-  Nota 1: SLPB è il nome del dispositivo "PNP0C0E". Se confermi che non esiste un dispositivo `PNP0C0E`, aggiungi una patch: SSDT-SLPB (che si trova in" Aggiungi parti mancanti ").
+  Nota 1: SLPB è il nome del dispositivo "PNP0C0E" Se confermi che non esiste un dispositivo `PNP0C0E`, aggiungi una patch: SSDT-SLPB (che si trova in" Aggiungi parti mancanti ").
 
   Nota 2: il nome e il percorso del dispositivo "PNP0C0D" devono essere coerenti con ACPI.
 

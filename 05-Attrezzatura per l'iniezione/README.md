@@ -1,5 +1,5 @@
-# Injection equipment
+# Attrezzature per iniezione
 
-- Injection `x86` achieve `CPU` power management
-- Injection `PNLF` to achieve dimming
-- Injection `SBUS` equipment
+- L'iniezione di `x86` ottiene la gestione dell'alimentazione della` CPU`
+- Iniezione "PNLF" per ottenere la regolazione
+- Attrezzatura per iniezione "SBUS"

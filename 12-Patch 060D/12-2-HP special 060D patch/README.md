@@ -1,40 +1,40 @@
-# 惠普特殊的 `0D6D` 补丁
+# Patch speciale HP `0D6D`
 
-- 关于 `0D/6D补丁` 的相关内容请参阅《0D6D补丁》
+-Per il contenuto correlato di `0D/6D patch`, fare riferimento ad alcuni "0D6D Patch"
 
-- 某些惠普机器，其 `ACPI` 的一些部件（和 `0D6D` 有关的）的 `_PRW` 方法如下：
+Macchine HP, alcune parti di `ACPI` (relative a` 0D6D`) `_PRW` Il metodo è il seguente:
 
-  ```swift
-  Method (_PRW, 0, NotSerialized)
-  {
-      Local0 = Package (0x02)
-      {
-          Zero,
-          Zero
+  ```swift 
+  Method (_PRW, 0, NotSerialized) 
+  { 
+      Local0 = Package (0x02) 
+      { 
+          Zero, 
+          Zero 
+      } 
+      Local0 [Zero] = 0x6D 
+      If ((USWE == One)) /* Note USWE */ 
+      { 
+          Local0 [One] = 0x03 
+      } 
+      Return (Local0) 
+  } 
+  ```In 
+
+in questo caso, è possibile utilizzare il "Metodo variabile preimpostata" per completare `0D / 6D
+       patch`, come ad esempio:
+
+  ```swift 
+  Scope (\) 
+  { If (_OSI ("Darwin ")) 
+      { 
+          USWE = 0 
       }
-      Local0 [Zero] = 0x6D
-      If ((USWE == One))    /* 注意USWE */
-      {
-          Local0 [One] = 0x03
-      }
-      Return (Local0)
-  }
-  ```
+  } 
+  ``` 
 
-  这种情况可以使用《预置变量法》完成 `0D/6D补丁`，如：
+-Example: ***SSDT-0D6D-HP*** 
 
-  ```swift
-  Scope (\)
-  {
-      If (_OSI ("Darwin"))
-      {
-          USWE = 0
-      }
-  }
-  ```
+   ***SSDT-0D6D-HP*** Applicabile a `HP 840 G3`, la patch corregge` XHC`, `GLAN` di` _PRW `Valore di ritorno
 
-- 示例： ***SSDT-0D6D-HP***
-
-   ***SSDT-0D6D-HP*** 适用于 `HP 840 G3`，补丁修补了 `XHC` 、 `GLAN` 的 `_PRW` 返回值。
-
-- 其他有类似情况的机器参考示例文件。
+-File di esempio di riferimento per altre macchine con situazioni simili.
