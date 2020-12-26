@@ -1,65 +1,65 @@
-# PNP0C0E 睡眠修正方法
+# PNP0C0E Metodo di correzione del sonno
 
-## `PNP0C0E` 和 `PNP0C0D` 睡眠方式
+## Modalità sleep `PNP0C0E` e` PNP0C0D`
 
-- ACPI 规范
+-Specifica ACPI
 
-  `PNP0C0E` — Sleep Button Device
+  "PNP0C0E" - Dispositivo pulsante di sospensione
 
-  `PNP0C0D` — Lid Device
+  "PNP0C0D" - Dispositivo coperchio
 
-  有关 `PNP0C0E` 和 `PNP0C0D` 详细内容请查阅 ACPI 规范。
+  Per dettagli su "PNP0C0E" e "PNP0C0D", fare riferimento alla specifica ACPI.
 
-- `PNP0C0E` 睡眠条件
+-`PNP0C0E` condizioni di sonno
 
-  - 执行 `Notify(***.SLPB, 0x80)`。 `SLPB` 是 `PNP0C0E` 设备名称。
+  -Esegui "Notifica (***. SLPB, 0x80)". "SLPB" è il nome del dispositivo "PNP0C0E".
   
-- `PNP0C0D` 睡眠条件
+-`PNP0C0D` condizioni di sonno
 
-  - `_LID`  返回 `Zero` 。 `_LID` 是 `PNP0C0D` 设备当前状态。
-  - 执行 `Notify(***.LID0, 0x80)`。 `LID0` 是 `PNP0C0D` 设备名称。
+  -`_LID` restituisce "Zero". "_LID" è lo stato corrente del dispositivo "PNP0C0D".
+  -Esegui "Notifica (***. LID0, 0x80)". "LID0" è il nome del dispositivo "PNP0C0D".
 
-## 问题描述
+## Descrizione del problema
 
-部分机器提供了睡眠按键（小月亮按键），如：部分 ThinkPad 的 Fn+F4，Dell 的 Fn+Insert 等。当按下这个按键后，系统执行了 `PNP0C0E` 睡眠。可是，ACPI 错误地向系统传递了关机参数而非睡眠参数，从而导致系统崩溃。即使能够睡眠也能正常唤醒，系统工作状态也被破坏。
+Alcune macchine forniscono un pulsante di sospensione (piccolo pulsante luna), come Fn + F4 per alcuni ThinkPad, Fn + Insert per Dell e così via. Quando questo pulsante viene premuto, il sistema esegue lo sleep `PNP0C0E`. Tuttavia, ACPI ha passato in modo errato i parametri di arresto invece dei parametri di sospensione al sistema, il che ha causato l'arresto anomalo del sistema. Anche se riesci a dormire, puoi svegliarti normalmente e lo stato di funzionamento del sistema viene distrutto.
 
-下列方法之一可以修复这个问题：
+Uno dei seguenti metodi può risolvere questo problema:
 
-- 截取ACPI 传递的参数并纠正它。
-- 将`PNP0C0E` 睡眠转换为`PNP0C0D` 睡眠。
+-Intercettare i parametri passati da ACPI e correggerli.
+-Convertire la sospensione `PNP0C0E` in sospensione` PNP0C0D`.
 
-## 解决方案
+## soluzione
 
-### 关联的3个补丁
+### Associate 3 patch
 
-- ***SSDT-PTSWAK*** ：定义变量 `FNOK` 和 `MODE` ，捕捉 `FNOK` 的变化。见《PTSWAK综合扩展补丁》。
+- *** SSDT-PTSWAK ***: Definisci le variabili `FNOK` e` MODE` per catturare le modifiche di `FNOK`. Vedere "Patch di estensione completa per PTSWAK".
 
-  - `FNOK` 表示按键状态
-    - `FNOK` =1：按下睡眠按键
-    - `FNOK` =0：再次按下睡眠按键或者机器被唤醒后
-  - `MODE` 设定睡眠模式
-    - `MODE` =1：`PNP0C0E` 睡眠
-    - `MODE` =0：`PNP0C0D` 睡眠
+  -`FNOK` significa stato del pulsante
+    -`FNOK` = 1: premere il pulsante di sospensione
+    -`FNOK` = 0: premere di nuovo il pulsante di sospensione o la macchina viene riattivata
+  -`MODE` imposta la modalità di sospensione
+    -`MODE` = 1: `PNP0C0E` sleep
+    -`MODE` = 0: `PNP0C0D` sleep
 
-  注意：根据自己的需要设置 `MODE` ，但不可以更改 `FNOK` 。
+  Nota: impostare "MODALITÀ" in base alle proprie esigenze, ma non è possibile modificare "FNOK".
 
-- ***SSDT-LIDpatch*** ：捕捉 `FNOK` 变化
+- *** SSDT-LIDpatch ***: cattura le modifiche di "FNOK"
 
-  - 如果 `FNOK` =1，盖子设备当前状态返回 `Zero`
-  - 如果 `FNOK` =0，盖子设备当前状态返回原始值
+  -Se "FNOK" = 1, lo stato corrente del dispositivo del coperchio torna a "Zero"
+  -Se "FNOK" = 0, lo stato corrente del dispositivo di copertura torna al valore originale
 
-  注意： `PNP0C0D` 设备名称、路径要和ACPI一致。
+  Nota: il percorso e il nome del dispositivo "PNP0C0D" devono essere coerenti con ACPI.
 
-- ***睡眠按键补丁*** ：按键按下后，令 `FNOK` = `1` ，并根据不同的睡眠模式执行相应的操作
+- *** Patch del pulsante di sospensione ***: Dopo aver premuto il pulsante, impostare `FNOK` =` 1` ed eseguire le operazioni corrispondenti in base alle diverse modalità di sospensione
 
-  注意：`PNP0C0D` 设备名称、路径要和ACPI一致。
+  Nota: il percorso e il nome del dispositivo "PNP0C0D" devono essere coerenti con ACPI.
 
-#### 两种睡眠方式描述
+#### Descrizione di due modalità di sospensione
 
-- `MODE` =1模式：当按下睡眠按键时， ***睡眠按键补丁*** 令 `FNOK=1`。 ***SSDT-PTSWAK*** 捕捉到 `FNOK` 为 `1`，强制令`Arg0=3`（否则`Arg0=5`）。待唤醒后恢复 `FNOK=0`。一次完整的 `PNP0C0E` 睡眠和唤醒过程结束。
-- `MODE` =0模式：当按下睡眠按键时，除了完成上述过程外， ***SSDT-LIDpatch*** 同时扑捉到 `FNOK=1` ，使 `_LID`  返回 `Zero` 并执行 `PNP0C0D` 睡眠。待唤醒后恢复 `FNOK=0`。一次完整的 `PNP0C0D` 睡眠和唤醒过程结束。
+-`MODE` = 1 modalità: quando si preme il pulsante di sospensione, *** patch del pulsante di sospensione *** rende `FNOK = 1`. *** SSDT-PTSWAK *** ha catturato "FNOK" come "1" e forza "Arg0 = 3" (altrimenti "Arg0 = 5"). Ripristina "FNOK = 0" dopo il risveglio. Un processo completo di sospensione e riattivazione `PNP0C0E` è terminato.
+-`MODE` = modalità 0: quando viene premuto il pulsante di sospensione, oltre a completare il processo sopra, *** SSDT-LIDpatch *** acquisisce anche `FNOK = 1` e restituisce` _LID` a `Zero` ed esegue Sonno `PNP0C0D`. Ripristina "FNOK = 0" dopo il risveglio. Un processo completo di sospensione e riattivazione di `PNP0C0D` è terminato.
 
-以下是 ***SSDT-LIDpatch*** 主要内容：
+Di seguito sono riportati i contenuti principali di *** SSDT-LIDpatch ***:
 
 ```Swift
 Method (_LID, 0, NotSerialized)
@@ -75,7 +75,7 @@ Method (_LID, 0, NotSerialized)
 }
 ```
 
-以下是 ***睡眠按键补丁*** 主要内容：
+Quanto segue è il contenuto principale della *** patch del pulsante di sospensione ***:
 
 ```Swift
 If (\_SB.PCI9.MODE == 1) /* PNP0C0E 睡眠 */
@@ -97,70 +97,70 @@ Else /* PNP0C0D 睡眠 */
 }
 ```
 
-### 更名和补丁组合示例:（Dell Latitude 5480 和 ThinkPad X1C5th）
+### Esempio di combinazione di ridenominazione e patch: (Dell Latitude 5480 e ThinkPad X1C5th)
 
-- **Dell Latitude 5480**
+- ** Dell Latitude 5480 **
 
-  PTSWAK更名：`_PTS` to `ZPTS`、`_WAK` to `ZWAK`。
+  PTSWAK è stato rinominato: `_PTS` in` ZPTS`, `_WAK` in` ZWAK`.
 
-  盖子状态更名：`_LID` to `XLID`
+  Stato del coperchio rinominato: `_LID` in` XLID`
 
-  按键更名：`BTNV` to `XTNV` (Dell-Fn+Insert)
+  Pulsante rinominato: da `BTNV` a` XTNV` (Dell-Fn + Inserisci)
 
-  补丁组合：
+  Combinazione di patch:
 
-  - ***SSDT-PTSWAK***：综合补丁。根据自己的需要设置 `MODE`。
-  - ***SSDT-LIDpatch***：盖子状态补丁。
-  - ***SSDT-FnInsert_BTNV-dell***：睡眠按键补丁。
+  - *** SSDT-PTSWAK ***: patch completa. Imposta "MODALITÀ" in base alle tue esigenze.
+  - *** SSDT-LIDpatch ***: patch di stato del coperchio.
+  - *** SSDT-FnInsert_BTNV-dell ***: patch pulsante di sospensione.
 
-- **ThinkPad X1C5th**
+- ** ThinkPad X1C5th **
 
-  PTSWAK更名：`_PTS` to `ZPTS`、`_WAK` to `ZWAK`。
+  PTSWAK è stato rinominato: `_PTS` in` ZPTS`, `_WAK` in` ZWAK`.
 
-  盖子状态更名： `_LID` to `XLID`
+  Stato del coperchio rinominato: `_LID` in` XLID`
 
-  按键更名：`_Q13 to XQ13` (TP-Fn+F4)
+  Rinomina chiave: da `_Q13 a XQ13` (TP-Fn + F4)
   
-  补丁组合：
+  Combinazione di patch:
   
-  - ***SSDT-PTSWAK***：综合补丁。根据自己的需要设置 `MODE`。
-  - ***SSDT-LIDpatch***：盖子状态补丁。修改补丁内 `LID0` 为 `LID`。
-  - ***SSDT-FnF4_Q13-X1C5th***：睡眠按键补丁。
+  - *** SSDT-PTSWAK ***: patch completa. Imposta "MODALITÀ" in base alle tue esigenze.
+  - *** SSDT-LIDpatch ***: patch di stato del coperchio. Modifica "LID0" in "LID" nella patch.
+  - *** SSDT-FnF4_Q13-X1C5th ***: patch pulsante di sospensione.
   
-  **注意1**：X1C5th 的睡眠按键是 Fn+4，有的TP的睡眠按键是 Fn+F4。
+  ** Nota 1 **: il pulsante di sospensione di X1C5th è Fn + 4 e il pulsante di sospensione di alcuni TP è Fn + F4.
   
-  **注意2**：TP 机器 `LPC` 控制器名称可能是`LPC`、也可能是`LPCB`。
+  ** Nota 2 **: il nome del controller "LPC" della macchina TP può essere "LPC" o "LPCB".
 
-### 其他机器修复 `PNP0C0E` 睡眠
+### Altre macchine riparano il sonno `PNP0C0E`
 
-- 使用补丁： ***SSDT-PTSWAK*** ；更名：`_PTS` to `ZPTS`、`_WAK` to `ZWAK`。见《PTSWAK综合扩展补丁》。
+-Usa la patch: *** SSDT-PTSWAK ***; rinominata: `_PTS` in` ZPTS`, `_WAK` in` ZWAK`. Vedere "Patch di estensione completa per PTSWAK".
 
-  根据自己的需要修改 `MODE`。
+  Modifica la "MODALITÀ" in base alle tue esigenze.
 
-- 使用补丁： ***SSDT-LIDpatch*** ；更名： `_LID` to `XLID` 。
+-Usa patch: *** SSDT-LIDpatch ***; rinominato: `_LID` in` XLID`.
 
-  注意： `PNP0C0D` 设备名称、路径要和ACPI一致。
+  Nota: il percorso e il nome del dispositivo "PNP0C0D" devono essere coerenti con ACPI.
 
-- 查找睡眠按键位置、制作 ***睡眠按键补丁***
+-Trova la posizione del pulsante sleep, crea *** patch pulsante sleep ***
 
-  - 一般情况下，睡眠按键是 `EC` 下的 `_Qxx`，这个 `_Qxx` 里包涵 `Notify(***.SLPB,0x80)` 指令。如果查找不到，DSDT 全文搜索 `Notify(***.SLPB,0x80)` ，找到其所在位置，逐步向上查找最初位置。
-  - 参考示例制作睡眠按键补丁以及必要的更名。
+  -Normalmente, il pulsante di sospensione è `_Qxx` sotto` EC`, questo `_Qxx` contiene il comando` Notify (***. SLPB, 0x80) `. Se non può essere trovato, DSDT cercherà il testo completo "Notifica (***. SLPB, 0x80)" per trovare la sua posizione, e gradualmente troverà la posizione originale verso l'alto.
+  -Fai la patch del pulsante di sospensione e rinomina se necessario con riferimento all'esempio.
 
-  注意1：SLPB是 `PNP0C0E` 设备名称。如果确认没有 `PNP0C0E` 设备，添加补丁：SSDT-SLPB（位于《添加缺失的部件》）。
+  Nota 1: SLPB è il nome del dispositivo "PNP0C0E". Se confermi che non esiste un dispositivo `PNP0C0E`, aggiungi una patch: SSDT-SLPB (che si trova in" Aggiungi parti mancanti ").
 
-  注意2： `PNP0C0D` 设备名称、路径要和ACPI一致。
+  Nota 2: il nome e il percorso del dispositivo "PNP0C0D" devono essere coerenti con ACPI.
 
-### `PNP0C0E` 睡眠特点
+### `PNP0C0E` Funzioni di sospensione
 
-- 睡眠过程稍快。
-- 睡眠过程无法被终止。
+-Il processo di sonno è leggermente più veloce.
+-Il processo di sospensione non può essere terminato.
 
-### `PNP0C0D` 睡眠特点
+### `PNP0C0D` Funzioni di sospensione
 
-- 睡眠过程中，再次按下睡眠按键立即终止睡眠。
+-Durante il sonno, premere nuovamente il pulsante di sospensione per interrompere immediatamente il sonno.
 
-- 接入外显时，按下睡眠按键后，工作屏幕为外显（内屏灭）；再次按下睡眠按键，内屏、外显正常。
+-Quando il display esterno è collegato, dopo aver premuto il pulsante sleep, lo schermo di lavoro diventa il display esterno (lo schermo interno è spento); premendo nuovamente il pulsante sleep, i display interno ed esterno sono normali.
 
-## 注意事项
+## Precauzioni
 
-- `PNP0C0E` 和 `PNP0C0D` 设备名称、路径要和ACPI一致。
+-`PNP0C0E` e `PNP0C0D` nomi e percorsi dei dispositivi devono essere coerenti con ACPI.

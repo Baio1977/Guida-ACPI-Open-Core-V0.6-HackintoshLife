@@ -128,16 +128,16 @@ Method(XOSI, 1)
 
 ACPI definisce anche "OSYS", la relazione tra "OSYS" e i parametri precedenti è la seguente:
 
-  - `OSYS = 0x07D9`: Win7 系统，即 `Windows 2009`
-  - `OSYS = 0x07DC`: Win8 系统，即 `Windows 2012`
-  - `OSYS = 0x07DD`: Win8.1 系统，即 `Windows 2013`
-  - `OSYS = 0x07DF`: Win10 系统，即 `Windows 2015`
-  - `OSYS = 0x07E0`: Win10 1607，即 `Windows 2016`
-  - `OSYS = 0x07E1`: Win10 1703，即 `Windows 2017`
-  - `OSYS = 0x07E1`: Win10 1709，即 `Windows 2017.2`
-  - `OSYS = 0x07E2`: Win10 1803，即 `Windows 2018`
-  - `OSYS = 0x07E2`: Win10 1809，即 `Windows 2018.2`
-  - `OSYS = 0x????`: Win10 1903，即 `Windows 2019`
+-`OSYS = 0x07D9`: sistema Win7, ovvero `Windows 2009`
+   -`OSYS = 0x07DC`: sistema Win8, ovvero `Windows 2012`
+   -`OSYS = 0x07DD`: sistema Win8.1, ovvero `Windows 2013`
+   -`OSYS = 0x07DF`: sistema Win10, ovvero `Windows 2015`
+   -`OSYS = 0x07E0`: Win10 1607, che è `Windows 2016`
+   -`OSYS = 0x07E1`: Win10 1703, che è `Windows 2017`
+   -`OSYS = 0x07E1`: Win10 1709, che è `Windows 2017.2`
+   -`OSYS = 0x07E2`: Win10 1803, che è `Windows 2018`
+   -`OSYS = 0x07E2`: Win10 1809, che è `Windows 2018.2`
+   -`OSYS = 0x ???? `: Win10 1903, che è` Windows 2019`
   - ...
 
 -Quando il sistema caricato non viene riconosciuto da ACPI, a "OSYS" viene assegnato un valore predefinito. Questo valore varia da macchina a macchina. Alcuni rappresentano "Linux", altri "Windows2003" e altri hanno altri valori.

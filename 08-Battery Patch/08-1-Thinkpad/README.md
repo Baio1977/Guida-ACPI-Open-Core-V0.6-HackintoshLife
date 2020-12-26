@@ -1,61 +1,61 @@
-# ThinkPad电池补丁
+# Patch batteria ThinkPad
 
-## 说明
+## Descrizione
 
-- 请阅读`附件`《ThinkPad 电池系统》。
-- 确认 `主电池` 路径是 `\_SB.PCI0.`**`LPC`**`.EC.BAT0` 或者 `\_SB.PCI0.`**`LPCB`**`.EC.BAT0`，非两者，本章内容仅供参考。
-- 以下分 **三种情况** 说明电池补丁的使用方法。
+-Si prega di leggere "Allegato" "ThinkPad Battery System".
+-Confermare che il percorso di `Main Battery` sia` \ _SB.PCI0.` ** `LPC` **` .EC.BAT0` o `\ _SB.PCI0.` **` LPCB` ** `.EC.BAT0`, Non entrambi, il contenuto di questo capitolo è solo di riferimento.
+-Quanto segue è diviso in ** tre casi ** per spiegare come utilizzare la patch della batteria.
 
-### 单电池系统更名和补丁
+### Rinomina e patch del sistema a batteria singola
 
-- 更名：
-  - TP 电池基本更名
-  - TP 电池 `Mutex` 置 `0` 更名
-- 补丁
-  - `主电池`补丁 -- ***SSDT-OCBAT0-TP******
+-Rinominare:
+  -La batteria TP è sostanzialmente rinominata
+  -La batteria TP `Mutex` impostata su` 0` è stata rinominata
+-Patch
+  -Patch batteria principale` - *** SSDT-OCBAT0-TP ******
 
-### 双电池系统一块物理电池更名和补丁
+### Sistema a doppia batteria con una batteria fisica rinominata e patchata
 
-- 更名
-  - TP 电池基本更名
-  - TP 电池 `Mutex` 置 `0` 更名
-  - `BAT1` 禁用更名 `_STA to XSTA` 
+-Rinominare
+  -La batteria TP è sostanzialmente rinominata
+  -La batteria TP `Mutex` impostata su` 0` è stata rinominata
+  -`BAT1` disabilita la ridenominazione di `_STA in XSTA`
   
-    **注意**：请正确使用 `Count` ， `Skip` ， `TableSignature` ，并通过system-DSDT验证 `_STA to XSTA` 位置是否正确
-- 补丁
+    ** Nota **: Utilizza correttamente `Count`,` Skip`, `TableSignature` e verifica che la posizione di` _STA in XSTA` sia corretta tramite DSDT di sistema
+-Patch
   
-  - `主电池`补丁 -- ***SSDT-OCBAT0-TP****** 
-  - `BAT1`禁用补丁 -- ***SSDT-OCBAT1-disable-`LPC`*** 【或者 ***SSDT-OCBAT1-disable-`LPCB`*** 】
+  -Patch batteria principale` - *** SSDT-OCBAT0-TP ******
+  -`BAT1` disabilita patch - *** SSDT-OCBAT1-disable-`LPC` *** [o *** SSDT-OCBAT1-disable-`LPCB` ***]
 
-### 双电池系统二块物理电池更名和补丁
+### Sistema a doppia batteria due batterie fisiche rinominate e patchate
 
-- 更名
-  - TP 电池基本更名
-  - TP 电池 `Mutex` 置 `0` 更名
-  - `Notify` 更名
-- 补丁
-  - `主电池`补丁 --***SSDT-OCBAT0-TP******
-  - `BATC`补丁 -- ***SSDT-OCBATC-TP-`LPC`*** 【或者 ***SSDT-OCBATC-TP-`LPCB`*** 、***SSDT-OCBATC-TP-`_BIX`*** 】
-  - `Notify`补丁 -- ***SSDT-Notify-`LPC`*** 【或者 ***SSDT-Notify-`LPCB`*** 】
+-Rinominare
+  -La batteria TP è sostanzialmente rinominata
+  -La batteria TP `Mutex` impostata su` 0` è stata rinominata
+  -`Notify` rinominato
+-Patch
+  -Patch batteria principale` - *** SSDT-OCBAT0-TP ******
+  -`BATC` patch-- *** SSDT-OCBATC-TP-`LPC` *** [o *** SSDT-OCBATC-TP-`LPCB` *** *** SSDT-OCBATC-TP-` _BIX` ***】
+  -`Notify` patch - *** SSDT-Notify-`LPC` *** [o *** SSDT-Notify-`LPCB` ***】
   
-    **注意**：
+    **Nota**:
   
-    - 选用 `BATC`补丁时，7代+机器使用 ***SSDT-OCBATC-TP-`_BIX`*** 
-    - 选用 `Notify`补丁时，应当 **仔细** 检查补丁里的 `_Q22`， `_Q24`， `_Q25`， `_Q4A`， `_Q4B`， `_Q4C`， `_Q4D`，`BATW`，`BFCC` 等内容是否与原始 `ACPI` 对应内容一致，如果不一致请修正补丁相应内容。比如：3代机器的 `_Q4C` 的内容和样本内容不同；4代、5代、6代、7代机器无 `_Q4C` ；7代+机器有 `BFCC` 。等等......。样本文件 ***SSDT-Notify-`LPCB`*** 仅适用于T580 。
-- 加载顺序
-  - `主电池`补丁
-  - `BATC`补丁
-  - `Notify`补丁
+    -Quando si utilizza la patch `BATC`, utilizzare la + macchina di settima generazione *** SSDT-OCBATC-TP-`_BIX` ***
+    -Quando si seleziona la patch `Notify`, dovresti ** attentamente ** controllare` _Q22`, `_Q24`,` _Q25`, `_Q4A`,` _Q4B`, `_Q4C`,` _Q4D`, `BATW` Se il contenuto di "BFCC" è coerente con il contenuto corrispondente di "ACPI" originale, in caso contrario, correggere il contenuto corrispondente della patch. Ad esempio, il contenuto di "_Q4C" della macchina di terza generazione è diverso dal contenuto di esempio; le macchine di quarta, quinta, sesta e settima generazione non hanno "_Q4C"; la macchina di settima generazione + ha "BFCC". e molti altri....... Il file di esempio *** SSDT-Notify-`LPCB` *** è solo per T580.
+-Carico di sequenza
+  -Patch della batteria principale
+  -Patch`BATC`
+  -Patch di notifica
 
-## 注意事项
+## Precauzioni
 
-- ***SSDT-OCBAT0-TP****** 是 `主电池` 补丁。选用时根据机器型号选择对应的补丁。
-- 选用补丁时，应注意 `LPC` 和 `LPCB` 的区别。
-- 是否需要 `TP 电池 Mutex 置 0 更名`，自行尝试。
+- *** SSDT-OCBAT0-TP ****** è la patch della batteria principale. Quando si sceglie, scegliere la patch corrispondente in base al modello di macchina.
+-Quando si selezionano le patch, prestare attenzione alla differenza tra "LPC" e "LPCB".
+-Hai bisogno di `TP battery Mutex impostato su 0 e rinominato`, provalo tu stesso.
 
-## `Notify` 补丁示例【仅 `Method (_Q22` ...部分】
+## Esempio di patch `Notify` [solo metodo` (_Q22` ... parte])
 
-> T580 原文
+> T580 originale
 
 ```Swift
 Method (_Q22, 0, NotSerialized)  /* _Qxx: EC Query, xx=0x00-0xFF */
@@ -73,7 +73,7 @@ Method (_Q22, 0, NotSerialized)  /* _Qxx: EC Query, xx=0x00-0xFF */
 }
 ```
 
-> 重写
+> Riscrivi
 
 ```swift
 /*
@@ -104,28 +104,28 @@ Method (_Q22, 0, NotSerialized)  /* _Qxx: EC Query, xx=0x00-0xFF */
 }
 ```
 
-详见 `Notify` 补丁 --  ***SSDT-Notify-`BFCC`*** 
+Vedere la patch `Notify` per i dettagli - *** SSDT-Notify-`BFCC` ***
 
-> 已验证机器为`ThinkPad T580`，补丁和更名如下：
+> La macchina verificata è `ThinkPad T580`, la patch e la ridenominazione sono le seguenti:
 
-- **SSDT-OCBAT0-TP_tx80_x1c6th** 
-- **SSDT-OCBATC-TP-`LPCB`** 
-- **SSDT-Notify-`LPCB`** 
-- **TP电池基本更名** 
-- **Notify更名** 
+- ** SSDT-OCBAT0-TP_tx80_x1c6th **
+- ** SSDT-OCBATC-TP-`LPCB` **
+- ** SSDT-Notify-`LPCB` **
+- ** La batteria TP è sostanzialmente rinominata **
+- ** Notifica rinominato **
 
-### 附件：ThinkPad电池系统
+### Accessori: sistema di batterie ThinkPad
 
-#### 概述
+#### Panoramica
 
-Thinkpad 电池系统分为单电池系统和双电池系统。
+Il sistema di batterie Thinkpad è suddiviso in sistema a batteria singola e sistema a doppia batteria.
 
-- 双电池系统就是机器配备了二块电池。或者，虽然机器只装备了一块电池，但提供了第二块电池的物理接口以及对应的 ACPI。第二块电池作为可选件，可以后期安装。双电池系统的机器可能有一块电池，也可能有二块电池。
-- 单电池系统是机器配备了一块电池，且只有一块电池的 ACPI。
+-Il sistema a doppia batteria significa che la macchina è dotata di due batterie. Oppure, sebbene la macchina sia dotata di una sola batteria, fornisce l'interfaccia fisica della seconda batteria e il corrispondente ACPI. La seconda batteria è opzionale e può essere installata successivamente. Una macchina con un sistema a doppia batteria può avere una o due batterie.
+-Il sistema a batteria singola è ACPI in cui la macchina è dotata di una batteria e una sola batteria.
 
-- 比如，T470, T470s 的电池结构属于双电池系统，T470P 的电池结构属于单电池系统。再比如，T430 系列属于双电池系统，机器本身只有一块电池，但可以通过光驱位安装第二块电池。
+-Ad esempio, la struttura della batteria del T470 e del T470s è un sistema a doppia batteria e la struttura della batteria del T470P è un sistema a batteria singola. Per un altro esempio, la serie T430 è un sistema a doppia batteria La macchina stessa ha una sola batteria, ma la seconda batteria può essere installata tramite l'unità ottica.
 
-#### 单，双电池系统判定
+#### Valutazione del sistema a batteria singola e doppia
 
-- 双电池系统：ACPI 中同时存在 `BAT0` 和 `BAT1`
-- 单电池系统：ACPI 中只有 `BAT0`，无 `BAT1`
+-Sistema a doppia batteria: sia `BAT0` che` BAT1` esistono in ACPI
+-Sistema a batteria singola: ACPI ha solo "BAT0" e non "BAT1"

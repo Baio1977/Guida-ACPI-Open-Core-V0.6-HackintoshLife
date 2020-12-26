@@ -1,26 +1,26 @@
-# Disable EHCx
+# Disabilita EHCx
 
-## description
+## descrizione
 
-EHC1 and EHC2 buses need to be disabled in one of the following situations:
+I bus EHC1 ed EHC2 devono essere disabilitati in una delle seguenti situazioni:
 
-- ACPI includes EHC1 or EHC2, and the machine itself does not have related hardware.
--ACPI includes EHC1 or EHC2. The machine has related hardware but no actual output port (external and internal)。
+- ACPI include EHC1 o EHC2 e la macchina stessa non dispone di hardware correlato.
+-ACPI include EHC1 o EHC2. La macchina ha hardware correlato ma nessuna porta di uscita effettiva (esterna e interna)。
 
 
 ## patch
 
-- ***SSDT-EHC1_OFF***：Disable `EHC1`。
-- ***SSDT-EHC2_OFF***：Disable `EHC2`。
-- ***SSDT-EHCx_OFF***：It is the merged patchof ***SSDT-EHC1_OFF*** and ***SSDT-EHC2_OFF***。
+- *** SSDT-EHC1_OFF *** ： Disabilita `EHC1`。
+- *** SSDT-EHC2_OFF *** ： Disabilita `EHC2`。
+- *** SSDT-EHCx_OFF *** ： È la patch unita di *** SSDT-EHC1_OFF *** e *** SSDT-EHC2_OFF ***。
 
-## Instructions
+## Istruzioni
 
-- Priority BIOS setting: `XHCI Mode` = `Enabled`。
-- If the BIOS does not have `XHCI Mode` the option, at the same time meet the **description of** one case, using the patch。
+- Impostazione del BIOS prioritario: `XHCI Mode` =` Enabled`。
+- Se il BIOS non ha l'opzione `XHCI Mode`, allo stesso tempo soddisfa la ** descrizione di ** un caso, utilizzando la patch。
 
-### Precautions
+### Precauzioni
 
-- Applicable to 7, 8, 9 series machines, and macOS is 10.11 or above.
-- For 7 series machines,***SSDT-EHC1_OFF*** and ***SSDT-EHC2_OFF*** cannot be used at the same time。
-- Patch  `Scope (\)`   under the added `_INI` method, and if other patches of `_INI` duplication, should merge `_INI` the contents。
+- Applicabile a macchine della serie 7, 8, 9 e macOS 10.11 o superiore.
+- Per le macchine della serie 7, *** SSDT-EHC1_OFF *** e *** SSDT-EHC2_OFF *** non possono essere utilizzati contemporaneamente。
+- Applicare la patch `Scope (\)` sotto il metodo `_INI` aggiunto, e se altre patch di duplicazione` _INI`, dovrebbero unire `_INI` i contenuti。

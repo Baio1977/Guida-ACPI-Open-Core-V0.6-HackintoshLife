@@ -1,32 +1,32 @@
-# 综合补丁
+# Patch completa
 
-## 描述
+## Descrizione
 
-- 通过对 `_PTS` 和 `_WAK` 更名，加上综合补丁和它的扩展补丁，解决某些机器睡眠或唤醒过程中出现一些问题。
+-Denominando `_PTS` e` _WAK`, aggiungendo patch complete e le sue patch estese, sono stati risolti alcuni problemi nel processo di sospensione o riattivazione di alcune macchine.
 
-- 综合补丁是一个框架，它包括：
-  - 屏蔽独显接口 `_ON`, `_OFF`。
-  - 6 个扩展补丁接口 `EXT1`, `EXT2`, `EXT3`, `EXT4` , `EXT5` 和 `EXT6`。
-  - 定义强制睡眠传递参数 `FNOK` 和 `MODE` ，详见《PNP0C0E睡眠修正方法》。
-  - 定义调试参数 `TPTS` 和 `TWAK` ，用于在睡眠和唤醒过程中，侦测、跟踪 `Arg0` 变化。比如，在亮度快捷键补丁里添加以下代码：
+-La patch completa è un framework che include:
+   -Blocca l'interfaccia del display indipendente `_ON`,` _OFF`.
+   -6 interfacce patch estese `EXT1`,` EXT2`, `EXT3`,` EXT4`, `EXT5` e` EXT6`.
+   -Definire i parametri obbligatori per il trasferimento del sonno `FNOK` e` MODE`, vedere "Metodo di correzione del sonno PNP0C0E" per i dettagli.
+   -Definisci i parametri di debug `TPTS` e` TWAK`, che sono usati per rilevare e tenere traccia delle modifiche di `Arg0` durante il sonno e la sveglia. Ad esempio, aggiungi il seguente codice alla patch di scelta rapida della luminosità:
 
     ```Swift
     ...
-    /* 某按键： */
-    \RMDT.P2 ("ABCD-_PTS-Arg0=", \_SB.PCI9.TPTS)
-    \RMDT.P2 ("ABCD-_WAK-Arg0=", \_SB.PCI9.TWAK)
-    ...
-    ```
+         /* Una chiave: */
+         \ RMDT.P2 ("ABCD-_PTS-Arg0 =", \ _SB.PCI9.TPTS)
+         \ RMDT.P2 ("ABCD-_WAK-Arg0 =", \ _SB.PCI9.TWAK)
+         ...
+         `` `
 
-    当按下亮度快捷键后，能够在控制台上看到前一次睡眠、唤醒后 `Arg0` 的值。
+         Quando si preme il tasto di scelta rapida della luminosità, è possibile vedere il valore di "Arg0" sulla console dopo la sospensione e il risveglio precedenti.
 
-    注：调试ACPI需要安装驱动 ACPIDebug.kext，添加补丁 SSDT-RMDT，以及自定义的调试补丁。具体方法参见《ACPIDebug》。
+         Nota: per eseguire il debug di ACPI, è necessario installare il driver ACPIDebug.kext, aggiungere la patch SSDT-RMDT e personalizzare la patch di debug. Vedere "ACPIDebug" per metodi specifici.
 
-## 更名
+    ## Rinomina
 
-使用综合补丁必须对 `_PTS` 和 `_WAK` 更名。依据原始 DSDT 内容选择正确的更名，如：
+    Per utilizzare la patch integrata, è necessario rinominare `_PTS` e` _WAK`. Scegli la modifica del nome corretta in base al contenuto DSDT originale, ad esempio:
 
-- `_PTS` to `ZPTS(1,N)`:
+    -`_PTS` a `ZPTS (1, N)`:
 
   ```Swift
     Method (_PTS, 1, NotSerialized)  /* _PTS: Prepare To Sleep */
@@ -54,7 +54,7 @@
     {
   ```
 
-如果 DSDT 中存在 `_TTS` 也需要对其更名；如果不存在，则无需更名。依据原始 DSDT 内容选择正确的更名，如：
+Se "_TTS" esiste nel DSDT, deve essere rinominato; se non esiste, non è necessario rinominarlo. Scegli la modifica del nome corretta in base al contenuto DSDT originale, ad esempio:
 
 - `_TTS` to `ZTTS(1,N)`:
 
@@ -71,16 +71,16 @@
   ```
 
 
-## 补丁
+## Patch
 
-- ***SSDT-PTSWAKTTS*** —— 综合补丁。
+- *** SSDT-PTSWAKTTS *** —— Patch completa.
 
-- ***SSDT-EXT1-FixShutdown*** —— `EXT1` 扩展补丁。 修复因 XHC 控制器导致的关机变重启的问题，原理是当 `_PTS` 中传入的参数为 `5` 时将 `XHC.PMEE` 置 0。该补丁与 Clover 的 `FixShutdown` 效果等同。部分 XPS / ThinkPad 机器会需要这个补丁。
+- *** SSDT-EXT1-FixShutdown *** —— Patch di estensione `EXT1`. Risolve il problema che il controller XHC cambia dallo spegnimento al riavvio. Il principio è di impostare "XHC.PMEE" su 0 quando il parametro passato in "_PTS" è "5". Questa patch ha lo stesso effetto di "FixShutdown" di Clover. Alcune macchine XPS / ThinkPad avranno bisogno di questa patch.
 
-- ***SSDT-EXT3-WakeScreen*** —— `EXT3` 扩展补丁。解决某些机器唤醒后需按任意键亮屏的问题。使用时应查询 `PNP0C0D` 设备名称和路径是否已存在补丁文件中，如 `_SB.PCI0.LPCB.LID0`。如果不存在自行添加。
+- *** SSDT-EXT3-WakeScreen *** - Patch di estensione `EXT3`. Risolvi il problema che alcune macchine devono premere un tasto qualsiasi per accendere lo schermo dopo il risveglio. Quando lo si utilizza, è necessario verificare se il nome del dispositivo e il percorso di `PNP0C0D` sono già nel file di patch, ad esempio` _SB.PCI0.LPCB.LID0`. Se non esiste, aggiungilo tu stesso.
 
-- ***SSDT-EXT5-TP-LED*** —— `EXT5` 扩展补丁。 解决 ThinkPad 机器唤醒后 A 面呼吸灯和电源键呼吸灯未恢复正常的问题；修复在 ThinkPad 老机型上唤醒后 <kbd>F4</kbd> 麦克风指示灯状态不正常的问题。
+- *** SSDT-EXT5-TP-LED *** —— Patch di estensione `EXT5`. Risolvi il problema che la luce del respiro sul lato A e la luce del respiro del pulsante di accensione non tornano alla normalità dopo che la macchina ThinkPad si è riattivata; risolvi il problema che lo stato dell'indicatore del microfono <kbd> F4 </kbd> è anormale dopo il risveglio sul vecchio modello ThinkPad.
 
-## 注意
+## Nota
 
-具有相同扩展名称的补丁不可同时使用。如有同时使用的要求必须合并后使用。
+Le patch con lo stesso nome di estensione non possono essere utilizzate contemporaneamente. Se ci sono requisiti per l'uso simultaneo, devono essere combinati.
