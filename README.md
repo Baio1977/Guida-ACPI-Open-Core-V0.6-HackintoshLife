@@ -7,8 +7,8 @@ La serie di patch si basa sui requisiti e sui suggerimenti di OpenCore 0.5+.
 ## Il GitBook
 Questo repository si basa su GitBook e utilizza le azioni Github per creare il servizio Page e il manuale PDF.
 
-- [https://ocbook.tlhub.cn] (https://ocbook.tlhub.cn)
-- [Patch dei componenti OpenCore] (https://cdn.jsdelivr.net/gh/daliansky/OC-little/docs/OpenCore component library.pdf)
+- [https://ocbook.tlhub.cn](https://ocbook.tlhub.cn)
+- [OpenCore component patches](https://cdn.jsdelivr.net/gh/daliansky/OC-little/docs/OpenCore部件库.pdf)
 
 ## Sommario
 
@@ -105,19 +105,19 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
    5. Liste di caricamento dei drvices della tastiera config-5-PS2Smart
    6. liste di caricamento delle unità wireless e bluetooth config-6-Intel
 
-### Crediti
+### Credits 
 
--Credito speciale a:
-  - @ XianWu scrive queste patch per i componenti ACPI utilizzabili con ** [OpenCore] (https://github.com/acidanthera/OpenCorePkg) **
-  -@Bat.bat, @DalianSky, @athlonreg, @iStar 丶 Per sempre la loro correzione e finalizzazione.
+- Special credit to：
+  - @daliansky per le informazioni  **[daliansky](https://github.com/daliansky/OC-little)** 
+  - @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalisation.
 
--Credito a:
-  - @ 冬瓜 -X1C5th
-  - @ OC-xlivans
-  - @ Air 13 IWL-GZ-Big Orange (OC perfetto)
-  - @ 子 骏 oc IWL
-  - @ 大勇 - 小 新 air13-OC- Pitching Xiaobai
-  - @ xjn819
-  -...
+- Credit to：
+  - @冬瓜-X1C5th
+  - @OC-xlivans
+  - @Air 13 IWL-GZ-Big Orange (OC perfect)
+  - @子骏oc IWL
+  - @大勇-小新air13-OC-划水小白
+  - @xjn819
+  - ......
 
-- ** Grazie per [Acidanthera] (https://github.com/acidanthera) che mantiene [OpenCorePkg] (https://github.com/acidanthera/OpenCorePkg) **
+- **Thanks for [Acidanthera](https://github.com/acidanthera) maintaining [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)**
