@@ -1,35 +1,35 @@
-# 添加缺失的部件
+# Aggiungi parti mancanti
 
-## 描述
+## Descrizione
 
-添加缺失的部件只是一种完善方案，非必要！
+L'aggiunta di parti mancanti è solo una soluzione perfetta, non necessaria!
 
-### 使用说明
+### Istruzioni per l'uso
 
-**DSDT中:**
+** DSDT: **
 
-- 搜索 `PNP0200`，如果缺失，可添加 ***SSDT-DMAC***。
+-Cerca `PNP0200`, se manca, aggiungi *** SSDT-DMAC ***.
 
-- 搜索 `MCHC`，如果缺失，可添加 ***SSDT-MCHC***。
+-Cerca `MCHC`, se manca, aggiungi *** SSDT-MCHC ***.
 
-- 搜索 `PNP0C01`，如果缺失，可添加 ***SSDT-MEM2***。
+-Cerca `PNP0C01`, se manca, aggiungi *** SSDT-MEM2 ***.
 
-- 搜索 `0x00160000`，如果缺失，可添加 ***SSDT-IMEI***。
+-Cerca `0x00160000`, se manca, aggiungi *** SSDT-IMEI ***.
 
-- 6 代以上机器，搜索 `0x001F0002`，如果缺失，可添加 ***SSDT-PPMC***。
+-Per macchine di sesta generazione e superiori, cerca "0x001F0002", se mancante, aggiungi *** SSDT-PPMC ***.
 
-- 6 代以上机器，搜索 `PMCR` 、 `APP9876`，如果缺失，可添加 ***SSDT-PMCR***。
+-Per macchine di 6a generazione e superiori, cerca `PMCR` e` APP9876`, se mancano, aggiungi *** SSDT-PMCR ***.
 
-  说明：@请叫我官人 提供方法，目前已成为 OpenCore 官方的 SSDT 示例。
-  > Z390 芯片组 PMC (D31:F2) 只能通过 MMIO 启动。由于 ACPI 规范中没有 PMC 设备，苹果推出了自己的命名 `APP9876`、从 AppleIntelPCHPMC 驱动中访问这个设备。而在其它操作系统中，一般会使用 `HID: PNP0C02`、`UID: PCHRESV` 访问这个设备。  
-  > 包括 APTIO V 在内的平台，在初始化 PMC 设备之前不能读写 NVRAM（在 SMM 模式中被冻结）。  
-  > 虽然不知道为什么会这样，但是值得注意的是 PMC 和 SPI 位于不同的内存区域，PCHRESV 同时映射了这两个区域，但是苹果的 AppleIntelPCHPMC 只会映射 PMC 所在的区域。  
-  > PMC 设备与 LPC 总线之间毫无关系，这个 SSDT 纯粹是为了加快 PMC 的初始化而把该设备添加到 LPC 总线下。如果将其添加到 PCI0 总线中、PMC 只会在 PCI 配置结束后启动，对于需要读取 NVRAM 的操作来说就已经太晚了。
+  Nota: @ 请 叫 我 官人 Fornisci il metodo, che è diventato l'esempio SSDT ufficiale di OpenCore.
+  > Il chipset Z390 PMC (D31: F2) può essere avviato solo tramite MMIO. Poiché non è presente alcun dispositivo PMC nella specifica ACPI, Apple ha introdotto il proprio nome "APP9876" per accedere a questo dispositivo dal driver AppleIntelPCHPMC. In altri sistemi operativi, generalmente utilizzare `HID: PNP0C02`,` UID: PCHRESV` per accedere a questo dispositivo.
+  > Le piattaforme che includono APTIO V non possono leggere o scrivere NVRAM (congelata in modalità SMM) prima di inizializzare il dispositivo PMC.
+  > Anche se non so perché questo accada, vale la pena notare che PMC e SPI si trovano in aree di memoria diverse.PCHRESV mappa queste due aree contemporaneamente, ma AppleIntelPCHPMC di Apple mappa solo l'area in cui si trova PMC.
+  > Il dispositivo PMC non ha nulla a che fare con il bus LPC.Questo SSDT serve esclusivamente per velocizzare l'inizializzazione di PMC e aggiungere il dispositivo al bus LPC. Se viene aggiunto al bus PCI0, PMC verrà avviato solo dopo che la configurazione PCI è stata completata, il che è troppo tardi per l'operazione che deve leggere la NVRAM.
 
-- 搜索 `PNP0C0C`，如果缺失，可添加 ***SSDT-PWRB***。
+-Cerca `PNP0C0C`, se manca, aggiungi *** SSDT-PWRB ***.
 
-- 搜索 `PNP0C0E`，如果缺失，可添加 ***SSDT-SLPB***，《PNP0C0E睡眠修正方法》需要这个部件。
+-Cercare "PNP0C0E", se manca, è possibile aggiungere *** SSDT-SLPB ***, "PNP0C0E Metodo di correzione del sonno" richiede questo componente.
 
-### 注意
+### Nota
 
-使用以上部分补丁时，注意 `LPCB` 名称应和原始ACPI名称一致。
+Quando si utilizzano alcune delle patch precedenti, si noti che il nome di "LPCB" dovrebbe essere coerente con il nome ACPI originale.
