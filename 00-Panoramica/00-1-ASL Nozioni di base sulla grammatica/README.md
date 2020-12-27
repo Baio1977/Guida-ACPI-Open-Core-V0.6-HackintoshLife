@@ -12,38 +12,37 @@ Non sono uno sviluppatore di BIOS, i seguenti contenuti si basano sulla comprens
 
 ## Descrption
 
-Prima di tutto, è necessario differenziare DSDT (Campi della tabella di descrizione del sistema differenziato) e SSDT (Campi della tabella di descrizione del sistema secondario). Sono tutte forme di "Configurazione avanzata e interfaccia di alimentazione", di cui è abbreviato in "ACPI". , lo percepiamo come una serie di tabelle per descrivere le interfacce. Di conseguenza, la funzione principale di `ACPI` è quella di fornire ai sistemi operativi alcuni servizi e informazioni. DSDT e SSDT non sono esclusi. Una caratteristica notevole di` ACPI` è utilizzando un linguaggio specifico per creare tabelle ACPI. Questo linguaggio, ASL (ACPI Source Language), è il fulcro di questo articolo. Compiliamo ASL to AML (ACPI Machine Language) da software specifici, a loro volta, eseguiti dal sistema operativo. L'ASL è un tipo di linguaggio, deve avere i suoi ruoli.
-
+Prima di tutto, è necessario differenziare DSDT (Campi della tabella di descrizione del sistema differenziato) e SSDT (Campi della tabella di descrizione del sistema secondario). Sono tutte forme di "Configurazione avanzata e interfaccia di alimentazione", di cui è abbreviato in "ACPI". , lo percepiamo come una serie di tabelle per descrivere le interfacce. Di conseguenza, la funzione principale di `ACPI` è quella di fornire ai sistemi operativi alcuni servizi e informazioni. DSDT e SSDT non sono esclusi. Una caratteristica notevole di ACPI è l'utilizzo di un linguaggio specifico per creare tabelle ACPI. Questo linguaggio, ASL (ACPI Source Language), è il fulcro di questo articolo. Compiliamo ASL to AML (ACPI Machine Language) da software specifici, a loro volta, eseguiti dal sistema operativo. L'ASL è un tipo di linguaggio, deve avere i suoi ruoli.
 
 ## Ruoli ASL
 
 1. La variabile non deve superare 4
-caratteri e non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, senza eccezioni.
+caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, senza eccezioni.
 
 1. "Scope" è simile a "{}". Ce n'è uno e solo uno "Scope". Pertanto, DSDT inizia con
 
-   ```swift
+   `` rapido
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
    {
-   ```
+   `` `
 
-   and ended by
+   e finì per
 
-   ```swift
+   `` rapido
    }
-   ```
+   `` `
 
 Questo è "root Scope".
 
-    I parametri `xxxx` si riferiscono a` Nome file`, `OEMID`,` ID tabella`, `Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è **` DSDT` * *, a sua volta, il terzo parametro è `0x02`. Altri parametri possono essere inseriti liberamente.
+    I parametri `xxxx` si acquistano a` Nome file`,` OEMID`, `ID tabella`,` Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è ** `DSDT` * *, a sua volta, il terzo parametro è` 0x02`. Altri parametri possono essere inseriti liberamente.
 
 2. Quei metodi e le variabili che iniziano con "_" sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione "_T_X" dopo la decompilazione.
 
    
 3. "Method" può essere definito seguito da "Device" o "Scope". Pertanto, "method" non può essere definito senza "Scope" e le istanze elencate di seguito sono ** non valide **.
 
-   ```swift
-   Method (xxxx, 0, NotSerialized)
+   `` rapido
+   Metodo (xxxx, 0, NotSerialized)
    {
        ...
    }
@@ -51,58 +50,58 @@ Questo è "root Scope".
    {
        ...
    }
-   ```
+   `` `
 
-4. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
+4. `\ _GPE`,` \ _PR`, `\ _SB`,` \ _SI`, `\ _TZ` appartengono all'ambito radice` \ `.
 
-   - `\_GPE`--- ACPI Event handlers
-   - `\_PR` --- CPU
-   - `\_SB` --- Devices and buses
-   - `\_SI` --- System indicator
-   - `\_TZ` --- Thermal zone
+   - `\ _GPE` --- Gestori di eventi ACPI
+   - `\ _PR` --- CPU
+   - `\ _SB` --- Dispositivi e bus
+   - `\ _SI` --- Indicatore di sistema
+   - `\ _TZ` --- Zona termica
 
- > ** I componenti con attributi diversi si trovano negli ambiti corrispondenti. Per esempi: **
+ > ** I componenti con attributi si trovano negli ambiti corrispondenti. Per esempio: **
 
-   - `Device (PCI0)` places under `Scope (\_SB)`
+   - "Device (PCI0)" si trova in "Scope (\ _SB)"
 
-     ```swift
-     Scope (\_SB)
+     `` rapido
+     Ambito (\ _SB)
      {
-         Device (PCI0)
+         Dispositivo (PCI0)
          {
              ...
          }
          ...
      }
-     ```
+     `` `
 
--I componenti si riferiscono alla posizione della CPU sotto
+-I componenti si è bene alla posizione della CPU sotto
 
       > CPU diverse posizionano ambiti comuni in modo diverso, ad esempio `_PR`,` _SB`, `SCK0`
 
-     ```swift
-     Scope (_PR)
+     `` rapido
+     Ambito (_PR)
      {
-         Processor (CPU0, 0x00, 0x00000410, 0x06)
+         Processore (CPU0, 0x00, 0x00000410, 0x06)
          {
              ...
          }
          ...
      }
-     ```
+     `` `
 
-   - `Scope (_GPE)` places event handlers
+   - `Scope (_GPE)` posiziona i gestori di eventi
 
-      ```swift
-      Scope (_GPE)
+      `` rapido
+      Ambito (_GPE)
       {
-          Method (_L0D, 0, NotSerialized)
+          Metodo (_L0D, 0, NotSerialized)
           {
               ...
           }
           ...
       }
-      ```
+      `` `
 
 Sì, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con ** `_` ** sono riservati dai sistemi operativi.
 
@@ -112,240 +111,237 @@ Sì, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con
 
 7. Il simbolo "_" non ha significato, completa solo i 4 caratteri, ad esempio "_OSI".
 
-8. Per una migliore comprensione, ACPI rilascia "ASL + (ASL2.0)", introduce il linguaggio C "+ - * / =", "<<", ">>" e il giudizio logico "==", "! =" eccetera.
+8. Per una migliore comprensione, ACPI rilascia "ASL + (ASL2.0)", introduce il linguaggio C "+ - * / =", "<<", ">>" e il giudizio logico "==", " ! = "eccetera.
 
 9. I metodi in ASL possono accettare fino a 7 argomenti, sono rappresentati da `Arg0` a` Arg6` e non possono essere personalizzati.
 
 10. Le variabili locali in ASL possono accettare fino a 8 argomenti, sono rappresentate da `Local0` ~` Local7` Le definizioni non sono necessarie, ma dovrebbero essere inizializzate, in altre parole, è necessaria l'assegnazione.
 
-## ASL Common Type of Data
+## Tipo comune di dati ASL
 
-|    ASL    |  
-| :-------: | 
-| `Integer` | 
-| `String`  |  
-|  `Event`  |  
-| `Buffer`  |  
-| `Package` | 
+| ASL |
+| : -------: |
+| `Integer` |
+| `String` |
+| "Evento" |
+| `Buffer` |
+| `Pacchetto` |
 
-## ASL Variables Definition
+## Definizione delle variabili ASL
 
-- Define Integer
+- Definisci numero intero
 
-  ```swift
-  Name (TEST, 0)
-  ```
+  `` rapido
+  Nome (TEST, 0)
+  `` `
 
-- Define String
+- Definisci stringa
   
-  ```swift
-  Name (MSTR,"ASL")
-  ```
+  `` rapido
+  Nome (MSTR, "ASL")
+  `` `
 
-- Define Package
+- Definisci pacchetto
 
-  ```swift
-  Name (_PRW, Package (0x02)
+  `` rapido
+  Nome (_PRW, pacchetto (0x02)
   {
       0x0D,
       0x03
   })
-  ```
+  `` `
 
-- Define Buffer Field
+- Definisci campo buffer
 
-  > Buffer Field 6 types in total:
+  > Buffer Field 6 tipi in totale:
 
-|     Create statement     |   size   |
-| :--------------: | :------: |
-|  CreateBitField  |  1-Bit   |
-| CreateByteField  |  8-Bit   |
-| CreateWordField  |  16-Bit  |
-| CreateDWordField |  32-Bit  |
-| CreateQWordField |  64-Bit  |
-|   CreateField    | any sizes |
+| Crea dichiarazione | dimensione |
+| : --------------: | : ------: |
+| CreateBitField | 1 bit |
+| CreateByteField | 8 bit |
+| CreateWordField | 16 bit |
+| CreateDWordField | 32 bit |
+| CreateQWordField | 64 bit |
+| CreateField | qualsiasi dimensione |
 
-  ```swift
+  `` rapido
   CreateBitField (AAAA, Zero, CCCC)
   CreateByteField (DDDD, 0x01, EEEE)
   CreateWordField (FFFF, 0x05, GGGG)
   CreateDWordField (HHHH, 0x06, IIII)
   CreateQWordField (JJJJ, 0x14, KKKK)
   CreateField (LLLL, Local0, 0x38, MMMM)
-  ```
+  `` `
 
 Non è necessario annunciare il suo tipo quando si definisce una variabile.
 
-## ASL Assignment
+## Assegnazione ASL
 
-```swift
-Store (a,b) /* legacy ASL */
-b = a      /*   ASL+  */
-```
+`` rapido
+Store (a, b) / * legacy ASL * /
+b = a / * ASL + * /
+`` `
 
 Esempio:
 
-```swift
-Store (0, Local0)
+`` rapido
+Negozio (0, Local0)
 Local0 = 0
 
-Store (Local0, Local1)
+Negozio (Local0, Local1)
 Local1 = Local0
-```
+`` `
 
 ## Calcolo ASL
 
-|  ASL+  |  Legacy ASL  |     Examples                                                         |
-| :----: | :--------: | :----------------------------------------------------------- |
-|   +    |    Add     |    `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                    |
-|   -    |  Subtract  |     `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`               |
-|   *    |  Multiply  |     `Local0 = 1 * 2`<br/>`Multiply (1, 2, Local0)`               |
-|   /    |   Divide   |    `Local0 = 10 / 9`<br/>`Divide (10, 9, Local1(remainder), Local0(result))` |
-|   %    |    Mod     |     `Local0 = 10 % 9`<br/>`Mod (10, 9, Local0)`                  |
-|   <<   | ShiftLeft  |      `Local0 = 1 << 20`<br/>`ShiftLeft (1, 20, Local0)`           |
-|   >>   | ShiftRight |    `Local0 = 0x10000 >> 4`<br/>`ShiftRight (0x10000, 4, Local0)` |
-|   --   | Decrement  |   `Local0--`<br/>`Decrement (Local0)`                          |
-|   ++   | Increment  |   `Local0++`<br/>`Increment (Local0)`                          |
-|   &    |    And     |      `Local0 = 0x11 & 0x22`<br/>`And (0x11, 0x22, Local0)`        |
-| &#124; |     Or     |        `Local0 = 0x01`&#124;`0x02`<br/>`Or (0x01, 0x02, Local0)`  |
-|   ~    |    Not     |   `Local0 = ~(0x00)`<br/>`Not (0x00,Local0)`                   |
-|      |    Nor     |    `Nor (0x11, 0x22, Local0)`                                   |
+| ASL + | Legacy ASL | Esempi |
+| : ----: | : --------: | : ------------------------------------------------- ---------- |
+| + | Aggiungi | `Local0 = 1 + 2` <br/>` Aggiungi (1, 2, Local0) `|
+| - | Sottrai | `Local0 = 2 - 1` <br/>` Sottrai (2, 1, Local0) `|
+| * | Moltiplica | `Local0 = 1 * 2` <br/>` Moltiplica (1, 2, Local0) `|
+| / | Dividi | `Local0 = 10 / 9` <br/>` Divide (10, 9, Local1 (resto), Local0 (risultato)) `|
+| % | Mod | `Local0 = 10% 9` <br/>` Mod (10, 9, Local0) `|
+| << | ShiftLeft | `Local0 = 1 << 20` <br />` ShiftLeft (1, 20, Local0) `|
+| >> | ShiftRight | `Local0 = 0x10000 >> 4` <br/>` ShiftRight (0x10000, 4, Local0) `|
+| - | Decremento | `Local0 -` <br/> `Decrement (Local0)` |
+| ++ | Incremento | `Local0 ++` <br/> `Incrementa (Local0)` |
+| & | E | `Local0 = 0x11 & 0x22` <br/>` And (0x11, 0x22, Local0) `|
+| & # 124; | Oppure | `Local0 = 0x01` & # 124;` 0x02` <br/> `Oppure (0x01, 0x02, Local0)` |
+| ~ | Non | `Local0 = ~ (0x00)` <br/> `Non (0x00, Local0)` |
+| | Né | `Nor (0x11, 0x22, Local0)` |
 
-Read `ACPI Specification` for details
+Leggere "Specifiche ACPI" per i dettagli
 
-## ASL Logic
+## Logica ASL
 
-|  ASL+  |   Legacy ASL  | Examples             |
-| :----: | :-----------: | :----------------------------------------------------------- |
-|   &&   |     LAnd      |  `If (BOL1 && BOL2)`<br/>`If (LAnd(BOL1, BOL2))`              |
-|   !    |     LNot      |  `Local0 = !0`<br/>`Store (LNot(0), Local0)`                  |
-| &#124; |      LOr      |  `Local0 = (0`&#124;`1)`<br/>`Store (LOR(0, 1), Local0)`    |
-|   <    |     LLess     |  `Local0 = (1 < 2)`<br/>`Store (LLess(1, 2), Local0)`         |
-|   <=   |  LLessEqual   |  `Local0 = (1 <= 2)`<br/>`Store (LLessEqual(1, 2), Local0)`   |
-|   >    |   LGreater    |  `Local0 = (1 > 2)`<br/>`Store (LGreater(1, 2), Local0)`      |
-|   >=   | LGreaterEqual |  `Local0 = (1 >= 2)`<br/>`Store (LGreaterEqual(1, 2), Local0)` |
-|   ==   |    LEqual     |  `Local0 = (Local0 == Local1)`<br/>`If (LEqual(Local0, Local1))` |
-|   !=   |   LNotEqual   |  `Local0 = (0 != 1)`<br/>`Store (LNotEqual(0, 1), Local0)`    |
+| ASL + | Legacy ASL | Esempi |
+| : ----: | : -----------: | : ------------------------------------------------- ---------- |
+| && | LAnd | `If ​​(BOL1 && BOL2)` <br/> `If (LAnd (BOL1, BOL2))` |
+| ! | LNot | `Local0 =! 0` <br/>` Store (LNot (0), Local0) `|
+| & # 124; | LOr | `Local0 = (0` & # 124;` 1) `<br/>` Store (LOR (0, 1), Local0) `|
+| <| Meno | `Local0 = (1 <2)` <br /> `Store (LLess (1, 2), Local0)` |
+| <= | LLessEqual | `Local0 = (1 <= 2)` <br /> `Store (LLessEqual (1, 2), Local0)` |
+| > | LG maggiore | `Local0 = (1> 2)` <br/> `Store (LGuesday (1, 2), Local0)` |
+| > = | LG GreaterEqual | `Local0 = (1> = 2)` <br/> `Store (LGuesdayEqual (1, 2), Local0)` |
+| == | LEqual | `Local0 = (Local0 == Local1)` <br/> `If (LEqual (Local0, Local1))` |
+| ! = | LNotEqual | `Local0 = (0! = 1)` <br/> `Store (LNotEqual (0, 1), Local0)` |
 
-Only two results from logical calculation - `0` or `1`
+Solo due risultati dal calcolo logico: "0" o "1"
 
-## ASL Definition of Method
+## Definizione di metodo ASL
 
-1. Define a Method
+1. Definire un metodo
 
-   ```swift
-   Method (TEST)
+   `` rapido
+   Metodo (TEST)
    {
        ...
    }
-   ```
+   `` `
 
-2. Define a method contains 2 parameters, and apply local variables`Local0`~`Local7`
+2. Definire un metodo che contenga 2 parametri e applicare le variabili locali`Local0` ~ `Local7`
 
-   Numbers of parameters are defaulted as `0`
+   I numeri dei parametri sono impostati come "0"
 
-   ```swift
-   Method (MADD, 2)
+   `` rapido
+   Metodo (MADD, 2)
    {
        Local0 = Arg0
        Local1 = Arg1
-       Local0 += Local1
+       Local0 + = Local1
    }
-   ```
+   `` `
 
 
-3. Define a method contains a return value
+3. Definire un metodo che contenga un valore di ritorno
   
-   ```swift
-   Method (MADD, 2)
+   `` rapido
+   Metodo (MADD, 2)
    {
        Local0 = Arg0
        Local1 = Arg1
-       Local0 += Local1
+       Local0 + = Local1
 
-       Return (Local0) /* return here */
+       Return (Local0) / * return here * /
    }
-   ```
+   `` `
 
    
 
-   ```swift
-   Local0 = 1 + 2            /* ASL+ */
-   Store (MADD (1, 2), Local0)  /* Legacy ASL */
-   ```
+   `` rapido
+   Local0 = 1 + 2 / * ASL + * /
+   Negozio (MADD (1, 2), Local0) / * Legacy ASL * /
+   `` `
 
-4. Define serialised method
+4. Definire il metodo serializzato
 
-   If not define `Serialized` or `NotSerialized`, default as `NotSerialized`
+   Se non definire "Serialized" o "NotSerialized", il valore predefinito è "NotSerialized"
 
-   ```swift
-   Method (MADD, 2, Serialized)
+   `` rapido
+   Metodo (MADD, 2, serializzato)
    {
        Local0 = Arg0
        Local1 = Arg1
-       Local0 += Local1
-       Return (Local0)
+       Local0 + = Local1
+       Ritorno (Local0)
    }
-   ```
+   `` `
 
-   It looks like `multi-thread synchronisation`. In other words, only one instance can be existed in the memory when the method is stated as `Serialized`. Normally the application create one object, for example:
+   Sembra una "sincronizzazione multi-thread". In altre parole, solo un'istanza può essere presente nella memoria quando il metodo è dichiarato come "Serializzato". Normalmente l'applicazione crea un oggetto, ad esempio:
 
-   ```swift
-   Method (TEST, Serialized)
+   `` rapido
+   Metodo (TEST, serializzato)
    {
-       Name (MSTR,"I will sucess")
+       Nome (MSTR, "I will success")
    }
-   ```
+   `` `
 
-   If we state `TEST` shown above，and call it from two different methods:
+   Se affermiamo `TEST` mostrato sopra ， e lo chiamiamo da due metodi diversi:
 
-   ```swift
-   Device (Dev1)
-   {
-        TEST ()
-   }
-   Device (Dev2)
+   `` rapido
+   Dispositivo (Dev1)
    {
         TEST ()
    }
-   ```
-If we execute `TEST` in `Dev1`, then `TEST` in `Dev2` will wait until the first one finalised. If we state:
-
-   ```swift
-   Method (TEST, NotSerialized)
+   Dispositivo (Dev2)
    {
-       Name (MSTR, "I will sucess")
+        TEST ()
    }
-   ```
+   `` `
+Se eseguiamo `TEST` in` Dev1`, allora `TEST` in` Dev2` aspetterà fino a quando il primo non sarà finalizzato. Se affermiamo:
 
-   when one of `TEST` called from `Devx`, another `TEST` will be failed to create `MSTR`.
+   `` rapido
+   Metodo (TEST, NotSerialized)
+   {
+       Nome (MSTR, "I will success")
+   }
+   `` `
 
-## ACPI Preset Function
+## Funzione Preset ACPI
 
-### `_OSI`  (Operating System Interfaces)
+### `_OSI` (interfacce del sistema operativo)
 
-It is easy to acquire the current operating system's name and version when applying `_OSI`. For example, we could apply a patch that is specific to Windows or MacOS.
+È facile acquisire il nome e la versione del sistema operativo corrente quando si applica "_OSI". Ad esempio, potremmo applicare una patch specifica per Windows o MacOS.
 
-`_OSI` requires a string, the string must be picked from the table below.
+"_OSI" richiede una stringa, la stringa deve essere prelevata dalla tabella sottostante.
 
-|                 OS                  |      String      |
-| :---------------------------------------: | :--------------: |
-|                   macOS                   |    `"Darwin"`    |
-| Linux<br/>(Including OS based on Linux kernel) |    `"Linux"`     |
-|                  FreeBSD                  |   `"FreeBSD"`    |
-|                  Windows                  | `"Windows 20XX"` |
+| OS | String |
+| : ---------------------------------------: | : --------------: |
+| macOS | `" Darwin "` |
+| Linux <br/> (incluso sistema operativo basato su kernel Linux) | "" Linux "` |
+| FreeBSD | `" FreeBSD "` |
+| Windows | `` "Windows 20XX" `|
 
-> Notably，different Windows versions requre a unique string，read：
+> In particolare ， diverse versioni di Windows richiedono una stringa univoca ， leggi ：
 >
 > <https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi>
 
-When `_OSI`'s string matchs the current system, it returns `1`, `If` condition is valid.
+Quando la stringa di "_OSI" corrisponde al sistema corrente, restituisce "1", la condizione "If" è valida.
 
-```swift
-If (_OSI ("Darwin")) /* judge if the current system is macOS */
-```
-
-### `_STA` (Status)
+`` rapido
+If (_OSI ("Darwin")) / * giudica se il sistema corrente è macOS * /
+`` `
+### `_STA` (Stato)
 
 **Caution⚠️: two types of `_STA`，do not mix up`_STA`from`PowerResource`！！！**
 
@@ -359,21 +355,21 @@ If (_OSI ("Darwin")) /* judge if the current system is macOS */
 | Bit [3] | Set if the device is functioning properly (cleared if device failed its diagnostics).            |
 | Bit [4] | Set if the battery is present.             |
 
-We need to transfer these bits from hexadecimal to binary. `0x0F` transfered to `1111`, meaning enable it(the first four bits); while `Zero` means disable. 
+Dobbiamo trasferire questi bit da esadecimale a binario. "0x0F" trasferito a "1111", che significa abilitarlo (i primi quattro bit); mentre "Zero" significa disabilitare.
 
-We also encounter `0x0B`,`0x1F`. `1011` is a binary form of `0x0B`, meaning the device is enabled and not is not allowed to decode its resources. `0X0B` often utilised in **`SSDT-PNLF`**. `0x1F` (`11111`)only appears to describe battery device from laptop, the last bit is utilised to inform Control Method Battery Device `PNP0C0A` that the battery is present.
+Incontriamo anche "0x0B", "0x1F". "1011" è una forma binaria di "0x0B", il che significa che il dispositivo è abilitato e non autorizzato a decodificare le sue risorse. `0X0B` spesso usato in **` SSDT-PNLF` **. "0x1F" ("11111") sembra descrivere solo il dispositivo batteria dal laptop, l'ultimo bit è utilizzato per informare il metodo di controllo del dispositivo batteria "PNP0C0A" che la batteria è presente.
 
-> In terms of `_STA` from `PowerResource`
+> In termini di `_STA` da` PowerResource`
 >
-> `_STA` from `PowerResource` only returns `One` or `Zero`. Please read `ACPI Specification` for detail.
+> `_STA` da` PowerResource` restituisce solo` Uno` o` Zero`. Si prega di leggere "Specifiche ACPI" per i dettagli.
 
-### `_CRS` (Current Resource Settings)
-`_CRS` returns a `Buffer`, it is often utilised to acquire touchable devices' `GPIO Pin`,`APIC Pin` for controlling the interrupt mode.
+### `_CRS` (Impostazioni correnti delle risorse)
+`_CRS` restituisce un` Buffer`, è spesso utilizzato per acquisire dispositivi toccabili '`GPIO Pin`,` APIC Pin` per controllare la modalità di interruzione.
 
 
-## ASL flow Control
+## Controllo del flusso ASL
 
-ASL also has its method to control flow.
+ASL ha anche il suo metodo per controllare il flusso.
 
 - Switch
   - Case
@@ -444,10 +440,9 @@ ASL also has its method to control flow.
    }
    ```
 
+### Controllo del loop
 
-### Loop control
-
-#### `While` & `Stall`
+#### `While` &` Stall`
 
 ```swift
 Local0 = 10
@@ -460,7 +455,8 @@ While (Local0 >= 0x00)
 
 `Local0` = `10`,if `Local0` ≠ `0` is false, `Local0`-`1`, stall `32μs`, the codes delay `10 * 32 = 320 μs`。
 
-#### `For`
+
+#### `Per`
 
 `For` from `ASL` is similar to `C`, `Java`
 
@@ -471,7 +467,7 @@ for (local0 = 0, local0 < 8, local0++)
 }
 ```
 
-`For` shown above and `While` shown below are equivalent
+"For" mostrato sopra e "While" sotto sono equivalenti
 
 ```swift
 Local0 = 0
@@ -481,7 +477,7 @@ While (Local0 < 8)
 }
 ```
 
-## `External` Quote
+## Citazione `Esterno`
 
 |    Quote Types    | External SSDT Quote| Quoted    |
 | :------------: | :------------: |  :------------------------------------ |
@@ -503,10 +499,9 @@ While (Local0 < 8)
 
 > DDBHandleObj is rare, no discussion
 
-
 ## ASL CondRefOf
 
-`CondRefOf` is useful to check the object is existed or not.
+`CondRefOf` è utile per controllare che l'oggetto sia esistito o meno.
 
 ```swift
 Method (SSCN, 0, NotSerialized)
@@ -527,7 +522,7 @@ Method (SSCN, 0, NotSerialized)
 }
 ```
 
-The codes are quoted from **`SSDT-I2CxConf`**. When system is not MacOS, and `XSCN` exists under `I2C0`, it returns the orginal value.
+I codici sono citati da ** `SSDT-I2CxConf` **. Quando il sistema non è MacOS e "XSCN" esiste in "I2C0", restituisce il valore originale.
 
-## Conclusion
-Hoping this article assists you when you are editing DSDT/SSDT.
+## Conclusione
+Spero che questo articolo ti aiuti quando stai modificando DSDT / SSDT.
