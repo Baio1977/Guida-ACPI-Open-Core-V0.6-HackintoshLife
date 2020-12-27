@@ -1,6 +1,6 @@
-# Brand machine special patch
+# Patch speciale per macchina di marca
 
--Special patches for Dell machines
--Xiaoxin PRO13 special patch
--Special patch for ThinkPad machine
--Asus machine special patch
+-Patch speciali per macchine Dell
+-Patch speciale xiaoxin PRO13
+-Patch speciale per la macchina ThinkPad
+-Patch speciale macchina Asus
