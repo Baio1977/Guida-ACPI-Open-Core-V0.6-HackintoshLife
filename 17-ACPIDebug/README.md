@@ -1,56 +1,56 @@
-# ACPIDebug description
+# Descrizione ACPIDebug
 
-## Description
+## Descrizione
 
-By adding debugging code to the ***SSDT-xxxx*** patch, you can see the patch or ACPI working process on the console for debugging the patch.
+Aggiungendo il codice di debug alla patch *** SSDT-xxxx ***, è possibile vedere la patch o il processo di lavoro ACPI sulla console per il debug della patch.
 
-## Claim
+## Richiesta
 
--Drive
-  -Install ***ACPIDebug.kext*** to `OC\Kexts` and add the driver list.
+-Guidare
+  -Installa *** ACPIDebug.kext *** in `OC \ Kexts` e aggiungi l'elenco dei driver.
 -Patch
-  -Add the main patch ***SSDT-RMDT*** to `OC\ACPI`, and add the patch list.
-  -Add ***custom patch*** to `OC\ACPI`, and add the patch list.
+  -Aggiungere la patch principale *** SSDT-RMDT *** a `OC \ ACPI` e aggiungere l'elenco delle patch.
+  -Aggiungere *** patch personalizzata *** a `OC \ ACPI` e aggiungere l'elenco delle patch.
 
 ## Debug
 
--Open the **Console** and search for **`Keyword`** (**`Keyword`** from ***Custom Patches***)
--Observe the console output
+-Apri la ** Console ** e cerca ** `Keyword` ** (**` Keyword` ** da *** Patch personalizzate ***)
+-Osservare l'output della console
 
-## Example
+## Esempio
 
--Purpose
+-Scopo
 
-  -Observe how the `_PTS` and `_WAK` of `ACPI` receive `Arg0` after the machine sleeps and wakes up.
+  -Osserva come `_PTS` e` _WAK` di `ACPI` ricevono` Arg0` dopo che la macchina è in stato di stop e si sveglia.
 
--Drivers and patches
+-Driver e patch
 
-  -***ACPIDebug.kext***-see above
+  - *** ACPIDebug.kext *** - vedi sopra
 
-  -***SSDT-RMDT***-see above
+  - *** SSDT-RMDT *** - vedi sopra
 
-  -***SSDT-PTSWAK*** ——The patch has built-in parameter transfer variables `\_SB.PCI9.TPTS`, `\_SB.PCI9.TWAK` to facilitate other patches to use. See "PTSWAK Comprehensive Extension Patch"
+  - *** SSDT-PTSWAK *** —— La patch ha variabili di trasferimento dei parametri incorporate `\ _SB.PCI9.TPTS`,` \ _SB.PCI9.TWAK` per facilitare l'uso di altre patch. Vedi "PTSWAK Comprehensive Extension Patch"
 
-  -***SSDT-BKeyQxx-Debug***-This patch is just an example. Debugging code has been added to the patch, and the debugging code can be executed after the key is responded. In actual use, you can assign brightness shortcut keys or other keys.
+  - *** SSDT-BKeyQxx-Debug *** - Questa patch è solo un esempio. Il codice di debug è stato aggiunto alla patch e il codice di debug può essere eseguito dopo aver risposto alla chiave. Nell'uso effettivo, è possibile assegnare tasti di scelta rapida della luminosità o altri tasti.
 
-    **Note**: The name change required by the above patch is in the comment of the corresponding patch file.
+    ** Nota **: la modifica del nome richiesta dalla patch precedente si trova nel commento del file della patch corrispondente.
 
--Observe the console output
+-Osservare l'output della console
 
-  -Open the console and search for `ABCD-`
+  -Apri la console e cerca "ABCD-"
 
-  -Complete a sleep and wake up process
+  -Completa un processo di sonno e risveglio
 
-  -Press the key specified by ***SSDT-BKeyQxx-Debug*** and observe the console output. Under normal circumstances, the display results are as follows:
+  -Premere il tasto specificato da *** SSDT-BKeyQxx-Debug *** e osservare l'output della console. In circostanze normali, i risultati di visualizzazione sono i seguenti:
 
-    ```log
-    13:19:50.542733+0800 kernel ACPIDebug: {"ABCD-_PTS-Arg0=", 0x3,}
-    13:19:55.541826+0800 kernel ACPIDebug: {"ABCD-_WAK-Arg0=", 0x3,}
-    ```
+    `` log
+    13: 19: 50.542733 + 0800 kernel ACPIDebug: {"ABCD-_PTS-Arg0 =", 0x3,}
+    13: 19: 55.541826 + 0800 kernel ACPIDebug: {"ABCD-_WAK-Arg0 =", 0x3,}
+    `` `
 
-    The above display result is the value of `Arg0` after the last sleep and wake-up.
+    Il risultato del display sopra è il valore di "Arg0" dopo l'ultimo sonno e risveglio.
 
-## Remarks
+## Osservazioni
 
--Debug code can be diversified, such as: `\RMDT.P1`, `\RMDT.P2`, `\RMDT.P3`, etc., see ***SSDT-RMDT.dsl*** for details
--The above drivers and main patches are from [@RehabMan](https://github.com/rehabman)
+-Il codice di debug può essere diversificato, ad esempio: `\ RMDT.P1`,` \ RMDT.P2`, `\ RMDT.P3`, ecc., Vedere *** SSDT-RMDT.dsl *** per i dettagli
+-I driver e le patch principali di cui sopra provengono da [@RehabMan] (https://github.com/rehabman)
