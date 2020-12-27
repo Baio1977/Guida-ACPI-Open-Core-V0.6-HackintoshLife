@@ -1,54 +1,54 @@
-# Patch speciale macchina ThinkPad
+# ThinkPad machine special patch
 
-## Rinomina speciale
+## Special rename
 
-Come alcune macchine Lenovo, il DSDT delle macchine ThinkPad può contenere anche il campo `PNLF`. Cerca `PNLF` in DSDT, se c'è` PNLF`, devi aggiungere il seguente rinomina:
+Like some Lenovo machines, the DSDT of ThinkPad machines may also contain the `PNLF` field. Search for `PNLF` in DSDT, if there is `PNLF`, you need to add the following rename:
 
-`` testo
-Trova: 504E4C46
-Sostituisci: 584E4C46
-`` `
+```text
+Find: 504E4C46
+Replace: 584E4C46
+```
 
-## Patch speciale
+## Special Patch
 
-### Iniezione degli attributi del touchpad ThinkPad e patch anti-deriva a piccoli punti rossi
+### ThinkPad touchpad attribute injection and small red dot anti-drift patch
 
-Il touchpad e il punto rosso di ThinkPad appartengono al tipo ELAN e utilizzano il protocollo `Synaptics` per connettersi tramite SMBus. Poiché attualmente non esiste un driver SMBus che possa essere utilizzato stabilmente in macOS, è possibile utilizzare solo VoodooPS2. Quando si utilizza VoodooPS2, per abilitare l'ottimizzazione ThinkPad incorporata in VoodooPS2, è necessario inserire gli attributi del trackpad tramite SSDT.
+ThinkPad's touchpad and red dot belong to the ELAN type, and use the `Synaptics` protocol to connect through SMBus. Since there is currently no SMBus driver that can be used stably under macOS, only VoodooPS2 can be used. When using VoodooPS2, in order to enable the ThinkPad optimization built in VoodooPS2, you need to inject the trackpad attributes through SSDT.
 
-** SSDT-ThinkPad_ClickPad **
+**SSDT-ThinkPad_ClickPad**
 
-Se il tuo trackpad è uno dei due mostrati nell'immagine qui sotto, usa questa patch.
+If your trackpad is one of the two shown in the image below, then please use this patch.
 
-! [] (https://i.loli.net/2020/04/26/ceEyQfgikqzjapL.png)
+![](https://i.loli.net/2020/04/26/ceEyQfgikqzjapL.png)
 
-** SSDT-ThinkPad_TouchPad **
+**SSDT-ThinkPad_TouchPad**
 
-Se il tuo trackpad è uno dei due mostrati nell'immagine sotto, usa questa patch.
+If your trackpad is one of the two shown in the image below, then please use this patch.
 
-! [] (https://i.loli.net/2020/04/26/FUxIp4nmAb2PSws.png)
-
-----
-
-Il percorso della tastiera della maggior parte delle macchine ThinkPad è `\ _SB.PCI0.LPC.KBD` o` \ _SB.PCI0.LPCB.KBD`. Le due patch fornite usano `_SB.PCI0.LPC.KBD` per impostazione predefinita. Verificare personalmente il nome del bus LPC e il nome della tastiera originali rispetto al DSDT e sostituire il percorso ACPI.
-
-Entrambe le patch comportano la modifica della variabile RMCF del dispositivo tastiera. Se si utilizza contemporaneamente la patch di mappatura PS2 nel capitolo "Mappatura tastiera PS2", è necessario unire manualmente i contenuti delle variabili RMCF. Vedi ** SSDT-ThinkPad_ClickPad + PS2Map-AtoZ ** per l'esempio di unione. Questa patch include anche l'iniezione degli attributi ThinkPad ClickPad e la mappatura A -> Z PS2 Map.
-
-Inoltre, il VoodooPS2Controller di Rebhabman è obsoleto. Si consiglia di utilizzare [VoodooPS2] di acidanthera (https://github.com/acidanthera/VoodooPS2) e di utilizzare [VoodooInput] (https://github.com/acidanthera/VoodooInput) per abilitare ThinkPad All i gesti del touchpad.
+![](https://i.loli.net/2020/04/26/FUxIp4nmAb2PSws.png)
 
 ----
 
-Quanto segue è una spiegazione delle varie configurazioni in SSDT, che è stata scritta da [@SukkaW] (https://github.com/SukkaW) sulla base del [README] di Rehabman, manutentore originale di VoodooPS2 (https://github.com/RehabMan / OS- X-Voodoo-PS2-Controller / blob / master / README.md) e i commenti sul codice in VoodooPS2 sono stati risolti.
+The keyboard path of most ThinkPad machines is `\_SB.PCI0.LPC.KBD` or `\_SB.PCI0.LPCB.KBD`. The two provided patches use `_SB.PCI0.LPC.KBD` by default. Please check the original LPC bus name and keyboard name against the DSDT by yourself, and replace the ACPI path.
 
--DragLockTempMask: tasto di scelta rapida per il blocco del trascinamento temporaneo. "0x40004" corrisponde a Control, "0x80008" a Command e "0x100010" a Option. Va notato che queste sono le relazioni originali mappate sulla tastiera fisica e non sono influenzate dalla sequenza di tasti funzione impostata nelle "Preferenze di Sistema".
--DynamicEWMode: modalità Dynamic EW. In modalità EW, i gesti con due dita (come lo scorrimento con due dita) divideranno equamente la larghezza di banda del touchpad. Quando la modalità EW dinamica è abilitata, il touchpad non sarà sempre in modalità EW, quindi può migliorare la velocità di risposta di scorrimento a due dita del touchpad ThinkPad ClickPad. (Nota del traduttore: quando si scorre con due dita, solo due dita sono in contatto allo stesso tempo. Il pannello di controllo e quindi il touchpad restituiscono solo la direzione e la distanza di scorrimento di un dito, risparmiando la larghezza di banda dell'altro dito). Durante il trascinamento del file (Nota del traduttore, un dito tiene il touchpad e l'altro dito scorre) ClickPad verrà premuto e la modalità EW sarà ancora abilitata. Questa opzione ha causato problemi con alcuni touchpad, quindi è disabilitata per impostazione predefinita.
--FakeMiddleButton: simula il clic del pulsante centrale quando tocchi il trackpad con tre dita contemporaneamente.
--HWResetOnStart: alcuni dispositivi touchpad (in particolare il touchpad ThinkPad e il piccolo punto rosso) devono abilitare questa opzione per funzionare correttamente.
--ForcePassThrough e SkipPassThrough: Il dispositivo di input PS2 può inviare un tipo speciale di pacchetto di dati a 6 byte di "Pass Through", che può realizzare la trasmissione del segnale interleaved tra il touchpad e lo stick di puntamento (come il punto rosso ThinkPad). VoodooPS2 ha realizzato il riconoscimento automatico dei pacchetti "Pass Through" di tipo dispositivo PS2, queste due opzioni sono solo a scopo di debug.
--PalmNoAction durante la digitazione: il palmo della mano potrebbe toccare accidentalmente il touchpad durante la digitazione. Abilitando questa opzione si evitano i tocchi accidentali.
--SmoothInput: dopo aver abilitato questa opzione, il driver calcolerà la media ogni tre punti di campionamento per ottenere una traccia di movimento regolare.
--UnsmoothInput: Dopo aver abilitato questa opzione, quando si interrompe l'immissione sul touchpad, la media di campionamento verrà annullata e la posizione quando si inserisce interrotto viene utilizzata come posizione finale della traccia. Questo perché alla fine della traiettoria, la media del campionamento può causare grandi errori o persino invertire le traiettorie. Per impostazione predefinita, questa opzione e SmoothInput sono entrambe abilitate.
--DivisorX e DivisorY: Imposta la larghezza del bordo del touchpad. L'area del bordo non fornirà alcuna risposta.
--MomentumScrollThreshY: usa il touchpad per scorrere con due dita e continua per scorrere dopo che le dita hanno lasciato il touchpad, come se ci fosse inerzia. Questa opzione è abilitata per impostazione predefinita per imitare il più possibile l'esperienza del trackpad dei dispositivi Mac.
--MultiFingerHorizontalDivisor e MultiFingerVerticalDivisor: alcuni touch panel hanno un'area "barra di scorrimento" dedicata all'estrema destra e / o in basso. Questa parte dell'area non risponde agli sfioramenti con più dita per impostazione predefinita. Queste due opzioni forniscono le impostazioni per la larghezza dell'area non reattiva. Il valore predefinito è 1, il che significa che l'intero touchpad può rispondere a sfioramenti con più dita.
--Risoluzione: La "risoluzione" del touchpad, l'unità è il numero di pixel per pollice, cioè quanti pixel verranno disegnati sullo schermo quando un dito scorre di un pollice sul touchpad.
--ScrollDeltaThresh: valore di tolleranza, utilizzato per evitare il problema del jitter quando si scorre con due dita su macOS 10.9 Maverick. Il valore predefinito è 10.
+Both patches involve the modification of the RMCF variable of the keyboard device. If you use the PS2 mapping patch in the "PS2 Keyboard Mapping" chapter at the same time, you need to manually merge the contents of the RMCF variables. Please see **SSDT-ThinkPad_ClickPad+PS2Map-AtoZ** for the merge example. This patch also includes the injecting ThinkPad ClickPad attributes And A -> Z PS2 Map mapping.
+
+In addition, Rebhabman's VoodooPS2Controller is outdated. It is recommended to use acidanthera's [VoodooPS2](https://github.com/acidanthera/VoodooPS2), and use [VoodooInput](https://github.com/acidanthera/VoodooInput) to enable ThinkPad All touchpad gestures.
+
+----
+
+The following is an explanation of the various configurations in SSDT, which was written by [@SukkaW](https://github.com/SukkaW) based on VoodooPS2 original maintainer Rehabman’s [README](https://github.com/RehabMan/OS- X-Voodoo-PS2-Controller/blob/master/README.md) and the code comments in VoodooPS2 are sorted out.
+
+-DragLockTempMask: temporary drag lock shortcut key. `0x40004` corresponds to Control, `0x80008` corresponds to Command, and `0x100010` corresponds to Option. It should be noted that these are the original relationships mapped on the physical keyboard and are not affected by the function key sequence set in the "System Preferences".
+-DynamicEWMode: Dynamic EW mode. In EW mode, two-finger gestures (such as two-finger swipe) will equally divide the bandwidth of the touchpad. When the dynamic EW mode is enabled, the touchpad will not always be in EW mode, so it can improve the two-finger scrolling response speed of the ThinkPad ClickPad touchpad. (Translator's Note: When two-finger scrolling, only two fingers are in touch at the same time. The control panel and then the touchpad only feedback the direction and distance of one finger sliding, saving the bandwidth of the other finger). While dragging the file (Translator's Note, one finger holds the touchpad and the other finger slides) ClickPad will be pressed, and the EW mode will still be enabled. This option caused problems with a few touchpads, so it is disabled by default.
+-FakeMiddleButton: Simulate a middle button click when you tap the trackpad with three fingers at the same time.
+-HWResetOnStart: Some touchpad devices (especially the ThinkPad touchpad and the little red dot) need to enable this option to work properly.
+-ForcePassThrough and SkipPassThrough: The PS2 input device can send a special type of 6-byte data packet of "Pass Through", which can realize the interleaved signal transmission between the touchpad and the pointing stick (such as the ThinkPad red dot). VoodooPS2 has realized the automatic recognition of PS2 device type "Pass Through" packets, these two options are only for debugging purposes.
+-PalmNoAction When Typing: The palm of your hand may accidentally touch the touchpad when typing. Enabling this option will prevent accidental touches.
+-SmoothInput: After enabling this option, the driver will average every three sampling points to obtain a smooth movement track.
+-UnsmoothInput: After enabling this option, when inputting to the touchpad is stopped, the sampling average will be cancelled, and the position when inputting stopped is used as the end position of the track. This is because at the end of the trajectory, sampling averaging may cause large errors or even reverse trajectories. By default, this option and SmoothInput are both enabled.
+-DivisorX and DivisorY: Set the edge width of the touchpad. The edge area will not provide any response.
+-MomentumScrollThreshY: Use the touchpad to scroll with two fingers, and continue to scroll after the fingers leave the touchpad, as if there is inertia. This option is enabled by default to mimic the trackpad experience of Mac devices as much as possible.
+-MultiFingerHorizontalDivisor and MultiFingerVerticalDivisor: Some touch panels have a dedicated "slide bar" area at the far right and/or bottom. This part of the area does not respond to multi-finger swipes by default. These two options provide settings for the width of the non-responsive area. The default value is 1, which means that the entire touchpad can respond to multi-finger swipes.
+-Resolution: The "resolution" of the touchpad, the unit is the number of pixels per inch, that is, how many pixels will be drawn on the screen when a finger slides one inch on the touchpad.
+-ScrollDeltaThresh: Tolerance value, used to avoid the jitter problem when sliding with two fingers on macOS 10.9 Maverick. The default value is 10.
