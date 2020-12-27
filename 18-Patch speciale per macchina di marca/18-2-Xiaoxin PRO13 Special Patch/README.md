@@ -1,58 +1,58 @@
-# Xiaoxin PRO13 Special Patch
+# Xiaoxin PRO13 Patch speciale
 
-## Special rename
+## Rinomina speciale
 
-PNLF renamed XNLF
+PNLF rinominato XNLF
 
-```text
-Find: 504E4C46
-Replace: 584E4C46
-```
+`` testo
+Trova: 504E4C46
+Sostituisci: 584E4C46
+`` `
 
-The DSDT of Xiaoxin PRO has variable `PNLF`, `PNLF` and brightness patch name may conflict, so use the above name change to avoid it.
+Il DSDT di Xiaoxin PRO ha la variabile `PNLF`,` PNLF` e il nome della patch di luminosità potrebbe essere in conflitto, quindi usa la modifica del nome sopra per evitarlo.
 
-## Special AOAC patch
+## Patch speciale AOAC
 
--***SSDT-NameS3-disable*** ——See "S3 Sleep Prohibition" in "AOAC Method"
--***SSDT-NDGP_OFF-AOAC*** —— Refer to "AOAC Prohibit Independent Display" in "AOAC Method"
--***SSDT-DeepIdle*** ——See "Power Idle Management" in "AOAC Method"
--***SSDT-PCI0.LPCB-Wake-AOAC*** ——See "AOAC Wake Method" in "AOAC Method"
+- *** SSDT-NameS3-disable *** ——Vedi "S3 Sleep Prohibition" in "AOAC Method"
+- *** SSDT-NDGP_OFF-AOAC *** —— Fare riferimento a "AOAC Prohibit Independent Display" in "AOAC Method"
+- *** SSDT-DeepIdle *** ——Vedi "Gestione alimentazione inattiva" in "Metodo AOAC"
+- *** SSDT-PCI0.LPCB-Wake-AOAC *** —— Vedi "Metodo di riattivazione AOAC" in "Metodo AOAC"
 
-## Other patches (reference)
+## Altre patch (riferimento)
 
--***SSDT-PLUG-_SB.PR00***-see "X86 injection"
--***SSDT-EC***-see "Counterfeit Equipment-Counterfeit EC"
--***SSDT-PNLF-CFL*** ——See "PNLF Injection Method"
--***SSDT-PMCR***-see "Add missing parts"
--***SSDT-SBUS*** ——See "SBUS/SMBU Patch"
--***SSDT-OCBAT1-lenovoPRO13***-See "Battery Patch"
--***SSDT-I2CxConf*** ——See "I2C Dedicated Components"
--***SSDT-OCI2C-TPXX-lenovoPRO13*** ——See "I2C Special Parts"
--***SSDT-CB-01_XHC*** ——See "ACPI Customized USB Port"
--***SSDT-GPRW*** ——See "060D Patch"
--***SSDT-RTC_Y-AWAC_N*** ——see "Binary Rename and Preset Variables"
--***SSDT-RMCF-PS2Map-LenovoPRO13*** ——This chapter patch, please refer to "PS2 Keyboard Map"
--***SSDT-OCPublic-Merge*** —— Patches in this chapter, see **Attachment** description
--***SSDT-BATS-PRO13***-see "Battery Patch"
+- *** SSDT-PLUG-_SB.PR00 *** - vedi "Iniezione X86"
+- *** SSDT-EC *** - vedere "Apparecchiature contraffatte-EC contraffatte"
+- *** SSDT-PNLF-CFL *** ——Vedere "Metodo di iniezione PNLF"
+- *** SSDT-PMCR *** - vedi "Aggiungere parti mancanti"
+- *** SSDT-SBUS *** ——Vedi "Patch SBUS / SMBU"
+- *** SSDT-OCBAT1-lenovoPRO13 *** - Vedi "Patch batteria"
+- *** SSDT-I2CxConf *** ——Vedere "Componenti dedicati I2C"
+- *** SSDT-OCI2C-TPXX-lenovoPRO13 *** ——Vedere "Parti speciali I2C"
+- *** SSDT-CB-01_XHC *** ——Vedere "Porta USB personalizzata ACPI"
+- *** SSDT-GPRW *** ——Vedi "060D Patch"
+- *** SSDT-RTC_Y-AWAC_N *** —— vedi "Rinomina binaria e variabili preimpostate"
+- *** SSDT-RMCF-PS2Map-LenovoPRO13 *** ——Questa patch del capitolo, fare riferimento a "Mappa della tastiera PS2"
+- *** SSDT-OCPublic-Merge *** —— Patch in questo capitolo, vedere la descrizione dell '** allegato **
+- *** SSDT-BATS-PRO13 *** - vedi "Patch della batteria"
 
-**Note**: The name change required by the above patch is in the comment of the corresponding patch file.
+** Nota **: la modifica del nome richiesta dalla patch precedente si trova nel commento del file della patch corrispondente.
 
-## Remarks
+## Osservazioni
 
--Please read "AOAC Method"
+-Si prega di leggere "Metodo AOAC"
 
-## Attachment: Merging common patches
+## Allegato: unione di patch comuni
 
--In order to simplify the operation and reduce the number of patches, some public patches have been merged into: ***SSDT-OCPublic-Merge***.
+-Per semplificare l'operazione e ridurre il numero di patch, alcune patch pubbliche sono state unite in: *** SSDT-OCPublic-Merge ***.
 
-#### Merged Patch
+#### Patch unita
 
--***SSDT-EC-USBX*** —— **USBX** part from OC official patch example
--***SSDT-ALS0*** ——The original patch is located in "Counterfeit Device-Counterfeit Ambient Light Sensor"
--***SSDT-MCHC***-The original patch is located in "Add Missing Parts"
+- *** SSDT-EC-USBX *** —— ** USBX ** parte dall'esempio di patch ufficiale OC
+- *** SSDT-ALS0 *** —— La patch originale si trova in "Counterfeit Device-Counterfeit Ambient Light Sensor"
+- *** SSDT-MCHC *** - La patch originale si trova in "Aggiungi parti mancanti"
 
-#### Precautions
+#### Precauzioni
 
--***SSDT-OCPublic-Merge*** applies to all machines.
--After using ***SSDT-OCPublic-Merge***, the patches listed above **<u>Merged Patches</u>** are no longer applicable.
+- *** SSDT-OCPublic-Merge *** si applica a tutte le macchine.
+-Dopo aver utilizzato *** SSDT-OCPublic-Merge ***, le patch elencate sopra ** <u> Patch unite </u> ** non sono più applicabili.
 
