@@ -1,36 +1,36 @@
-# Dell machine special patch
+# Patch speciale della macchina Dell
 
-## Claim
+## Richiesta
 
--Check if the following `Device` and `Method` exist in ACPI and the names match, otherwise ignore the content of this chapter.
-  -`Device`: ECDV【PNP0C09】
-  -`Device`: LID0【PNP0C0D】
-  -`Method`: OSID
-  -`Method`: BTNV
+-Controlla se i seguenti "Device" e "Method" esistono in ACPI e i nomi corrispondono, altrimenti ignora il contenuto di questo capitolo.
+  -`Device`: ECDV 【PNP0C09】
+  -`Device`: LID0 【PNP0C0D】
+  -`Metodo`: OSID
+  -`Metodo`: BTNV
 
-## Special rename
+## Rinomina speciale
 
-PNLF renamed XNLF
+PNLF rinominato XNLF
 
-```text
-Find: 504E4C46
-Replace: 584E4C46
-```
+`` testo
+Trova: 504E4C46
+Sostituisci: 584E4C46
+`` `
 
-There is a variable `PNLF` in the DSDT of some Dell machines. If `PNLF` and the brightness patch have the same name, there may be conflicts. Use the above name change to avoid it.
+C'è una variabile "PNLF" nel DSDT di alcune macchine Dell. Se "PNLF" e la patch di luminosità hanno lo stesso nome, potrebbero esserci dei conflitti. Usa il cambio di nome sopra per evitarlo.
 
-## Special Patch
+## Patch speciale
 
--***SSDT-OCWork-dell***
-  -Most Dell machines have an `OSID` method. The `OSID` method includes two variables `ACOS` and `ACOS`, which determine the working mode of the machine. For example, only when `ACOS` >= `0x20`, ACPI's brightness shortcut key method will work. Listed below are the relationships between 2 variables and working modes. For details of the `OSID` method, please refer to the `Method (OSID...` of DSDT).
-    -`ACOS` >= `0x20`, brightness shortcut key works
-    -`ACOS` = `0x80`, `ACSE` = 0 is win7 mode, in this mode, the breathing light flashes during sleep
-    -`ACOS` = `0x80`, `ACSE` = 1 is win8 mode, in this mode, the breathing light is off during sleep
-  -The specific content of the two variables in the `OSID` method depends on the operating system itself. You must use **operating system patch** or use **this patch** in the black apple state to change these two variables to meet specific requirements.
+- *** SSDT-OCWork-dell ***
+  -La maggior parte delle macchine Dell ha un metodo `OSID`. Il metodo `OSID` include due variabili` ACOS` e `ACOS`, che determinano la modalità di lavoro della macchina. Ad esempio, solo quando `ACOS`> =` 0x20`, il metodo del tasto di scelta rapida della luminosità di ACPI funzionerà. Di seguito sono elencate le relazioni tra 2 variabili e modalità di lavoro. Per i dettagli sul metodo `OSID`, fare riferimento al` Metodo (OSID ... `di DSDT).
+    -`ACOS`> = `0x20`, il tasto di scelta rapida della luminosità funziona
+    -`ACOS` = `0x80`,` ACSE` = 0 è la modalità win7, in questa modalità, la luce del respiro lampeggia durante il sonno
+    -`ACOS` = `0x80`,` ACSE` = 1 è la modalità win8, in questa modalità, la luce del respiro è spenta durante il sonno
+  -Il contenuto specifico delle due variabili nel metodo `OSID` dipende dal sistema operativo stesso. È necessario utilizzare ** patch del sistema operativo ** o utilizzare ** questa patch ** nello stato mela nera per modificare queste due variabili per soddisfare requisiti specifici.
 
--Fix the patch combination of Fn+Insert function key
+-Fissa la combinazione di patch di Fn + tasto funzione Inserisci
   
-  -***SSDT-PTSWAK*** See "PTSWAK Comprehensive Extension Patch"
-  -***SSDT-EXT3-WakeScreen*** See "PTSWAK Comprehensive Extension Patch"
-  -***SSDT-LIDpatch*** See "PNP0C0E Sleep Correction Method"
-  -***SSDT-FnInsert_BTNV-dell*** See "PNP0C0E Sleep Correction Method"
+  - *** SSDT-PTSWAK *** Vedi "PTSWAK Comprehensive Extension Patch"
+  - *** SSDT-EXT3-WakeScreen *** Vedi "PTSWAK Comprehensive Extension Patch"
+  - *** SSDT-LIDpatch *** Vedere "Metodo di correzione del sonno PNP0C0E"
+  - *** SSDT-FnInsert_BTNV-dell *** Vedere "Metodo di correzione del sonno PNP0C0E"
