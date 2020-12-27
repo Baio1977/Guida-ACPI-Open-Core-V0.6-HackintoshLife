@@ -1,16 +1,16 @@
-#OpenCore 0.5+ patch dei componenti
+# OpenCore 0.5+ patch dei componenti
 
-##Descrizione
+## Descrizione
 La serie di patch si basa sui requisiti e sui suggerimenti di OpenCore 0.5+.
 
 
-##Il GitBook
+## Il GitBook
 Questo repository si basa su GitBook e utilizza le azioni Github per creare il servizio Page e il manuale PDF.
 
 - [https://ocbook.tlhub.cn](https://ocbook.tlhub.cn)
 - [OpenCore component patches](https://cdn.jsdelivr.net/gh/daliansky/OC-little/docs/OpenCore部件库.pdf)
 
-##Sommario
+## Sommario
 
 0. **Panoramica**
 
@@ -105,7 +105,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
    5. Liste di caricamento dei drvices della tastiera config-5-PS2Smart
    6. liste di caricamento delle unità wireless e bluetooth config-6-Intel
 
-###Credits 
+### Credits 
 
 - Special credit to：
   - @daliansky per le informazioni  **[daliansky](https://github.com/daliansky/OC-little)** 
