@@ -108,8 +108,8 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 ### Credits 
 
 - Credits to：
-  - [Daliansky] (https://github.com/daliansky) per le informazioni e la repo **[daliansky](https://github.com/daliansky/OC-little)** 
-  - [Williambj1] (https://github.com/williambj1) 
+  - [Daliansky](https://github.com/daliansky) per le informazioni e la repo **[daliansky](https://github.com/daliansky/OC-little)** 
+  - [Williambj1](https://github.com/williambj1)
   - [Team Acidanthera](https://github.com/acidanthera) per [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)**
 
 
