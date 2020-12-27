@@ -118,6 +118,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
   - @子骏oc IWL
   - @大勇-小新air13-OC-划水小白
   - @xjn819
-  - ......
+  - Baio77
+  - HackintoshLife.it
 
 - **Thanks for [Acidanthera](https://github.com/acidanthera) maintaining [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)**
