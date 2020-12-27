@@ -1,83 +1,83 @@
-# CMOS reset patch
+# Patch di ripristino CMOS
 
-## Description
+## Descrizione
 
--Some machines will appear **"Power-on self-test error"** when shutting down or restarting, which is caused by the resetting of CMOS.
--When using Clover, check `ACPI\FixRTC` to solve the above problems.
--When using OpenCore, the following solutions are officially provided, see ***Sample.plist***:
-  -Install **RTCMemoryFixup.kext**
-  -`Kernel\Patch` patch: **__ZN11BCM5701Enet14getAdapterInfoEv**
--This chapter provides an SSDT patch method to solve the above problems. This SSDT patch is essentially a counterfeit RTC, see "Preset Variable Method" and "Counterfeit Equipment".
+-Alcune macchine appariranno ** "Errore di autotest all'accensione" ** all'arresto o al riavvio, causato dal ripristino del CMOS.
+-Quando si utilizza Clover, selezionare `ACPI \ FixRTC` per risolvere i problemi di cui sopra.
+-Quando si utilizza OpenCore, vengono fornite ufficialmente le seguenti soluzioni, vedere *** Sample.plist ***:
+  -Installa ** RTCMemoryFixup.kext **
+  -`Kernel \ Patch` patch: ** __ ZN11BCM5701Enet14getAdapterInfoEv **
+-Questo capitolo fornisce un metodo di patch SSDT per risolvere i problemi di cui sopra. Questa patch SSDT è essenzialmente un RTC contraffatto, vedere "Preset Variable Method" e "Counterfeit Equipment".
 
-## solution
+## soluzione
 
--Delete the **interrupt number** of **RTC `PNP0B00`** component `_CRS`.
+-Elimina il ** numero di interrupt ** del ** RTC `PNP0B00` ** componente` _CRS`.
 
-  ```Swift
-  Device (RTC)
+  `` Rapido
+  Dispositivo (RTC)
   {
-      Name (_HID, EisaId ("PNP0B00"))
-      Name (_CRS, ResourceTemplate ()
+      Nome (_HID, EisaId ("PNP0B00"))
+      Nome (_CRS, ResourceTemplate ()
       {
           IO (Decode16,
               0x0070,
               0x0070,
               0x01,
-              0x08, /* or 0x02, experimentally determined */
+              0x08, / * o 0x02, determinato sperimentalmente * /
               )
-          IRQNoFlags () /* Delete this line */
-              {8} /* Delete this line */
+          IRQNoFlags () / * Elimina questa riga * /
+              {8} / * Elimina questa riga * /
       })
   }
-  ```
+  `` `
 
 ## Patch: SSDT-RTC0-NoFlags
 
--Disable original parts: **RTC**
-  -If **RTC** does not exist `_STA`, use the following method to disable **RTC**:
+-Parti originali disabilitabili: ** RTC **
+  -Se ** RTC ** non esiste `_STA`, utilizzare il seguente metodo per disabilitare ** RTC **:
   
-    ```Swift
-    External(_SB.PCI0.LPCB.RTC, DeviceObj)
-    Scope (_SB.PCI0.LPCB.RTC)
+    `` Rapido
+    Esterno (_SB.PCI0.LPCB.RTC, DeviceObj)
+    Ambito (_SB.PCI0.LPCB.RTC)
     {
-        Method (_STA, 0, NotSerialized)
+        Metodo (_STA, 0, NotSerialized)
         {
-            If (_OSI ("Darwin"))
+            Se (_OSI ("Darwin"))
             {
-                Return (Zero)
+                Ritorno (zero)
             }
-            Else
+            Altro
             {
-                Return (0x0F)
+                Ritorno (0x0F)
             }
         }
     }
-    ```
+    `` `
   
-  -If **RTC** exists `_STA`, use the preset variable method to disable **RTC**. The variable in the example is `STAS`, and attention should be paid to the influence of `STAS` on other equipment and components when using it.
+  -Se ** RTC ** esiste `_STA`, utilizza il metodo delle variabili preimpostate per disabilitare ** RTC **. La variabile nell'esempio è "STAS" e si dovrebbe prestare attenzione all'influenza di "STAS" su altre apparecchiature e componenti quando lo si utilizza.
   
-    ```Swift
-    External (STAS, FieldUnitObj)
-    Scope (\)
+    `` Rapido
+    Esterno (STAS, FieldUnitObj)
+    Scopo (\)
     {
-        If (_OSI ("Darwin"))
+        Se (_OSI ("Darwin"))
         {
             STAS = 2
         }
     }
-    ```
+    `` `
 
--Counterfeit **RTC0**, see catalog.
+-Contraffazione ** RTC0 **, vedi catalogo.
 
-## Note
+## Nota
 
--The device name and path in the patch should be consistent with the original ACPI.
+-Il nome del dispositivo e il percorso nella patch dovrebbero essere coerenti con l'ACPI originale.
 
--If the machine itself disables RTC for some reason, it needs to fake RTC to work normally. In this case, **"Power-on self-check error"** appears, just delete the interrupt number of the counterfeit patch:
+-Se la macchina stessa disabilita RTC per qualche motivo, deve falsificare RTC per funzionare normalmente. In questo caso, viene visualizzato ** "Errore di autoverifica all'accensione" **, basta eliminare il numero di interruzione della patch contraffatta:
 
-  ```Swift
-    IRQNoFlags () /* Delete this line */
-        {8} /* delete this line */
-  ```
+  `` Rapido
+    IRQNoFlags () / * Elimina questa riga * /
+        {8} / * elimina questa riga * /
+  `` `
 
-**Thanks** @Chic Cheung, @Noctis for your hard work!
+** Grazie ** @Chic Cheung, @Noctis per il tuo duro lavoro!
