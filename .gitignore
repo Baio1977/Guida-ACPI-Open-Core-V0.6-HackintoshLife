@@ -1,7 +1,5 @@
+.DS_Store
+ocbook
 ._*
-DS_Store
-Thumbs.db
-static/
-tmp/
-cache/
-*.log
+node_modules
+_book
