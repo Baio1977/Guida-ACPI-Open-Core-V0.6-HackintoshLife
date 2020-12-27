@@ -1,126 +1,126 @@
-# OCI2C-TPXX patch method
+# Metodo patch OCI2C-TPXX
 
-## Description
+## Descrizione
 
-This method provides a solution for implementing Hotpatch patches on I2C devices. This method does not involve the specific process and details of the I2C patch. For more information about I2C, see:
+Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui dispositivi I2C. Questo metodo non coinvolge il processo specifico e i dettagli della patch I2C. Per ulteriori informazioni su I2C, vedere:
 
--@penghubingzhou: [https://www.penghubingzhou.cn](https://www.penghubingzhou.cn)
--@神楽小白(GZ小白):[https://blog.gzxiaobai.cn/](https://blog.gzxiaobai.cn/)
--@神楽小白(GZ小白) Touchpad hot patch example library: [https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch](https://github.com/GZXiaoBai/Hackintosh-TouchPad- Hotpatch)
--VoodooI2C official document: [https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning](https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning)
--VoodooI2C official support post [https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/](https://www.tonymacx86.com/threads/voodooi2c-help-and-support. 243378/)
--Q group: `837538729` (1 group is full), `921143329` (2 groups)
+- @ penghubingzhou: [https://www.penghubingzhou.cn] (https://www.penghubingzhou.cn)
+- @ 神 楽 小白 (GZ 小白): [https://blog.gzxiaobai.cn/] (https://blog.gzxiaobai.cn/)
+- @ 神 楽 小白 (GZ 小白) Libreria di esempi di hot patch per touchpad: [https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch”(https://github.com/GZXiaoBai/Hackintosh-TouchPad- Hotpatch)
+-Documento ufficiale di VoodooI2C: [https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning”(https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning)
+-VoodooI2C post di supporto ufficiale [https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/”(https://www.tonymacx86.com/threads/voodooi2c-help-and-support. 243378 /)
+-Q gruppo: `837538729` (1 gruppo è pieno),` 921143329` (2 gruppi)
 
-## Patch principle and process
+## Principio e processo della patch
 
--Prohibit the original I2C device. See "Binary Rename and Preset Variables" for details.
+-Proibire il dispositivo I2C originale. Vedere "Rinomina binaria e variabili preimpostate" per i dettagli.
 
-  ```Swift
-  /*
-   * GPI0 enable
-   */
-  DefinitionBlock("", "SSDT", 2, "OCLT", "GPI0", 0)
+  `` Rapido
+  / *
+   * Abilitazione GPI0
+   * /
+  DefinitionBlock ("", "SSDT", 2, "OCLT", "GPI0", 0)
   {
-      External(GPEN, FieldUnitObj)
-      // External(GPHD, FieldUnitObj)
-      Scope (\)
+      Esterno (GPEN, FieldUnitObj)
+      // Esterno (GPHD, FieldUnitObj)
+      Scopo (\)
       {
-          If (_OSI ("Darwin"))
+          Se (_OSI ("Darwin"))
           {
               GPEN = 1
               // GPHD = 2
           }
       }
   }
-  ```
+  `` `
 
--Create a new I2C device `TPXX`, and migrate all the contents of the original device to `TPXX`.
+-Crea un nuovo dispositivo I2C `TPXX` e migra tutti i contenuti del dispositivo originale in` TPXX`.
 
--Amend the contents of `TPXX`:
+-Modifica il contenuto di `TPXX`:
 
-  -Replace all the original I2C device `name` with `TPXX`
+  -Sostituisci tutto il "nome" del dispositivo I2C originale con "TPXX"
 
-  -**Amendment** The `_STA` part is:
+  - ** Modifica ** La parte "_STA" è:
 
-    ```Swift
-    Method (_STA, 0, NotSerialized)
+    `` Rapido
+    Metodo (_STA, 0, NotSerialized)
     {
-        If (_OSI ("Darwin"))
+        Se (_OSI ("Darwin"))
         {
-            Return (0x0F)
+            Ritorno (0x0F)
         }
-        Else
+        Altro
         {
-            Return (Zero)
+            Ritorno (zero)
         }
     }
-    ```
+    `` `
 
-  -**Fixed** to prohibit the `related content` of the variables used in the original I2C device, so that it conforms to the logical relationship.
+  - ** Risolto ** per vietare il `contenuto correlato` delle variabili utilizzate nel dispositivo I2C originale, in modo che sia conforme alla relazione logica.
 
-  -**Fix** the `relevant content` related to the operating system variable OSYS to make it consistent with the logical relationship.
+  - ** Risolto il problema con ** il `contenuto rilevante` relativo alla variabile del sistema operativo OSYS per renderlo coerente con la relazione logica.
 
--Eliminate errors.
+-Elimina gli errori.
 
--I2C patch.
+-Patch I2C.
 
-### Example (Dell Latitude 5480, device path: `\_SB.PCI0.I2C1.TPD1`)
+### Esempio (Dell Latitude 5480, percorso del dispositivo: `\ _SB.PCI0.I2C1.TPD1`)
 
--Use "Preset Variables Law" to prohibit `TPD1`.
+-Utilizzare "Legge sulle variabili preimpostate" per vietare "TPD1".
 
-  ```Swift
-  Scope (\)
+  `` Rapido
+  Scopo (\)
   {
-      If (_OSI ("Darwin"))
+      Se (_OSI ("Darwin"))
       {
           SDS1 = 0
       }
   }
-  ```
+  `` `
 
--Create a new device `TPXX`, and migrate all the contents of the original `TPD1` to `TPXX`.
+-Crea un nuovo dispositivo `TPXX` e migra tutti i contenuti dell'originale` TPD1` in `TPXX`.
 
-  ```Swift
-  External(_SB.PCI0.I2C1, DeviceObj)
-  Scope (_SB.PCI0.I2C1)
+  `` Rapido
+  Esterno (_SB.PCI0.I2C1, DeviceObj)
+  Ambito (_SB.PCI0.I2C1)
   {
-      Device (TPXX)
+      Dispositivo (TPXX)
       {
-         Original TPD1 content
+         Contenuto originale TPD1
       }
   }
-  ```
+  `` `
 
--Modify the content of `TPXX`
+-Modifica il contenuto di "TPXX"
 
-  -Replace all `TPD1` with `TPXX`.
+  -Sostituisci tutto `TPD1` con` TPXX`.
   
-  -Replace the `_STA` part of the patch with:
+  -Sostituisci la parte `_STA` della patch con:
   
-    ```Swift
-    Method (_STA, 0, NotSerialized)
+    `` Rapido
+    Metodo (_STA, 0, NotSerialized)
     {
-        If (_OSI ("Darwin"))
+        Se (_OSI ("Darwin"))
         {
-            Return (0x0F)
+            Ritorno (0x0F)
         }
-        Else
+        Altro
         {
-            Return (Zero)
+            Ritorno (zero)
         }
     }
-    ```
+    `` `
   
-  -Search for `SDS1` (variable used when `TPD1` is prohibited), and modify the original `If (SDS1...)` to `If (one)`.
+  -Cercare "SDS1" (variabile usata quando "TPD1" è proibito) e modificare l'originale "If (SDS1 ...)" in "If (uno)".
   
-  -Find `OSYS` and delete (comment out) the following:
+  -Trova `OSYS` ed elimina (commenta) quanto segue:
   
-    ```Swift
-    //If (LLess (OSYS, 0x07DC))
-    //{
-    // SRXO (GPDI, One)
+    `` Rapido
+    // If (Meno (OSYS, 0x07DC))
+    // {
+    // SRXO (GPDI, uno)
     //}
-    ```
+    `` `
   
     Note: When `OSYS` is less than `0x07DC`, the I2C device does not work (`0x07DC` stands for Windows8).
   
