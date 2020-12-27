@@ -1,25 +1,25 @@
-# OpenCore 0.5+ patch dei componenti
+#OpenCore 0.5+ patch dei componenti
 
-## Descrizione
+##Descrizione
 La serie di patch si basa sui requisiti e sui suggerimenti di OpenCore 0.5+.
 
 
-## Il GitBook
+##Il GitBook
 Questo repository si basa su GitBook e utilizza le azioni Github per creare il servizio Page e il manuale PDF.
 
 - [https://ocbook.tlhub.cn](https://ocbook.tlhub.cn)
 - [OpenCore component patches](https://cdn.jsdelivr.net/gh/daliansky/OC-little/docs/OpenCore部件库.pdf)
 
-## Sommario
+##Sommario
 
-0. ** Panoramica **
+0. **Panoramica**
 
    1. Basic ACPI Source Language
    2. Sequenza di caricamento SSDT
    3. Modulo ACPI
    4. Tabella comparativa ASL-AML
 
-1. ** Informazioni su "AOAC" **
+1. **Informazioni su "AOAC"**
 
    1. Impedire il sonno "S3"
    2. "AOAC" disabilita la scheda grafica discreta
@@ -28,75 +28,75 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
    5. Impostare lo stato "ASPM"
    6. Disattiva automaticamente "WIFI" durante il sonno
 
-2. ** Variabile preimpostata **
+2. **Variabile preimpostata**
 
    1. Patch OC `I2C-GPIO`
    2. Patch correlate
 
-3. ** Dispositivi falsi **
+3. **Dispositivi falsi**
 
    1. Falsi "EC"
    2. RTC0
    3. Falso sensore di luce ambientale (ALS)
 
-4. ** Patch del sistema operativo **
+4. **Patch del sistema operativo**
 
-5. ** Dispositivi di iniezione **
+5. **Dispositivi di iniezione**
 
    1. Iniettare X86
    2. Metodo di iniezione "PNLF"
    3. Patch "SBUS (SMBU)"
 
-6. ** Aggiungi componenti mancanti **
+6. **Aggiungi componenti mancanti**
 
-7. ** Mappatura tastiera PS2 e tasto funzione luminosità @ OC-xlivans **
+7. **Mappatura tastiera PS2 e tasto funzione luminosità @ OC-xlivans**
 
-8. ** Patch batteria **
+8. **Patch batteria**
 
    1. Thinkpad
    2. Altre marche
    3. Patch indicatore di stato della batteria
    4. Esempi
 
-9. ** Disabilita EHCx **
+9. **Disabilita EHCx**
 
-10. ** Patch estensionale `PTSWAK` **
+10. **Patch estensionale `PTSWAK`**
 
-11. ** Metodo di regolazione del sonno `PNP0C0E` **
+11. **Metodo di regolazione del sonno `PNP0C0E`**
 
-12. ** Patch `0D6D` **
+12. **Patch `0D6D`**
 
     1. Patch generale "060D"
     2. Patch HP `060D`
 
-13. ** Fake Ethernet e ripristina Ethernet `BSD Name` **
+13. **Fake Ethernet e ripristina Ethernet `BSD Name`**
 
-14. ** Informazioni su `CMOS` **
+14. **Informazioni su `CMOS`**
 
-    1. Memoria "CMOS" e *** RTCMemoryFixup ***
+    1. Memoria "CMOS" e ***RTCMemoryFixup***
 
-15. ** Porte `ACPI` Patch` USB` **
+15. **Porte `ACPI` Patch` USB`**
 
-16. ** Disabilita i dispositivi `PCI` **
+16. **Disabilita i dispositivi `PCI`**
 
-17. ** ACPIDebug **
+17. **ACPIDebug**
 
-18. ** Patch per marche specifiche **
+18. **Patch per marche specifiche**
 
     1. Patch "Dell"
     2. Patch `XiaoXin PRO13`
     3. Patch "ThinkPad"
 
-19. ** Dispositivo `I2C` **
+19. **Dispositivo `I2C`**
 
-20. ** Disabilita la scheda grafica discreta tramite `SSDT` **
+20. **Disabilita la scheda grafica discreta tramite `SSDT`**
 
-** Patch riservate **
+**Patch riservate**
 
    1. Patch "IRQ" della scheda audio
    2. Patch di ripristino "CMOS"
 
-** Elenchi di carico delle unità comuni **
+**Elenchi di carico delle unità comuni**
 
    1. liste di caricamento config-1-Lilu-SMC-WEG-ALC
    2. liste di caricamento delle unità della tastiera config-2-PS2
@@ -105,7 +105,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
    5. Liste di caricamento dei drvices della tastiera config-5-PS2Smart
    6. liste di caricamento delle unità wireless e bluetooth config-6-Intel
 
-### Credits 
+###Credits 
 
 - Special credit to：
   - @daliansky per le informazioni  **[daliansky](https://github.com/daliansky/OC-little)** 
