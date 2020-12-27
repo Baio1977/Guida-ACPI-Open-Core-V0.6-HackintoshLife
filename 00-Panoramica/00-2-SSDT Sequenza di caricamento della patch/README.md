@@ -1,7 +1,9 @@
+1006 / 5000
+Risultati della traduzione
 # Sequenza di caricamento SSDT
 
--In generale, applichiamo SSDT per una macchina specifica (il suo DSDT o altri SSDT), la sequenza di caricamento dell'ACPI originale ha una priorità maggiore rispetto alle patch SSDT che abbiamo creato. Pertanto, le patch SSDT ** non hanno ** una sequenza di caricamento sotto "Aggiungi".
--C'è un'eccezione: se SSDT definisce un `dispositivo`, e utilizza anche` Scope` per citare il` dispositivo` da un altro SSDT, la sequenza è ** obbligatoria **.
+- In generale, applichiamo SSDT per una macchina specifica (il suo DSDT o altri SSDT), la sequenza di caricamento dell'ACPI originale ha una priorità maggiore rispetto alle patch SSDT che abbiamo creato. Pertanto, le patch SSDT ** non hanno ** una sequenza di caricamento in "Aggiungi".
+- C'è un'eccezione. Se SSDT definisce un "dispositivo" e utilizza anche "Scope" per citare il "dispositivo" da un altro SSDT, la sequenza è ** obbligatoria **.
 
 ## Esempi
 
@@ -38,4 +40,3 @@
             percorso <SSDT-XXXX-1.aml>
   Articolo 2
             percorso <SSDT-XXXX-2.aml>
-  `` `
