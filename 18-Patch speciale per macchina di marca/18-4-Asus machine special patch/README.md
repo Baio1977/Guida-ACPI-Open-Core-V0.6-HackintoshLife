@@ -1,26 +1,25 @@
-# Asus machine special patch
+# Patch speciale per macchine Asus
 
-## Claim
+## Richiesta
 
--Check if the following `Method` and `Name` exist in ACPI, if not, ignore the content of this chapter.
-  -`Name`: OSFG
-  -`Method`: MSOS
+-Controlla se i seguenti "Metodo" e "Nome" esistono in ACPI, in caso contrario, ignora il contenuto di questo capitolo.
+  -`Nome`: OSFG
+  -`Metodo`: MSOS
 
-## Special rename
+## Rinomina speciale
 
-PNLF renamed XNLF
+PNLF rinominato XNLF
 
-```text
-Find: 504E4C46
-Replace: 584E4C46
-```
+`` testo
+Trova: 504E4C46
+Sostituisci: 584E4C46
+`` `
 
-There is a variable `PNLF` in the DSDT of some Asus machines. If `PNLF` and the brightness patch have the same name, there may be conflicts. Use the above name change to avoid it.
+C'è una variabile `PNLF` nel DSDT di alcune macchine Asus. Se "PNLF" e la patch di luminosità hanno lo stesso nome, potrebbero esserci dei conflitti. Usa il cambio di nome sopra per evitarlo.
 
-## Special Patch
+## Patch speciale
 
--***SSDT-OCWork-asus***
-  -Most Asus machines have the `MSOS` method. The ``MSOS`` method assigns a value to `OSFG` and returns the current state value. This [current state value] determines the working mode of the machine. For example, only when `MSOS` >= `0x0100`, ACPI's brightness shortcut key method will work. By default, `MSOS` is locked to `OSME`. **This patch** changes ``MSOS`` by changing `OSME`. For details of the `MSOS` method, please refer to the `Method (MSOS...` of DSDT).
-    -`MSOS` >= `0x0100`, win8 mode, brightness shortcut keys work
-  -The return value of ``MSOS`` depends on the operating system itself. You must use **operating system patch** or use **this patch** in a black apple state to meet specific requirements.
-  
+- *** SSDT-OCWork-asus ***
+  -La maggior parte delle macchine Asus ha il metodo "MSOS". Il metodo "MSOS" assegna un valore a "OSFG" e restituisce il valore dello stato corrente. Questo [valore dello stato corrente] determina la modalità di lavoro della macchina. Ad esempio, solo quando `MSOS`> =` 0x0100`, il metodo del tasto di scelta rapida della luminosità di ACPI funzionerà. Per impostazione predefinita, "MSOS" è bloccato su "OSME". ** Questa patch ** cambia "MSOS" cambiando "OSME". Per i dettagli sul metodo "MSOS", fare riferimento al "Metodo (MSOS ..." di DSDT).
+    -`MSOS`> = `0x0100`, modalità win8, i tasti di scelta rapida della luminosità funzionano
+  -Il valore di ritorno di `` MSOS '' dipende dal sistema operativo stesso. È necessario utilizzare ** patch del sistema operativo ** o utilizzare ** questa patch ** in uno stato di mela nera per soddisfare requisiti specifici.
