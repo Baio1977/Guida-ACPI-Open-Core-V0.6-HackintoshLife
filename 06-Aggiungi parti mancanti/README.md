@@ -18,7 +18,7 @@ L'aggiunta di parti mancanti è solo una soluzione perfetta, non necessaria!
 
 -Per macchine di sesta generazione e superiori, cerca "0x001F0002", se mancante, aggiungi *** SSDT-PPMC ***.
 
--Per macchine di 6a generazione e superiori, cerca `PMCR` e` APP9876`, se mancano, aggiungi *** SSDT-PMCR ***.
+-Per macchine di 8a generazione e superiori, cerca `PMCR` e` APP9876`, se mancano, aggiungi *** SSDT-PMCR ***.
 
   Nota: @ 请 叫 我 官人 Fornisci il metodo, che è diventato l'esempio SSDT ufficiale di OpenCore.
   > Il chipset Z390 PMC (D31: F2) può essere avviato solo tramite MMIO. Poiché non è presente alcun dispositivo PMC nella specifica ACPI, Apple ha introdotto il proprio nome "APP9876" per accedere a questo dispositivo dal driver AppleIntelPCHPMC. In altri sistemi operativi, generalmente utilizzare `HID: PNP0C02`,` UID: PCHRESV` per accedere a questo dispositivo.
