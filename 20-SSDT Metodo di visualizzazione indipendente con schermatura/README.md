@@ -1,58 +1,58 @@
-# SSDT Shielding independent display method
+# Metodo di visualizzazione indipendente con schermatura SSDT
 
-## Two ways to block independent display
+## Due modi per bloccare la visualizzazione indipendente
 
--`config` method
+-`config`
 
-  -`DeviceProperties\Add\PciRoot(0x0)/Pci(0x2,0x0)` add
+  -`DeviceProperties \ Add \ PciRoot (0x0) / Pci (0x2,0x0) `aggiungi
 
-    ```text
-    disable-external-gpu 01000000
-    ```
+    `` testo
+    disabilitare-gpu-esterno 01000000
+    `` `
 
-  -Add boot parameters
+  -Aggiungere parametri di avvio
 
-    ```text
+    `` testo
     boot-args -wegnoegpu
-    ```
+    `` `
 
--**This method**-SSDT shielding independent display method
+- ** Questo metodo ** - Metodo di visualizzazione indipendente con schermatura SSDT
 
-## SSDT shielding independent display process
+## SSDT schermatura processo di visualizzazione indipendente
 
--Disable independent display during the initialization phase.
--Enable the standalone display during machine sleep to prevent the standalone display from entering `S3` when it is disabled, which may cause the system to crash.
--Disable the independent display again after the machine wakes up.
+-Disabilita visualizzazione indipendente durante la fase di inizializzazione.
+-Abilita il display standalone durante la sospensione della macchina per evitare che il display standalone inserisca "S3" quando è disabilitato, il che potrebbe causare l'arresto anomalo del sistema.
+-Disabilitare nuovamente il display indipendente dopo che la macchina si è svegliata.
 
-## Patch combination
+## Combinazione di patch
 
--Comprehensive patch-***SSDT-PTSWAK***
--Shield independent display patch—— ***SSDT-NDGP_OFF*** [or ***SSDT-NDGP_PS3***]
+-Patch completa - *** SSDT-PTSWAK ***
+-Patch display indipendente dallo schermo—— *** SSDT-NDGP_OFF ​​*** [o *** SSDT-NDGP_PS3 ***]
 
-## Example
+## Esempio
 
--***SSDT-PTSWAK***
+- *** SSDT-PTSWAK ***
 
-  Slightly, see "PTSWAK Comprehensive Extension Patch" for details.
+  Leggermente, vedere "PTSWAK Comprehensive Extension Patch" per i dettagli.
   
--***SSDT-NDGP_OFF***
+- *** SSDT-NDGP_OFF ​​***
 
-  -Query the name and path of the unique display and confirm the existence of the `_ON` and `_OFF` methods
-  -Refer to the example, modify its name and path to be consistent with the query result
+  -Query il nome e il percorso del display univoco e confermare l'esistenza dei metodi `_ON` e` _OFF`
+  -Fare riferimento all'esempio, modificare il nome e il percorso in modo che siano coerenti con il risultato della query
   
--***SSDT-NDGP_PS3***
+- *** SSDT-NDGP_PS3 ***
 
-  -Query the name and path of the independent display and confirm the existence of the `_PS0`, `_PS3` and `_DSM` methods
-  -Refer to the example, modify its name and path to be consistent with the query result
+  -Query il nome e il percorso del display indipendente e confermare l'esistenza dei metodi `_PS0`,` _PS3` e `_DSM`
+  -Fare riferimento all'esempio, modificare il nome e il percorso in modo che siano coerenti con il risultato della query
   
--**Attention**
+-**Attenzione**
 
-  -When querying the unique name and path as well as `_ON`, `_OFF`, `_PS0`, `_PS3` and `_DSM`, all `ACPI` files should be searched. It may exist in the `DSDT` file, or it may Exist in other `SSDT` files of `ACPI`.
-  -The unique name and path in the example is: `_SB.PCI0.RP13.PXSX`.
+  -Quando si interroga il nome e il percorso univoci così come `_ON`,` _OFF`, `_PS0`,` _PS3` e `_DSM`, è necessario cercare tutti i file` ACPI`. Può esistere nel file `DSDT`, o può esistere in altri file` SSDT` di `ACPI`.
+  -Il nome e il percorso univoci nell'esempio sono: `_SB.PCI0.RP13.PXSX`.
 
-## Precautions
+## Precauzioni
 
--According to the requirements of **patch combination**, ***SSDT-PTSWAK*** and ***SSDT-NDGP_OFF*** must be used at the same time [or ***SSDT-NDGP_PS3***]
--If both ***SSDT-NDGP_OFF*** and ***SSDT-NDGP_PS3*** meet the usage requirements, use ***SSDT-NDGP_OFF*** first
+-In base ai requisiti della ** combinazione di patch **, *** SSDT-PTSWAK *** e *** SSDT-NDGP_OFF ​​*** devono essere utilizzati contemporaneamente [o *** SSDT-NDGP_PS3 *** ]
+-Se entrambi *** SSDT-NDGP_OFF ​​*** e *** SSDT-NDGP_PS3 *** soddisfano i requisiti di utilizzo, utilizzare prima *** SSDT-NDGP_OFF ​​***
 
-**Note**: The main content above comes from [@RehabMan](https://github.com/rehabman)
+** Nota **: il contenuto principale di cui sopra proviene da [@RehabMan] (https://github.com/rehabman)
