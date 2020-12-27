@@ -1,4 +1,4 @@
-# Reserved parts
+# Parti riservate
 
--The new PS2 driver already supports brightness shortcut keys, and the "Brightness shortcut keys" component is no longer needed
--"CMOS Reset Patch" and "Sound Card IRQ Patch" are no longer applicable
+-Il nuovo driver PS2 supporta già i tasti di scelta rapida della luminosità e il componente "Tasti di scelta rapida della luminosità" non è più necessario
+- "CMOS Reset Patch" e "Sound Card IRQ Patch" non sono più applicabili
