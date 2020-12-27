@@ -1,4 +1,4 @@
-# OpenCore 0.5+ patch dei componenti
+# OpenCore 0.6+ patch dei componenti
 
 ## Descrizione
 La serie di patch si basa sui requisiti e sui suggerimenti di OpenCore 0.5+.
