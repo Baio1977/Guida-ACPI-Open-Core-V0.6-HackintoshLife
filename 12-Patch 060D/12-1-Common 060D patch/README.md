@@ -61,11 +61,7 @@ Questo tipo di "patch 0D / 6D" è adatto per modificare "0x03" (o "0x04") in "0x
       Return (GPRW (0x6D, 0x04)) /* or Return (UPRW (0x6D, 0x04)) */
     }
   ```
-
-268 / 5000
-Risultati della traduzione
-La maggior parte delle macchine più recenti cade in questa situazione. Segui il solito metodo (rinominato-patch). Il pacchetto prevede:
-
+  
    - *** SSDT-GPRW *** (Sono presenti dati di ridenominazione binari nel file patch)
    - *** SSDT-UPRW *** (Sono presenti dati di ridenominazione binari nel file patch)
 
