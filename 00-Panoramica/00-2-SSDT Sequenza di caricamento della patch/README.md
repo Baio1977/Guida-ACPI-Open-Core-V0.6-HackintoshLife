@@ -5,38 +5,39 @@ Risultati della traduzione
 - In generale, applichiamo SSDT per una macchina specifica (il suo DSDT o altri SSDT), la sequenza di caricamento dell'ACPI originale ha una priorità maggiore rispetto alle patch SSDT che abbiamo creato. Pertanto, le patch SSDT ** non hanno ** una sequenza di caricamento in "Aggiungi".
 - C'è un'eccezione. Se SSDT definisce un "dispositivo" e utilizza anche "Scope" per citare il "dispositivo" da un altro SSDT, la sequenza è ** obbligatoria **.
 
-## Esempi
+## Examples
 
-- Patch 1 ： ** SSDT-XXXX-1.aml **
+- Patch 1：**SSDT-XXXX-1.aml**
   
-  `` Rapido
-  Esterno (_SB.PCI0.LPCB, DeviceObj)
-  Ambito (_SB.PCI0.LPCB)
+  ```Swift
+  External (_SB.PCI0.LPCB, DeviceObj)
+  Scope (_SB.PCI0.LPCB)
   {
-      Dispositivo (XXXX)
+      Device (XXXX)
       {
-          Nome (_HID, EisaId ("ABC1111"))
+          Name (_HID, EisaId ("ABC1111"))
       }
   }
-  `` `
+  ```
   
-- Patch 2 ： ** SSDT-XXXX-2.aml **
+- Patch 2：**SSDT-XXXX-2.aml**
 
-  `` Rapido
-  Esterno (_SB.PCI0.LPCB.XXXX, DeviceObj)
-  Ambito (_SB.PCI0.LPCB.XXXX)
+  ```Swift
+  External (_SB.PCI0.LPCB.XXXX, DeviceObj)
+  Scope (_SB.PCI0.LPCB.XXXX)
   {
-        Metodo (YYYY, 0, NotSerialized)
+        Method (YYYY, 0, NotSerialized)
        {
-           /* fare niente */
+           /* do nothing */
        }
     }
-  `` `
+  ```
   
-- "Aggiungi" sequenza di caricamento
+- `Add` loading sequence
 
-  `` XML
-  Articolo 1
-            percorso <SSDT-XXXX-1.aml>
-  Articolo 2
-            percorso <SSDT-XXXX-2.aml>
+  ```XML
+  Item 1
+            path    <SSDT-XXXX-1.aml>
+  Item 2
+            path    <SSDT-XXXX-2.aml>
+  ```
