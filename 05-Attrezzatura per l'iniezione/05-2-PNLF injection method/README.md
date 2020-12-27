@@ -1,71 +1,70 @@
-# Metodo di iniezione OC-PNLF
+# OC-PNLF injection method
 
-## Brightness (`PNLF`) La composizione della parte di controllo
+## Brightness (`PNLF`) The composition of the control part
 
--Guidare:
+-Drive:
 
-  - Driver per la luminosità integrato di AnyGreen.kext (richiede Lilu.kext)
+  -WhateverGreen.kext built-in brightness driver (requires Lilu.kext)
 
-    Per impostazione predefinita, WutelyGreen.kext caricherà il driver della luminosità. Se usi altri driver di luminosità, dovresti disabilitare il suo driver di luminosità integrato.
+    By default, WhateverGreen.kext will load the brightness driver. If you use other brightness drivers, you should disable its built-in brightness driver.
 
-    -Metodo disabilitato:
+    -Disable method:
 
-      -Aggiungere il parametro di avvio `applbkl = 0`
-      -Modifica il file `Info.plist \ IOKitPersonality \ AppleIntelPanelA \ IOProbeScore = 5500` del driver.
+      -Add boot parameter `applbkl=0`
+      -Modify the driver's `Info.plist\IOKitPersonalities\AppleIntelPanelA\IOProbeScore=5500`.
 
-    -Link di download: <https://github.com/acidanthera/W qualunqueGreen/releases>
+    -Download link: <https://github.com/acidanthera/WhateverGreen/releases>
 
   -IntelBacklight.kext
   
-    -Scarica link: <https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/>
+    -Download link: <https://bitbucket.org/RehabMan/os-x-intel-backlight/src/master/>
   
   -ACPIBacklight.kext
   
-    -Scarica link: <https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/>
+    -Download link: <https://bitbucket.org/RehabMan/os-x-acpi-backlight/src/master/>
   
 -Patch
 
-  -Patch luminosità personalizzato
+  -Custom brightness patch
 
-    - *** SSDT-PNLF-SNB_IVY ***: patch di luminosità di 2a e 3a generazione.
-    - *** SSDT-PNLF-Haswell_Broadwell ***: patch di luminosità di 4a e 5a generazione.
-    - *** SSDT-PNLF-SKL_KBL ***: patch di luminosità di sesta e settima generazione.
-    - *** SSDT-PNLF-CFL ***: 8a generazione + patch di luminosità.
+    -***SSDT-PNLF-SNB_IVY***: 2nd and 3rd generation brightness patch.
+    -***SSDT-PNLF-Haswell_Broadwell***: 4th and 5th generation brightness patch.
+    -***SSDT-PNLF-SKL_KBL***: 6th and 7th generation brightness patch.
+    -***SSDT-PNLF-CFL***: 8th generation + brightness patch.
 
-      La patch sopra è inserita in `_SB`.
+      The above patch is inserted in `_SB`.
 
-  -Patch luminosità RehabMan
+  -RehabMan brightness patch
   
-    - [https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl] (https://github.com/RehabMan/OS-X-Clover -Laptop-Config / blob / master / hotpatch / SSDT-PNLF.dsl)
+    -[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl](https://github.com/RehabMan/OS-X-Clover -Laptop-Config/blob/master/hotpatch/SSDT-PNLF.dsl)
   
-    - [https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl] (https://github.com/RehabMan/OS-X-Clover -Laptop-Config / blob / master / hotpatch / SSDT-PNLFCFL.dsl)
+    -[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl](https://github.com/RehabMan/OS-X-Clover -Laptop-Config/blob/master/hotpatch/SSDT-PNLFCFL.dsl)
   
-    - [https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl] (https://github.com/RehabMan/OS-X-Clover -Laptop-Config / blob / master / hotpatch / SSDT-RMCF.dsl)
+    -[https://github.com/RehabMan/OS-X-Clover-Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl](https://github.com/RehabMan/OS-X-Clover -Laptop-Config/blob/master/hotpatch/SSDT-RMCF.dsl)
   
-      La patch di luminosità di RehabMan è inserita in `_SB.PCI0.IGPU`. Quando la si utilizza, rinominare la` IGPU` del file di patch con il nome originale in ACPI (ad esempio: `GFX0`).
+      The RehabMan brightness patch is inserted in `_SB.PCI0.IGPU`. When using it, rename the `IGPU` of the patch file to the original name in ACPI (eg: `GFX0`).
 
-## Metodi di iniezione comuni
+## Common injection methods
 
--Drive: qualunque sia il verde
--Patch: patch di luminosità personalizzato o patch di luminosità RehabMan
+-Drive: WhateverGreen
+-Patch: Custom brightness patch or RehabMan brightness patch
 
-## Metodo di iniezione ACPI
+## ACPI injection method
 
--Driver: ACPIBacklight.kext (è necessario disabilitare il driver di luminosità integrato W AnyGreen.kext, vedere il metodo di disabilitazione sopra)
--Patch: vedere il metodo "ACPI Brightness Patch"
+-Driver: ACPIBacklight.kext (need to disable WhateverGreen.kext built-in brightness driver, see the disable method above)
+-Patch: See "ACPI Brightness Patch" method
 
-## Altri metodi di iniezione
+## Other injection methods
 
-Provalo tu stesso secondo il principio di driver + patch.
+Try it yourself according to the principle of driver + patch.
 
-## Precauzioni
+## Precautions
 
--Quando si seleziona un metodo di iniezione, i driver, le patch, le impostazioni, ecc. Relativi ad altri metodi dovrebbero essere cancellati.
+-When selecting an injection method, the drivers, patches, settings, etc. related to other methods should be cleared.
 
--Quando si utilizzano patch di luminosità personalizzate, si prega di notare che le patch vengono tutte iniettate nel dispositivo `PNLF` sotto` _SB`. Quando c'è un campo `PNLF` nell'originale` ACPI`, deve essere rinominato, altrimenti influenzerà l'avvio di `Windows` . Puoi anche usare la [patch di `RehabMan`] (https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch). Rinominato come segue:
+-When using custom brightness patches, please note that the patches are all `PNLF` devices injected under `_SB`. When there is a `PNLF` field in the original `ACPI`, it needs to be renamed, otherwise it will affect the `Windows` boot . You can also use [`RehabMan`'s patch](https://github.com/RehabMan/OS-X-Clover-Laptop-Config/tree/master/hotpatch). Renamed as follows:
 
-  `` testo
-  // Da PNLF a XNLF
+  ```text
+  // PNLF to XNLF
   Find: 504E 4C46
   Replace: 584E 4C46
-  `` `
