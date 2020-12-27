@@ -1,77 +1,71 @@
-auto_awesome
-Traduci da: Inglese
-2212 / 5000
-Risultati della traduzione
-# Sound card IRQ patch
+## Descrizione
 
-## Description
+-La scheda audio della prima macchina richiede parti ** HPET ** ** `PNP0103` ** Fornisci il numero di interrupt` 0` e `8`, altrimenti la scheda audio non funzionerà normalmente. Infatti, quasi tutte le macchine '* * HPET ** non fornisce alcun numero di interrupt. Normalmente, i numeri di interrupt `0` e` 8` sono occupati rispettivamente da ** RTC ** ** `PNP0B00` **, ** TIMR ** **` PNP0100` * *
+-Per risolvere i problemi di cui sopra, è necessario correggere ** HPET **, ** RTC **, ** TIMR ** contemporaneamente.
 
--The sound card of the early machine requires parts **HPET** **`PNP0103`** Provide interrupt number `0` & `8`, otherwise the sound card will not work normally. In fact, almost all machines' * *HPET** does not provide any interrupt number. Normally, the interrupt numbers `0` & `8` are occupied by **RTC** **`PNP0B00`**, **TIMR** **`PNP0100`* * respectively
--To solve the above problems, you need to fix **HPET**, **RTC**, **TIMR** simultaneously.
+## Principio della patch
 
-## Patch principle
+-Disabilita le tre parti ** HPET **, ** RTC **, ** TIMR **.
+-Contraffazione di tre parti, ovvero: ** HPE0 **, ** RTC0 **, ** TIM0 **.
+-Rimuovere e aggiungere "IRQNoFlags () {8}" di ** RTC0 ** e "IRQNoFlags () {0}" di ** TIM0 ** a ** HPE0 **.
 
--Disable the three parts **HPET**, **RTC**, **TIMR**.
--Counterfeit three parts, namely: **HPE0**, **RTC0**, **TIM0**.
--Remove and add `IRQNoFlags (){8}` of **RTC0** and `IRQNoFlags (){0}` of **TIM0** to **HPE0**.
+## Metodo patch
 
-## Patch method
-
--Disable **HPET**, **RTC**, **TIMR**
-  -**HPET**
+-Disabilita ** HPET **, ** RTC **, ** TIMR **
+  - ** HPET **
   
-    Usually HPET has `_STA`, therefore, to disable HPET, you need to use the "preset variable method". Such as:
+    Di solito HPET ha `_STA`, quindi, per disabilitare HPET, è necessario utilizzare il" metodo della variabile preimpostata ". Ad esempio:
   
-    ```Swift
-    External (HPAE, IntObj) /* or External (HPTE, IntObj) */
-    Scope (\)
+    `` Rapido
+    Esterno (HPAE, IntObj) / * o Esterno (HPTE, IntObj) * /
+    Scopo (\)
     {
-        If (_OSI ("Darwin"))
+        Se (_OSI ("Darwin"))
         {
-            HPAE =0 /* or HPTE =0 */
+            HPAE = 0 / * o HPTE = 0 * /
         }
     }
-    ```
+    `` `
   
-    Note: The variable randomizer of `HPAE` in `_STA` may be different.
+    Nota: la variabile randomizer di "HPAE" in "_STA" potrebbe essere diversa.
   
-  -**RTC**
+  - ** RTC **
   
-    The RTC of early machines did not have `_STA`, press `Method (_STA,` to disable RTC. For example:
+    L'RTC delle prime macchine non aveva "_STA", premere "Method (_STA," per disabilitare RTC. Ad esempio:
   
-    ```Swift
-    Method (_STA, 0, NotSerialized)
+    `` Rapido
+    Metodo (_STA, 0, NotSerialized)
     {
-        If (_OSI ("Darwin"))
+        Se (_OSI ("Darwin"))
         {
-            Return (0)
+            Ritorno (0)
         }
-        Else
+        Altro
         {
-            Return (0x0F)
+            Ritorno (0x0F)
         }
     }
-    ```
+    `` `
   
-  -**TIMR**
+  - ** TIMR **
   
-    Same as **RTC**
+    Uguale a ** RTC **
   
--Patch file: ***SSDT-HPET_RTC_TIMR-fix***
+-File di patch: *** SSDT-HPET_RTC_TIMR-fix ***
 
-  See the above **patch principle**, refer to the example.
+  Vedere il ** principio della patch ** sopra, fare riferimento all'esempio.
   
-  **Top Charge**
+  ** Carica massima **
   
-  Although the early platform (Intel 3 Ivy Bridge generation mobile terminal is the most common), there is a common `IRQ` problem, which causes the onboard sound card to fail to drive. The performance is that `AppleHDA.kext` cannot be loaded, and only `AppleHDAController.kext` is loaded. Some machines on the platform still have this problem. Since HPET is an obsolete device from the Intel 6th generation platform, it is reserved for compatibility with earlier versions of the system. If you use the 6th generation or higher platform and the system version Windows 8.1 + HPET (High Precision Event in Device Manager) Timer) is already in the unloaded drive state
-  In macOS 10.12 + version, if this problem occurs on the 6th generation + hardware platform, you can directly block HPET to solve the problem. Refer to the specific settings of the HPET `_STA` method in the original DSDT.
+  Sebbene la prima piattaforma (il terminale mobile di generazione Intel 3 Ivy Bridge è la più comune), c'è un problema comune di "IRQ", che causa il mancato funzionamento della scheda audio integrata. La prestazione è che `AppleHDA.kext` non può essere caricato e viene caricato solo` AppleHDAController.kext`. Alcune macchine sulla piattaforma hanno ancora questo problema. Poiché HPET è un dispositivo obsoleto della piattaforma Intel di sesta generazione, è riservato per la compatibilità con le versioni precedenti del sistema. Se si utilizza la piattaforma di sesta generazione o superiore e la versione del sistema Windows 8.1 + HPET (High Precision Event in Device Manager) Timer) è già nello stato di unità non caricata
+  Nella versione macOS 10.12 +, se questo problema si verifica sulla piattaforma hardware di sesta generazione +, è possibile bloccare direttamente HPET per risolvere il problema. Fare riferimento alle impostazioni specifiche del metodo HPET `_STA` nel DSDT originale.
     
-## Precautions
+## Precauzioni
 
--This patch cannot be used simultaneously with the following patches:
-  -***SSDT-RTC_Y-AWAC_N*** of "Binary Rename and Preset Variables"
-  -OC official ***SSDT-AWAC***
-  -"Counterfeit Device" or OC official ***SSDT-RTC0***
-  -***SSDT-RTC0-NoFlags*** of "CMOS Reset Patch"
--`LPCB` name, **three parts** name, and `IPIC` name should be the same as the original `ACPI` part name.
--If the three-in-one patch cannot be resolved, try ***SSDT-IPIC*** under the premise of using the three-in-one patch. Follow the above method to disable ***HPET***, ***RTC*** and ***TIMR*** to disable the ***IPIC*** device, and then fake a ***IPI0*** device , The device content is the ***IPIC*** or ***PIC*** device content in the original `DSDT`, and finally delete `IRQNoFlags{2}`, refer to the example.
+-Questa patch non può essere utilizzata contemporaneamente alle seguenti patch:
+  - *** SSDT-RTC_Y-AWAC_N *** di "Rinomina binaria e variabili preimpostate"
+  -OC ufficiale *** SSDT-AWAC ***
+  - "Dispositivo contraffatto" o OC ufficiale *** SSDT-RTC0 ***
+  - *** SSDT-RTC0-NoFlags *** di "CMOS Reset Patch"
+-`LPCB` nome, ** tre parti ** nome e `IPIC` dovrebbero essere lo stesso del nome originale della parte` ACPI`.
+-Se la patch tre in uno non può essere risolta, prova *** SSDT-IPIC *** con la premessa di utilizzare la patch tre in uno. Segui il metodo sopra per disabilitare *** HPET ***, *** RTC *** e *** TIMR *** per disabilitare il dispositivo *** IPIC ***, quindi falsificare un *** IPI0 * ** dispositivo, Il contenuto del dispositivo è il contenuto del dispositivo *** IPIC *** o *** PIC *** nel "DSDT" originale, e infine elimina "IRQNoFlags {2}", fare riferimento all'esempio.
