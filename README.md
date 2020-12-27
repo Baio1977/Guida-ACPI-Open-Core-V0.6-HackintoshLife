@@ -107,17 +107,10 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 ### Credits 
 
-- Special credit to：
-  - @daliansky per le informazioni  **[daliansky](https://github.com/daliansky/OC-little)** 
-  - @Bat.bat, @DalianSky, @athlonreg, @iStar丶Forever their proofreading and finalisation.
+- Credits to：
+  - @daliansky per le informazioni e la repo **[daliansky](https://github.com/daliansky/OC-little)** 
+  - @bat.bat
+  - [Team Acidanthera](https://github.com/acidanthera) per [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)**
 
-- Credit to：
-  - @冬瓜-X1C5th
-  - @OC-xlivans
-  - @Air 13 IWL-GZ-Big Orange (OC perfect)
-  - @子骏oc IWL
-  - @大勇-小新air13-OC-划水小白
-  - @xjn819
-  - ......
 
-- **Thanks for [Acidanthera](https://github.com/acidanthera) maintaining [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)**
+# If you need help please contact us on [Telegram](https://t.me/HackintoshLife_it) or [Web](https://www.hackintoshlife.it/)
