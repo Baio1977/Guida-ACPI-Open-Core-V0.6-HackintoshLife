@@ -2,12 +2,12 @@
 
 ## Rinomina speciale
 
-PNLF rinominato XNLF
+PNLF renamed XNLF
 
-`` testo
-Trova: 504E4C46
-Sostituisci: 584E4C46
-`` `
+```text
+Find:     504E4C46
+Replace:  584E4C46
+```
 
 Il DSDT di Xiaoxin PRO ha la variabile `PNLF`,` PNLF` e il nome della patch di luminosità potrebbe essere in conflitto, quindi usa la modifica del nome sopra per evitarlo.
 
