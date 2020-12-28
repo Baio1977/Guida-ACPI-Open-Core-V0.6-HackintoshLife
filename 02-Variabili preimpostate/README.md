@@ -14,7 +14,7 @@ Prendi l'abilitazione di `HPET` come esempio. Vogliamo che `_STA` restituisca `0
 
 Rinomina binario:
 
-Trova: `00 A0 08 48 50`" Nota: `00` =` {`;` A0` = `If` ......`
+Trova: `00 A0 08 48 50` Nota: `00` =` {`;` A0` = `If` ......`
 
 Sostituisci: `00 A4 0A 0F A3` `Nota:` 00 `=` {`;` A4 0A 0F `=` Return (0x0F) `;` A3 `=` Noop `, utilizzato per inserire il numero di byte`
 
@@ -45,7 +45,7 @@ Sostituisci: `00 A4 0A 0F A3` `Nota:` 00 `=` {`;` A4 0A 0F `=` Return (0x0F) `;`
 
 **Spiegazione**: si è verificato un errore evidente dopo la modifica del nome, ma questo errore non causerà danni. Prima di tutto, il contenuto dopo `Return (0x0F)` non verrà eseguito. In secondo luogo, l'errore si trova in "{}" e non influirà su altri contenuti.
 
-   In realtà, dovremmo fare del nostro meglio per garantire la completezza della grammatica dopo il cambio di nome. Di seguito sono riportati i dati completi di "Trova" e "Sostituisci".
+   In realtà, dovremmo fare del nostro meglio per garantire la completezza della grammatica dopo il cambio di nome. Di seguito sono riportati i dati completi di `Trova` e `Sostituisci`.
   
    Trova: `00 A0 08 48 50 54 45 A4 0A 0F A4 00`
   
