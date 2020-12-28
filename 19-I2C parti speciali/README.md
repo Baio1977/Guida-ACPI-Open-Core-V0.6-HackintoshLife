@@ -7,9 +7,9 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 - @ penghubingzhou: [https://www.penghubingzhou.cn] (https://www.penghubingzhou.cn)
 - @ 神 楽 小白 (GZ 小白): [https://blog.gzxiaobai.cn/] (https://blog.gzxiaobai.cn/)
 - @ 神 楽 小白 (GZ 小白) Libreria di esempi di hot patch per touchpad: [https://github.com/GZXiaoBai/Hackintosh-TouchPad-Hotpatch”(https://github.com/GZXiaoBai/Hackintosh-TouchPad- Hotpatch)
--Documento ufficiale di VoodooI2C: [https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning”(https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning)
--VoodooI2C post di supporto ufficiale [https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/”(https://www.tonymacx86.com/threads/voodooi2c-help-and-support. 243378 /)
--Q gruppo: `837538729` (1 gruppo è pieno),` 921143329` (2 gruppi)
+- Documento ufficiale di VoodooI2C: [https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning”(https://voodooi2c.github.io/#GPIO%20Pinning/GPIO%20Pinning)
+- VoodooI2C post di supporto ufficiale [https://www.tonymacx86.com/threads/voodooi2c-help-and-support.243378/”(https://www.tonymacx86.com/threads/voodooi2c-help-and-support. 243378 /)
+- Q gruppo: `837538729` (1 gruppo è pieno),` 921143329` (2 gruppi)
 
 ## Principio e processo della patch
 
