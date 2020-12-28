@@ -324,9 +324,9 @@ Se eseguiamo `TEST` in` Dev1`, allora `TEST` in` Dev2` aspetterà fino a quando 
 
 ### `_OSI` (interfacce del sistema operativo)
 
-È facile acquisire il nome e la versione del sistema operativo corrente quando si applica "_OSI". Ad esempio, potremmo applicare una patch specifica per Windows o MacOS.
+È facile acquisire il nome e la versione del sistema operativo corrente quando si applica `_OSI`. Ad esempio, potremmo applicare una patch specifica per Windows o MacOS.
 
-"_OSI" richiede una stringa, la stringa deve essere prelevata dalla tabella sottostante.
+`_OSI` richiede una stringa, la stringa deve essere prelevata dalla tabella sottostante.
 
 |                 OS                  |      String      |
 | :---------------------------------------: | :--------------: |
@@ -361,11 +361,11 @@ If (_OSI ("Darwin")) /* giudica se il sistema attuale è macOS */
 
 Dobbiamo trasferire questi bit da esadecimale a binario. "0x0F" trasferito a `1111`, che significa abilitarlo (i primi quattro bit); mentre `Zero` significa disabilitare.
 
-Incontriamo anche `0x0B`, `0x1F`. `1011` è una forma binaria di "0x0B", il che significa che il dispositivo è abilitato e non autorizzato a decodificare le sue risorse. `0X0B` spesso usato in **`SSDT-PNLF`**. `0x1F` (`11111`) sembra descrivere solo il dispositivo batteria dal laptop, l'ultimo bit è utilizzato per informare il metodo di controllo del dispositivo batteria `PNP0C0A` che la batteria è presente.
+Incontriamo anche `0x0B`, `0x1F`. `1011` è una forma binaria di `0x0B`, il che significa che il dispositivo è abilitato e non autorizzato a decodificare le sue risorse. `0X0B` spesso usato in **`SSDT-PNLF`**. `0x1F` (`11111`) sembra descrivere solo il dispositivo batteria dal laptop, l'ultimo bit è utilizzato per informare il metodo di controllo del dispositivo batteria `PNP0C0A` che la batteria è presente.
 
 > In termini di `_STA` da` PowerResource`
 >
-> `_STA` da` PowerResource` restituisce solo` Uno` o` Zero`. Si prega di leggere "Specifiche ACPI" per i dettagli.
+> `_STA` da` PowerResource` restituisce solo` One` o` Zero`. Si prega di leggere `Specifiche ACPI` per i dettagli.
 
 ### `_CRS` (Impostazioni correnti delle risorse)
 `_CRS` restituisce un` Buffer`, è spesso utilizzato per acquisire dispositivi toccabili '`GPIO Pin`,` APIC Pin` per controllare la modalità di interruzione.
