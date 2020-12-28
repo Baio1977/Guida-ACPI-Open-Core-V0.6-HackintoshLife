@@ -2,14 +2,14 @@
 
 ## Descrizione
 
--Questo metodo realizza la personalizzazione della porta USB modificando il file ACPI.
--L'operazione di questo metodo richiede di eliminare un file ACPI. In circostanze normali, OpenCore ** non è consigliato ** per farlo, le porte USB personalizzate generalmente utilizzano lo strumento *** Hackintool.app ***.
--Questo metodo è dedicato ai fan.
+- Questo metodo realizza la personalizzazione della porta USB modificando il file ACPI.
+- L'operazione di questo metodo richiede di eliminare un file ACPI. In circostanze normali, OpenCore ** non è consigliato ** per farlo, le porte USB personalizzate generalmente utilizzano lo strumento *** Hackintool.app ***.
+- Questo metodo è dedicato ai fan.
 
 ## Campo di applicazione
 
--XHC e il suo "_UPC" esistono in un file ACPI separato
--Questo metodo non è applicabile ai dispositivi in cui `_UPC` esiste in DSDT (ad esempio ASUS)
+- XHC e il suo "_UPC" esistono in un file ACPI separato
+- Questo metodo non è applicabile ai dispositivi in cui `_UPC` esiste in DSDT (ad esempio ASUS)
 
 ## Specifica `_UPC`
 
@@ -27,7 +27,7 @@ _UPC, Package ()
 
 1. ** `xxxx` **
    -`0x00` significa che questa porta non esiste
-   -Altri valori (di solito "0x0F") rappresentano l'esistenza di questa porta
+   - Altri valori (di solito "0x0F") rappresentano l'esistenza di questa porta
 
 2. ** `yyyy` **
 
@@ -100,10 +100,10 @@ _UPC, Package ()
     
 - Personalizza la porta USB in base alla specifica `_UPC`. Cioè, i valori di xxxx e yyyy vengono corretti.
 
-    -Se la porta non esiste
+    - Se la porta non esiste
       -**`xxxx`** = `0x00`
       -**`yyyy`** = `0x00`
-    -Se la porta esiste
+    - Se la porta esiste
       -**`xxxx`** = `0xFF`
       -**`yyyy`**
 
