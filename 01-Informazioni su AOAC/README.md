@@ -57,9 +57,9 @@
 
 ## Precauzioni
 
-- La soluzione `AOAC` è una soluzione temporanea. Con l'applicazione diffusa della tecnologia "AOAC", potrebbero esserci soluzioni migliori in futuro.
+- La soluzione `AOAC` è una soluzione temporanea. Con l'applicazione diffusa della tecnologia `AOAC`, potrebbero esserci soluzioni migliori in futuro.
 -`AOAC` sonno e risveglio sono diversi da `S3` sonno e risveglio, le seguenti patch non sono applicabili
   - `Patch di estensione completa PTSWAK`
   - `Metodo di correzione del sonno PNP0C0E`
 - Per lo stesso motivo di cui sopra, `AOAC` non può visualizzare correttamente lo stato di funzionamento durante il sonno, ad esempio la spia che non respira lampeggia durante il sonno.
-- Le macchine non-`AOAC` possono anche provare questo metodo。
+- Le macchine non-`AOAC` possono anche provare questo metodo.
