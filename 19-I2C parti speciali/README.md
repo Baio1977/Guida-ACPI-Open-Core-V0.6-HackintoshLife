@@ -38,9 +38,9 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
 -Modifica il contenuto di `TPXX`:
 
-  -Sostituisci tutto il "nome" del dispositivo I2C originale con "TPXX"
+  -Sostituisci tutto il `nome` del dispositivo I2C originale con `TPXX`
 
-  - ** Modifica ** La parte "_STA" è:
+  - **Modifica** La parte `_STA` è:
 
     ```Swift
     Method (_STA, 0, NotSerialized)
@@ -56,9 +56,9 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
     }
     ```
 
-  - ** Risolto ** per vietare il `contenuto correlato` delle variabili utilizzate nel dispositivo I2C originale, in modo che sia conforme alla relazione logica.
+  - **Risolto** per vietare il `contenuto correlato` delle variabili utilizzate nel dispositivo I2C originale, in modo che sia conforme alla relazione logica.
 
-  - ** Risolto il problema con ** il `contenuto rilevante` relativo alla variabile del sistema operativo OSYS per renderlo coerente con la relazione logica.
+  - **Risolto il problema con** il `contenuto rilevante` relativo alla variabile del sistema operativo OSYS per renderlo coerente con la relazione logica.
 
 -Elimina gli errori.
 
