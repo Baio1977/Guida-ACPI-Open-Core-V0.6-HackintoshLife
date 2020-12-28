@@ -37,11 +37,11 @@
 
 ## AOAC dormi, svegliati
 
--`AOAC` sonno
+- `AOAC` sonno
 
   Lo schema sopra può far dormire la macchina, questo tipo di sonno è chiamato sleep `AOAC`. L'essenza del sonno `AOAC` è che il sistema e l'hardware entrano nello stato di inattività, che non è il senso tradizionale del sonno` S3`.
 
--`AOAC` sveglia
+- `AOAC` sveglia
 
   È più difficile riattivare la macchina dopo che è entrata in modalità sleep AOAC, di solito è necessario il pulsante di accensione per riattivarla. Alcune macchine potrebbero aver bisogno del pulsante di accensione + metodo `PNP0C0D` per riattivare la macchina.
 
@@ -53,7 +53,7 @@
 - Patch di attivazione AOAC - vedere `Metodo di attivazione AOAC`
 - Seconda patch di riattivazione: vedere `patch 060D"
 - Abilita dispositivo LI —— vedere `Impostazione della modalità di lavoro ASPM`, grazie @iStar 丶 Forever per aver fornito il metodo
--C ontrollo Bluetooth WIFI —— vedere `Sleep per disattivare automaticamente Bluetooth WIFI`, grazie @ i5 ex900 0,66% / h Huaxing OC Dreamn per aver fornito il metodo
+- C ontrollo Bluetooth WIFI —— vedere `Sleep per disattivare automaticamente Bluetooth WIFI`, grazie @ i5 ex900 0,66% / h Huaxing OC Dreamn per aver fornito il metodo
 
 ## Precauzioni
 
