@@ -97,19 +97,19 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
   
   -Sostituisci la parte `_STA` della patch con:
   
-    `` Rapido
-    Metodo (_STA, 0, NotSerialized)
+    ```Swift
+    Method (_STA, 0, NotSerialized)
     {
-        Se (_OSI ("Darwin"))
+        If (_OSI ("Darwin"))
         {
-            Ritorno (0x0F)
+            Return (0x0F)
         }
-        Altro
+        Else
         {
-            Ritorno (zero)
+            Return (Zero)
         }
     }
-    `` `
+    ```
   
   -Cercare "SDS1" (variabile usata quando "TPD1" è proibito) e modificare l'originale "If (SDS1 ...)" in "If (uno)".
   
