@@ -19,7 +19,7 @@ Prima di tutto, è necessario differenziare DSDT (Campi della tabella di descriz
 1. La variabile non deve superare 4
 caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, senza eccezioni.
 
-2. "Scope" è simile a "{}". Ce n'è uno e solo uno "Scope". Pertanto, DSDT inizia con
+2. `Scope` è simile a `{}`. Ce n'è uno e solo uno `Scope`. Pertanto, DSDT inizia con
 
    ```swift
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
@@ -32,11 +32,13 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
    }
    ```
 
-Questo è "root Scope".
+   Questo è `root Scope`.
 
-    I parametri `xxxx` si acquistano a` Nome file`,` OEMID`, `ID tabella`,` Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è **`DSDT`**, a sua volta, il terzo parametro è` 0x02`. Altri parametri possono essere inseriti liberamente.
+   I parametri `xxxx` si acquistano a` Nome file`,` OEMID`, `ID tabella`,` Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è **DSDT**, a sua volta, il terzo parametro è` 0x02`. Altri parametri possono essere inseriti liberamente.
 
-3. Quei metodi e le variabili che iniziano con "_" sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione "_T_X" dopo la decompilazione.
+
+3. Quei metodi e le variabili che iniziano con `_` sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione `_T_X` dopo la decompilazione.
+
 
 4. `Method` can be defined followed by `Device` or `Scope`. As such, `method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
 
@@ -172,7 +174,7 @@ Questo è "root Scope".
   CreateField (LLLL, Local0, 0x38, MMMM)
   ```
 
-Non è necessario annunciare il suo tipo quando si definisce una variabile.
+  Non è necessario annunciare il suo tipo quando si definisce una variabile.
 
 ## Assegnazione ASL
 
@@ -209,7 +211,7 @@ Local1 = Local0
 |   ~    |    Not     |   `Local0 = ~(0x00)`<br/>`Not (0x00,Local0)`                   |
 |      |    Nor     |    `Nor (0x11, 0x22, Local0)`                                   |
 
-Leggere "Specifiche ACPI" per i dettagli
+Leggere `Specifiche ACPI` per i dettagli
 
 ## Logica ASL
 
@@ -225,7 +227,7 @@ Leggere "Specifiche ACPI" per i dettagli
 |   ==   |    LEqual     |  `Local0 = (Local0 == Local1)`<br/>`If (LEqual(Local0, Local1))` |
 |   !=   |   LNotEqual   |  `Local0 = (0 != 1)`<br/>`Store (LNotEqual(0, 1), Local0)`    |
 
-Solo due risultati dal calcolo logico: "0" o "1"
+Solo due risultati dal calcolo logico: `0` o `1`
 
 ## Definizione di metodo ASL
 
@@ -240,7 +242,7 @@ Solo due risultati dal calcolo logico: "0" o "1"
 
 2. Definire un metodo che contenga 2 parametri e applicare le variabili locali`Local0` ~ `Local7`
 
-   I numeri dei parametri sono impostati come "0"
+   I numeri dei parametri sono impostati come `0`
 
    ```swift
    Method (MADD, 2)
@@ -273,7 +275,7 @@ Solo due risultati dal calcolo logico: "0" o "1"
 
 4. Definire il metodo serializzato
 
-   Se non definire "Serialized" o "NotSerialized", il valore predefinito è "NotSerialized"
+   Se non definire `Serialized` o `NotSerialized`, il valore predefinito è `NotSerialized`
 
    ```swift
    Method (MADD, 2, Serialized)
@@ -285,7 +287,7 @@ Solo due risultati dal calcolo logico: "0" o "1"
    }
    ```
 
-   Sembra una "sincronizzazione multi-thread". In altre parole, solo un'istanza può essere presente nella memoria quando il metodo è dichiarato come "Serializzato". Normalmente l'applicazione crea un oggetto, ad esempio:
+   Sembra una `sincronizzazione multi-thread`. In altre parole, solo un'istanza può essere presente nella memoria quando il metodo è dichiarato come `Serializzato`. Normalmente l'applicazione crea un oggetto, ad esempio:
 
    ```swift
    Method (TEST, Serialized)
@@ -317,6 +319,7 @@ Se eseguiamo `TEST` in` Dev1`, allora `TEST` in` Dev2` aspetterà fino a quando 
    ```
    quando uno di `TEST` chiamato da` Devx`, un altro `TEST` non riuscirà a creare` MSTR`.
 
+
 ## Funzione Preset ACPI
 
 ### `_OSI` (interfacce del sistema operativo)
@@ -336,14 +339,14 @@ Se eseguiamo `TEST` in` Dev1`, allora `TEST` in` Dev2` aspetterà fino a quando 
 >
 > <https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi>
 
-Quando la stringa di "_OSI" corrisponde al sistema corrente, restituisce "1", la condizione "If" è valida.
+Quando la stringa di `_OSI` corrisponde al sistema corrente, restituisce `1`, la condizione `If` è valida.
 
 `` rapido
 If (_OSI ("Darwin")) / * giudica se il sistema corrente è macOS * /
 `` `
 ### `_STA` (Stato)
 
-**Caution⚠️: two types of `_STA`，do not mix up`_STA`from`PowerResource`！！！**
+** Caution⚠️: two types of `_STA`，do not mix up`_STA`from`PowerResource`！！！**
 
 5 types of bit can be return from `_STA` method, explanations are listed below:
 
@@ -355,9 +358,9 @@ If (_OSI ("Darwin")) / * giudica se il sistema corrente è macOS * /
 | Bit [3] | Set if the device is functioning properly (cleared if device failed its diagnostics).            |
 | Bit [4] | Set if the battery is present.             |
 
-Dobbiamo trasferire questi bit da esadecimale a binario. "0x0F" trasferito a "1111", che significa abilitarlo (i primi quattro bit); mentre "Zero" significa disabilitare.
+Dobbiamo trasferire questi bit da esadecimale a binario. "0x0F" trasferito a `1111`, che significa abilitarlo (i primi quattro bit); mentre `Zero` significa disabilitare.
 
-Incontriamo anche "0x0B", "0x1F". "1011" è una forma binaria di "0x0B", il che significa che il dispositivo è abilitato e non autorizzato a decodificare le sue risorse. `0X0B` spesso usato in **` SSDT-PNLF` **. "0x1F" ("11111") sembra descrivere solo il dispositivo batteria dal laptop, l'ultimo bit è utilizzato per informare il metodo di controllo del dispositivo batteria "PNP0C0A" che la batteria è presente.
+Incontriamo anche `0x0B`, `0x1F`. `1011` è una forma binaria di "0x0B", il che significa che il dispositivo è abilitato e non autorizzato a decodificare le sue risorse. `0X0B` spesso usato in **`SSDT-PNLF`**. `0x1F` (`11111`) sembra descrivere solo il dispositivo batteria dal laptop, l'ultimo bit è utilizzato per informare il metodo di controllo del dispositivo batteria `PNP0C0A` che la batteria è presente.
 
 > In termini di `_STA` da` PowerResource`
 >
@@ -467,7 +470,7 @@ for (local0 = 0, local0 < 8, local0++)
 }
 ```
 
-"For" mostrato sopra e "While" sotto sono equivalenti
+`For` mostrato sopra e `While` sotto sono equivalenti
 
 ```swift
 Local0 = 0
@@ -522,7 +525,7 @@ Method (SSCN, 0, NotSerialized)
 }
 ```
 
-I codici sono citati da ** `SSDT-I2CxConf` **. Quando il sistema non è MacOS e "XSCN" esiste in "I2C0", restituisce il valore originale.
+I codici sono citati da **SSDT-I2CxConf**. Quando il sistema non è MacOS e `XSCN` esiste in `I2C0`, restituisce il valore originale.
 
 ## Conclusione
 Spero che questo articolo ti aiuti quando stai modificando DSDT / SSDT.
