@@ -51,15 +51,15 @@ Questo è "root Scope".
    }
    ```
 
-4. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
+4. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` appartengono all'ambito radice `\`.
 
-   - `\_GPE`--- ACPI Event handlers
+   - `\_GPE`--- ACPI Gestione
    - `\_PR` --- CPU
-   - `\_SB` --- Devices and buses
-   - `\_SI` --- System indicator
-   - `\_TZ` --- Thermal zone
+   - `\_SB` --- Dispositivi e Bus
+   - `\_SI` --- Indicatore di sistema
+   - `\_TZ` --- Zona Termica
 
-   > **Components with different atrributes place under corresponding scopes. For examples:**
+ > ** I componenti con attributi diversi si trovano negli ambiti corrispondenti. Per esempio:**
 
    - `Device (PCI0)` places under `Scope (\_SB)`
 
@@ -74,9 +74,9 @@ Questo è "root Scope".
      }
      ```
 
-   - Components relate to CPU place under
+-  I componenti si riferiscono al posto della CPU sotto
 
-     > different CPUs place variously, common scopes for instance `_PR`,`_SB`,`SCK0`
+     > CPU diverse posizionano ambiti comuni in modo diverso, ad esempio `_PR`,` _SB`, `SCK0`
 
      ```swift
      Scope (_PR)
@@ -89,7 +89,7 @@ Questo è "root Scope".
      }
      ```
 
-   - `Scope (_GPE)` places event handlers
+- `Scope (_GPE)` posiziona i gestori di eventi
 
       ```swift
       Scope (_GPE)
