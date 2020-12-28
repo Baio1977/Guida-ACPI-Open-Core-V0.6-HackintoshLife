@@ -26,9 +26,9 @@ L'aggiunta di parti mancanti è solo una soluzione perfetta, non necessaria!
   > Anche se non so perché questo accada, vale la pena notare che PMC e SPI si trovano in aree di memoria diverse.PCHRESV mappa queste due aree contemporaneamente, ma AppleIntelPCHPMC di Apple mappa solo l'area in cui si trova PMC.
   > Il dispositivo PMC non ha nulla a che fare con il bus LPC.Questo SSDT serve esclusivamente per velocizzare l'inizializzazione di PMC e aggiungere il dispositivo al bus LPC. Se viene aggiunto al bus PCI0, PMC verrà avviato solo dopo che la configurazione PCI è stata completata, il che è troppo tardi per l'operazione che deve leggere la NVRAM.
 
--Cerca `PNP0C0C`, se manca, aggiungi ***SSDT-PWRB***.
+- Cerca `PNP0C0C`, se manca, aggiungi ***SSDT-PWRB***.
 
--Cercare `PNP0C0E`, se manca, è possibile aggiungere ***SSDT-SLPB***, `PNP0C0E Metodo di correzione del sonno` richiede questo componente.
+- Cercare `PNP0C0E`, se manca, è possibile aggiungere ***SSDT-SLPB***, `PNP0C0E Metodo di correzione del sonno` richiede questo componente.
 
 ### Nota
 
