@@ -26,7 +26,7 @@ _UPC, Package ()
 ### Spiegazione
 
 1. ** `xxxx` **
-   -`0x00` significa che questa porta non esiste
+   - `0x00` significa che questa porta non esiste
    - Altri valori (di solito "0x0F") rappresentano l'esistenza di questa porta
 
 2. ** `yyyy` **
