@@ -2,16 +2,16 @@
 
 ## Descrizione
 
--Alcune macchine appariranno ** "Errore di autotest all'accensione" ** all'arresto o al riavvio, causato dal ripristino del CMOS.
--Quando si utilizza Clover, selezionare `ACPI \ FixRTC` per risolvere i problemi di cui sopra.
--Quando si utilizza OpenCore, vengono fornite ufficialmente le seguenti soluzioni, vedere *** Sample.plist ***:
-  -Installa ** RTCMemoryFixup.kext **
-  -`Kernel \ Patch` patch: ** __ ZN11BCM5701Enet14getAdapterInfoEv **
--Questo capitolo fornisce un metodo di patch SSDT per risolvere i problemi di cui sopra. Questa patch SSDT è essenzialmente un RTC contraffatto, vedere "Preset Variable Method" e "Counterfeit Equipment".
+- Alcune macchine appariranno **"Errore di autotest all'accensione"** all'arresto o al riavvio, causato dal ripristino del CMOS.
+- Quando si utilizza Clover, selezionare `ACPI \ FixRTC` per risolvere i problemi di cui sopra.
+- Quando si utilizza OpenCore, vengono fornite ufficialmente le seguenti soluzioni, vedere ***Sample.plist***:
+  - Installa **RTCMemoryFixup.kext**
+  - `Kernel \ Patch` patch: **__ ZN11BCM5701Enet14getAdapterInfoEv**
+- Questo capitolo fornisce un metodo di patch SSDT per risolvere i problemi di cui sopra. Questa patch SSDT è essenzialmente un RTC contraffatto, vedere "Preset Variable Method" e "Counterfeit Equipment".
 
 ## soluzione
 
--Elimina il ** numero di interrupt ** del ** RTC `PNP0B00` ** componente` _CRS`.
+- Elimina il **numero di interrupt** del **RTC `PNP0B00`** componente` _CRS`.
 
   `` Rapido
   Dispositivo (RTC)
@@ -33,8 +33,8 @@
 
 ## Patch: SSDT-RTC0-NoFlags
 
--Parti originali disabilitabili: ** RTC **
-  -Se ** RTC ** non esiste `_STA`, utilizzare il seguente metodo per disabilitare ** RTC **:
+- Parti originali disabilitabili: **RTC**
+  - Se **RTC** non esiste `_STA`, utilizzare il seguente metodo per disabilitare **RTC**:
   
     `` Rapido
     Esterno (_SB.PCI0.LPCB.RTC, DeviceObj)
@@ -54,7 +54,7 @@
     }
     `` `
   
-  -Se ** RTC ** esiste `_STA`, utilizza il metodo delle variabili preimpostate per disabilitare ** RTC **. La variabile nell'esempio è "STAS" e si dovrebbe prestare attenzione all'influenza di "STAS" su altre apparecchiature e componenti quando lo si utilizza.
+  - Se **RTC** esiste `_STA`, utilizza il metodo delle variabili preimpostate per disabilitare **RTC**. La variabile nell'esempio è "STAS" e si dovrebbe prestare attenzione all'influenza di "STAS" su altre apparecchiature e componenti quando lo si utilizza.
   
     `` Rapido
     Esterno (STAS, FieldUnitObj)
@@ -67,13 +67,13 @@
     }
     `` `
 
--Contraffazione ** RTC0 **, vedi catalogo.
+- Contraffazione **RTC0**, vedi catalogo.
 
 ## Nota
 
--Il nome del dispositivo e il percorso nella patch dovrebbero essere coerenti con l'ACPI originale.
+- Il nome del dispositivo e il percorso nella patch dovrebbero essere coerenti con l'ACPI originale.
 
--Se la macchina stessa disabilita RTC per qualche motivo, deve falsificare RTC per funzionare normalmente. In questo caso, viene visualizzato ** "Errore di autoverifica all'accensione" **, basta eliminare il numero di interruzione della patch contraffatta:
+- Se la macchina stessa disabilita RTC per qualche motivo, deve falsificare RTC per funzionare normalmente. In questo caso, viene visualizzato **"Errore di autoverifica all'accensione"**, basta eliminare il numero di interruzione della patch contraffatta:
 
   `` Rapido
     IRQNoFlags () / * Elimina questa riga * /
