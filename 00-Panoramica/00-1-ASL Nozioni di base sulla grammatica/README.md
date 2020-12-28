@@ -156,14 +156,14 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
 
   > Buffer Field 6 tipi in totale:
 
-| Crea dichiarazione | dimensione |
-| : --------------: | : ------: |
-| CreateBitField | 1 bit |
-| CreateByteField | 8 bit |
-| CreateWordField | 16 bit |
-| CreateDWordField | 32 bit |
-| CreateQWordField | 64 bit |
-| CreateField | qualsiasi dimensione |
+|     Create statement     |   size   |
+| :--------------: | :------: |
+|  CreateBitField  |  1-Bit   |
+| CreateByteField  |  8-Bit   |
+| CreateWordField  |  16-Bit  |
+| CreateDWordField |  32-Bit  |
+| CreateQWordField |  64-Bit  |
+|   CreateField    | any sizes |
 
   ```swift
   CreateBitField (AAAA, Zero, CCCC)
@@ -341,12 +341,13 @@ Se eseguiamo `TEST` in` Dev1`, allora `TEST` in` Dev2` aspetterà fino a quando 
 
 Quando la stringa di `_OSI` corrisponde al sistema corrente, restituisce `1`, la condizione `If` è valida.
 
-`` rapido
-If (_OSI ("Darwin")) / * giudica se il sistema corrente è macOS * /
-`` `
+```swift
+If (_OSI ("Darwin")) /* giudica se il sistema attuale è macOS */
+```
+
 ### `_STA` (Stato)
 
-** Caution⚠️: two types of `_STA`，do not mix up`_STA`from`PowerResource`！！！**
+**Caution⚠️: two types of `_STA`，do not mix up`_STA`from`PowerResource`！！！**
 
 5 types of bit can be return from `_STA` method, explanations are listed below:
 
@@ -390,7 +391,7 @@ ASL ha anche il suo metodo per controllare il flusso.
 
 #### `If`
 
-   The following codes check if the system is `Darwin`, if yes then`OSYS = 0x2710`
+   I seguenti codici controllano se il sistema è `Darwin`, se sì allora`OSYS = 0x2710`
 
    ```swift
    If (_OSI ("Darwin"))
@@ -401,7 +402,7 @@ ASL ha anche il suo metodo per controllare il flusso.
 
 #### `ElseIf`, `Else`
 
-   The following codes check if the system is `Darwin`, and if the system is not `Linux`, if yes then `OSYS = 0x07D0`
+   I seguenti codici controllano se il sistema è `Darwin`, e se il sistema non lo è `Linux`, se sì allora `OSYS = 0x07D0`
 
    ```swift
    If (_OSI ("Darwin"))
@@ -525,7 +526,7 @@ Method (SSCN, 0, NotSerialized)
 }
 ```
 
-I codici sono citati da **SSDT-I2CxConf**. Quando il sistema non è MacOS e `XSCN` esiste in `I2C0`, restituisce il valore originale.
+I codici sono citati **`SSDT-I2CxConf`** Quando il sistema non è MacOS e `XSCN` esiste in `I2C0`, restituisce il valore originale.
 
 ## Conclusione
 Spero che questo articolo ti aiuti quando stai modificando DSDT / SSDT.
