@@ -13,7 +13,7 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
 ## Principio e processo della patch
 
--Proibire il dispositivo I2C originale. Vedere "Rinomina binaria e variabili preimpostate" per i dettagli.
+ - Proibire il dispositivo I2C originale. Vedere `Rinomina binaria e variabili preimpostate` per i dettagli.
 
   ```Swift
   /*
@@ -34,11 +34,11 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
   }
   ```
 
--Crea un nuovo dispositivo I2C `TPXX` e migra tutti i contenuti del dispositivo originale in` TPXX`.
+   - Crea un nuovo dispositivo I2C `TPXX` e migra tutti i contenuti del dispositivo originale in` TPXX`.
 
--Modifica il contenuto di `TPXX`:
+   - Modifica il contenuto di `TPXX`:
 
-  -Sostituisci tutto il `nome` del dispositivo I2C originale con `TPXX`
+  - Sostituisci tutto il `nome` del dispositivo I2C originale con `TPXX`
 
   - **Modifica** La parte `_STA` è:
 
@@ -60,13 +60,13 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
   - **Risolto il problema con** il `contenuto rilevante` relativo alla variabile del sistema operativo OSYS per renderlo coerente con la relazione logica.
 
--Elimina gli errori.
+- Elimina gli errori.
 
--Patch I2C.
+- Patch I2C.
 
 ### Esempio (Dell Latitude 5480, percorso del dispositivo: `\ _SB.PCI0.I2C1.TPD1`)
 
--Utilizzare "Legge sulle variabili preimpostate" per vietare `TPD1`.
+- Utilizzare "Legge sulle variabili preimpostate" per vietare `TPD1`.
 
 
   ```Swift
@@ -79,7 +79,7 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
   }
   ```
 
--Crea un nuovo dispositivo `TPXX` e migra tutti i contenuti dell'originale` TPD1` in `TPXX`.
+- Crea un nuovo dispositivo `TPXX` e migra tutti i contenuti dell'originale` TPD1` in `TPXX`.
 
 
   ```Swift
@@ -93,11 +93,11 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
   }
   ```
 
--Modifica il contenuto di `TPXX`
+- Modifica il contenuto di `TPXX`
 
-   -Sostituisci tutto `TPD1` con` TPXX`.
+   - Sostituisci tutto `TPD1` con` TPXX`.
   
-   -Sostituisci la parte `_STA` della patch con:
+   - Sostituisci la parte `_STA` della patch con:
   
     ```Swift
     Method (_STA, 0, NotSerialized)
@@ -113,9 +113,9 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
     }
     ```
   
-  -Cercare `SDS1` (variabile usata quando `TPD1` è proibito) e modificare l'originale `If (SDS1 ...)` in `If (uno)`.
+  - Cercare `SDS1` (variabile usata quando `TPD1` è proibito) e modificare l'originale `If (SDS1 ...)` in `If (uno)`.
   
-  -Trova `OSYS` ed elimina (commenta) quanto segue:
+  - Trova `OSYS` ed elimina (commenta) quanto segue:
   
     ```Swift
     //If (LLess (OSYS, 0x07DC))
@@ -125,6 +125,6 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
     ```
    Nota: quando `OSYS` è minore di `0x07DC`, il dispositivo I2C non funziona (`0x07DC` sta per Windows8).
   
--Aggiungere il riferimento esterno `External ...` per correggere tutti gli errori.
+- Aggiungere il riferimento esterno `External ...` per correggere tutti gli errori.
 
--Patch I2C (omesso)
+- Patch I2C (omesso)
