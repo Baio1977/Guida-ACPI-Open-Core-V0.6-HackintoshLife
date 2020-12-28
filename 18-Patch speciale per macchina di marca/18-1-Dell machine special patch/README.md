@@ -3,19 +3,19 @@
 ## Richiesta
 
 -Controlla se i seguenti "Device" e "Method" esistono in ACPI e i nomi corrispondono, altrimenti ignora il contenuto di questo capitolo.
-  -`Device`: ECDV 【PNP0C09】
-  -`Device`: LID0 【PNP0C0D】
-  -`Metodo`: OSID
-  -`Metodo`: BTNV
+  - `Device` ：ECDV【PNP0C09】
+  - `Device` ：LID0【PNP0C0D】
+  - `Method` ：OSID
+  - `Method` ：BTNV
 
 ## Rinomina speciale
 
-PNLF rinominato XNLF
+PNLF renamed XNLF
 
-`` testo
-Trova: 504E4C46
-Sostituisci: 584E4C46
-`` `
+```text
+Find:     504E4C46
+Replace:  584E4C46
+```
 
 C'è una variabile "PNLF" nel DSDT di alcune macchine Dell. Se "PNLF" e la patch di luminosità hanno lo stesso nome, potrebbero esserci dei conflitti. Usa il cambio di nome sopra per evitarlo.
 
