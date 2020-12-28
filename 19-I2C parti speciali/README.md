@@ -115,13 +115,13 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
   
   -Trova `OSYS` ed elimina (commenta) quanto segue:
   
-    `` Rapido
-    // If (Meno (OSYS, 0x07DC))
-    // {
-    // SRXO (GPDI, uno)
+    ```Swift
+    //If (LLess (OSYS, 0x07DC))
+    //{
+    //    SRXO (GPDI, One)
     //}
-    `` `
-  
+    ```
+    
     Note: When `OSYS` is less than `0x07DC`, the I2C device does not work (`0x07DC` stands for Windows8).
   
 -Add external reference `External...` to fix all errors.
