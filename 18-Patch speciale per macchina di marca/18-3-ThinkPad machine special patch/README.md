@@ -5,8 +5,8 @@
 Come alcune macchine Lenovo, il DSDT delle macchine ThinkPad può contenere anche il campo `PNLF`. Cerca `PNLF` in DSDT, se c'è` PNLF`, devi aggiungere il seguente rinomina:
 
 ```text
-Find: 504E4C46
-Replace: 584E4C46
+Find:     504E4C46
+Replace:  584E4C46
 ```
 
 ## Patch speciale
