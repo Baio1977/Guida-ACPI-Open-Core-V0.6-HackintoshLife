@@ -5,7 +5,7 @@
 Tra le tante patch `SSDT`, un numero considerevole di patch può essere classificato come patch di dispositivo contraffatto, come ad esempio:
 
 - Alcuni dispositivi non esistono in ACPI, ma il sistema MAC ne ha bisogno. La descrizione corretta di questi dispositivi tramite le patch può caricare i driver di dispositivo. Ad esempio `05-2-PNLF Injection Method`, `Add Missing Parts`, `Counterfeit Ethernet`, ecc.
-- Problemi CE. Come "contraffazione CE".
+- Problemi EC. Come `contraffazione EC`.
 - Per alcuni dispositivi speciali, il metodo per vietare la contraffazione del dispositivo originale ci porterà convenienza nel lavoro di regolazione del cerotto. Come `Metodo patch OCI2C-TPXX`.
 - Un certo dispositivo è disabilitato per qualche motivo, ma il sistema MAC ha bisogno che funzioni. Vedi esempi di `questo capitolo`.
 - Nella maggior parte dei casi, anche utilizzando "Rinomina binaria e variabili preimpostate" è possibile abilitare il dispositivo.
