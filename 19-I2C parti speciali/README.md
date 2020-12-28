@@ -55,7 +55,7 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
         }
     }
     ```
-
+    
   - **Risolto** per vietare il `contenuto correlato` delle variabili utilizzate nel dispositivo I2C originale, in modo che sia conforme alla relazione logica.
 
   - **Risolto il problema con** il `contenuto rilevante` relativo alla variabile del sistema operativo OSYS per renderlo coerente con la relazione logica.
@@ -68,17 +68,6 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
 -Utilizzare "Legge sulle variabili preimpostate" per vietare `TPD1`.
 
-  ```Swift
-  Scopo (\)
-  {
-      Se (_OSI ("Darwin"))
-      {
-          SDS1 = 0
-      }
-  }
-  `` `
-
--Crea un nuovo dispositivo `TPXX` e migra tutti i contenuti dell'originale` TPD1` in `TPXX`.
 
   ```Swift
   Scope (\)
@@ -90,11 +79,25 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
   }
   ```
 
+-Crea un nuovo dispositivo `TPXX` e migra tutti i contenuti dell'originale` TPD1` in `TPXX`.
+
+
+  ```Swift
+  External(_SB.PCI0.I2C1, DeviceObj)
+  Scope (_SB.PCI0.I2C1)
+  {
+      Device (TPXX)
+      {
+         原TPD1内容
+      }
+  }
+  ```
+
 -Modifica il contenuto di `TPXX`
 
-  -Sostituisci tutto `TPD1` con` TPXX`.
+   -Sostituisci tutto `TPD1` con` TPXX`.
   
-  -Sostituisci la parte `_STA` della patch con:
+   -Sostituisci la parte `_STA` della patch con:
   
     ```Swift
     Method (_STA, 0, NotSerialized)
@@ -120,8 +123,7 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
     //    SRXO (GPDI, One)
     //}
     ```
-    
-Nota: quando `OSYS` è minore di `0x07DC`, il dispositivo I2C non funziona (`0x07DC` sta per Windows8).
+   Nota: quando `OSYS` è minore di `0x07DC`, il dispositivo I2C non funziona (`0x07DC` sta per Windows8).
   
 -Aggiungere il riferimento esterno `External ...` per correggere tutti gli errori.
 
