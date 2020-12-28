@@ -63,7 +63,7 @@ _UPC, Package ()
      >
      > Come ***SSDT-8-CB-01.aml*** of Xiaoxin PRO13 (i5) (la macchina senza display indipendente è ***SSDT-6-CB-01.aml***)
 
-   -`config\ACPI\Block\` `rilascia i file ACPI nei metodi` (decimal) e metodi `TableSignature`. Ad esempio:
+   - `config\ACPI\Block\` `rilascia i file ACPI nei metodi` (decimal) e metodi `TableSignature`. Ad esempio:
 
      ** dell5480**: **`TableLength`** = `2001`, **`TableSignature`** = `53534454` (SSDT)
 
