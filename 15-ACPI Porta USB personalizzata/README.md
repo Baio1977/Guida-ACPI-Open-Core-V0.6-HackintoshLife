@@ -34,19 +34,19 @@ _UPC, Package ()
    ** `yyyy` ** definisce il tipo di porta, fare riferimento alla tabella seguente
 
    | ** `yyyy` ** | Tipo di porta |
-   | : ------: | ----------------------------- |
-   | `0x00` | USB tipo "A" |
+   | :------: | ----------------------------- |
+   | `0x00` | USB Type `A` |
    | `0x01` | USB `Mini-AB` |
-   | "0x02" | Smart Card USB |
-   | `0x03` | USB 3 standard tipo "A" |
-   | `0x04` | USB 3 standard tipo "B" |
+   | `0x02` | USB Smart Card |
+   | `0x03` | USB 3 Standard Type `A` |
+   | `0x04` | USB 3 Standard Type `B` |
    | `0x05` | USB 3 `Micro-B` |
    | `0x06` | USB 3 `Micro-AB` |
    | `0x07` | USB 3 `Power-B` |
-   | `0x08` | USB tipo `C` ** (solo USB 2) ** |
-   | `0x09` | USB tipo `C` ** (con deviatore) ** |
-   | `0x0A` | USB tipo `C` ** (senza deviatore) ** |
-   | `0xFF` | Incorporato |
+   | `0x08` | USB Type `C` **(Only USB 2)** |
+   | `0x09` | USB Type `C` **(With diverter)** |
+   | `0x0A` | USB Type `C` **(without diverter)** |
+   | `0xFF` | Built-in |
 
    > Se sia la parte anteriore che quella posteriore dell'USB-C sono collegate alla stessa porta in Hackintool, significa che la porta ha un redirector
    >
