@@ -38,8 +38,7 @@ Questo è "root Scope".
 
 2. Quei metodi e le variabili che iniziano con "_" sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione "_T_X" dopo la decompilazione.
 
-   
-3. "Method" può essere definito seguito da "Device" o "Scope". Pertanto, "method" non può essere definito senza "Scope" e le istanze elencate di seguito sono **non valide**.
+3. `Method` can be defined followed by `Device` or `Scope`. As such, `method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
 
    ```swift
    Method (xxxx, 0, NotSerialized)
@@ -52,60 +51,60 @@ Questo è "root Scope".
    }
    ```
 
-4. `\ _GPE`,` \ _PR`, `\ _SB`,` \ _SI`, `\ _TZ` appartengono all'ambito radice` \ `.
+4. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
 
-   - `\ _GPE` --- Gestori di eventi ACPI
-   - `\ _PR` --- CPU
-   - `\ _SB` --- Dispositivi e bus
-   - `\ _SI` --- Indicatore di sistema
-   - `\ _TZ` --- Zona termica
+   - `\_GPE`--- ACPI Event handlers
+   - `\_PR` --- CPU
+   - `\_SB` --- Devices and buses
+   - `\_SI` --- System indicator
+   - `\_TZ` --- Thermal zone
 
- > ** I componenti con attributi si trovano negli ambiti corrispondenti. Per esempio: **
+   > **Components with different atrributes place under corresponding scopes. For examples:**
 
-   - "Device (PCI0)" si trova in "Scope (\ _SB)"
+   - `Device (PCI0)` places under `Scope (\_SB)`
 
-     `` rapido
-     Ambito (\ _SB)
+     ```swift
+     Scope (\_SB)
      {
-         Dispositivo (PCI0)
+         Device (PCI0)
          {
              ...
          }
          ...
      }
-     `` `
+     ```
 
--I componenti si è bene alla posizione della CPU sotto
+   - Components relate to CPU place under
 
-      > CPU diverse posizionano ambiti comuni in modo diverso, ad esempio `_PR`,` _SB`, `SCK0`
+     > different CPUs place variously, common scopes for instance `_PR`,`_SB`,`SCK0`
 
-     `` rapido
-     Ambito (_PR)
+     ```swift
+     Scope (_PR)
      {
-         Processore (CPU0, 0x00, 0x00000410, 0x06)
+         Processor (CPU0, 0x00, 0x00000410, 0x06)
          {
              ...
          }
          ...
      }
-     `` `
+     ```
 
-   - `Scope (_GPE)` posiziona i gestori di eventi
+   - `Scope (_GPE)` places event handlers
 
-      `` rapido
-      Ambito (_GPE)
+      ```swift
+      Scope (_GPE)
       {
-          Metodo (_L0D, 0, NotSerialized)
+          Method (_L0D, 0, NotSerialized)
           {
               ...
           }
           ...
       }
-      `` `
+      ```
 
-Sì, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con ** `_` ** sono riservati dai sistemi operativi.
+      Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
 
-5. Anche "Device (xxxx)" può essere riconosciuto come ambito, contiene varie descrizioni dei dispositivi, ad esempio "_ADR", "_CID", "_UID", "_DSM", "_STA".
+5. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
 
 6. Il simbolo "\" cita l'ambito radice; "^" cita l'ambito superiore. Allo stesso modo, "^" è superiore a "^^".
 
