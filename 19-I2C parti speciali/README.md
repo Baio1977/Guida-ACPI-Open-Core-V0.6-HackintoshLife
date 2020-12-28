@@ -68,7 +68,7 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
 -Utilizzare "Legge sulle variabili preimpostate" per vietare "TPD1".
 
-  `` Rapido
+  ```Swift
   Scopo (\)
   {
       Se (_OSI ("Darwin"))
@@ -121,8 +121,8 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
     //}
     ```
     
-    Note: When `OSYS` is less than `0x07DC`, the I2C device does not work (`0x07DC` stands for Windows8).
+Nota: quando `OSYS` è minore di `0x07DC`, il dispositivo I2C non funziona (`0x07DC` sta per Windows8).
   
--Add external reference `External...` to fix all errors.
+-Aggiungere il riferimento esterno `External ...` per correggere tutti gli errori.
 
--I2C patch (omitted)
+-Patch I2C (omesso)
