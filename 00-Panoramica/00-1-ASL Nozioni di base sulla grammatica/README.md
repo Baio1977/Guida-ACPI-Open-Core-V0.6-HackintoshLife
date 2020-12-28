@@ -102,9 +102,9 @@ Questo è "root Scope".
       }
       ```
 
-      Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
+      Sì, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con ** `_` ** sono riservati dai sistemi operativi.
 
-5. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
+5. Anche 'Dispositivo (xxxx)' può essere riconosciuto come ambito, contiene varie descrizioni dei dispositivi, ad es. `_ADR`,` _CID`, `_UID`,` _DSM`, `_STA`.
 
 6. Il simbolo "\" cita l'ambito radice; "^" cita l'ambito superiore. Allo stesso modo, "^" è superiore a "^^".
 
