@@ -20,7 +20,7 @@
   Durante l'utilizzo, assicurarsi che il percorso della batteria dell'ACPI originale sia coerente con il percorso della batteria dell'esempio
 - `CBIS`
   
-  -Trova la variabile corrispondente in base al contenuto di `_BST`, e premi` low byte` e `high byte` per scrivere B1B2. Ad esempio: PKG1 [0x02] = B1B2 (`FUSL`,` FUSH`), se questa variabile è a doppio byte, fare riferimento al metodo di divisione dei dati della patch della batteria per dividere i dati e ridefinire i dati
+  - Trova la variabile corrispondente in base al contenuto di `_BST`, e premi` low byte` e `high byte` per scrivere B1B2. Ad esempio: PKG1 [0x02] = B1B2 (`FUSL`,` FUSH`), se questa variabile è a doppio byte, fare riferimento al metodo di divisione dei dati della patch della batteria per dividere i dati e ridefinire i dati
   -Se non puoi confermare le variabili, puoi anche visualizzare le informazioni relative alla batteria [**Non verificato**] in Win o Linux e compilare direttamente. Ad esempio: `Versione firmware` è 123, impostare direttamente PKG1 [0x04] = B1B2 (0x23, 0x01)
 
 -`CBSS`
