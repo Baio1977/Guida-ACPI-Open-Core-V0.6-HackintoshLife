@@ -19,7 +19,7 @@ Prima di tutto, è necessario differenziare DSDT (Campi della tabella di descriz
 1. La variabile non deve superare 4
 caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, senza eccezioni.
 
-1. "Scope" è simile a "{}". Ce n'è uno e solo uno "Scope". Pertanto, DSDT inizia con
+2. "Scope" è simile a "{}". Ce n'è uno e solo uno "Scope". Pertanto, DSDT inizia con
 
    ```swift
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
@@ -36,9 +36,9 @@ Questo è "root Scope".
 
     I parametri `xxxx` si acquistano a` Nome file`,` OEMID`, `ID tabella`,` Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è **`DSDT`**, a sua volta, il terzo parametro è` 0x02`. Altri parametri possono essere inseriti liberamente.
 
-2. Quei metodi e le variabili che iniziano con "_" sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione "_T_X" dopo la decompilazione.
+3. Quei metodi e le variabili che iniziano con "_" sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione "_T_X" dopo la decompilazione.
 
-3. `Method` can be defined followed by `Device` or `Scope`. As such, `method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
+4. `Method` can be defined followed by `Device` or `Scope`. As such, `method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
 
    ```swift
    Method (xxxx, 0, NotSerialized)
@@ -51,7 +51,7 @@ Questo è "root Scope".
    }
    ```
 
-4. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
+5. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
 
    - `\_GPE`--- ACPI Event handlers
    - `\_PR` --- CPU
@@ -104,17 +104,17 @@ Questo è "root Scope".
 
       Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
 
-5. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
+6. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
 
-6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
+7. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
 
-7. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
+8. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
 
-8. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
+9. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
 
-9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customised.
+10. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customised.
 
-10. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialised, in other words, assignment is needed.
+11. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialised, in other words, assignment is needed.
 
 ## Tipo comune di dati ASL
 
