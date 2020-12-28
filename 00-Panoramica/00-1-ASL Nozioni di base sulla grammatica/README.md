@@ -51,15 +51,15 @@ Questo è "root Scope".
    }
    ```
 
-4. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` appartengono all'ambito radice `\`.
+4. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
 
-   - `\_GPE`--- ACPI Gestione
+   - `\_GPE`--- ACPI Event handlers
    - `\_PR` --- CPU
-   - `\_SB` --- Dispositivi e Bus
-   - `\_SI` --- Indicatore di sistema
-   - `\_TZ` --- Zona Termica
+   - `\_SB` --- Devices and buses
+   - `\_SI` --- System indicator
+   - `\_TZ` --- Thermal zone
 
- > ** I componenti con attributi diversi si trovano negli ambiti corrispondenti. Per esempio:**
+   > **Components with different atrributes place under corresponding scopes. For examples:**
 
    - `Device (PCI0)` places under `Scope (\_SB)`
 
@@ -74,9 +74,9 @@ Questo è "root Scope".
      }
      ```
 
--  I componenti si riferiscono al posto della CPU sotto
+   - Components relate to CPU place under
 
-     > CPU diverse posizionano ambiti comuni in modo diverso, ad esempio `_PR`,` _SB`, `SCK0`
+     > different CPUs place variously, common scopes for instance `_PR`,`_SB`,`SCK0`
 
      ```swift
      Scope (_PR)
@@ -89,7 +89,7 @@ Questo è "root Scope".
      }
      ```
 
-- `Scope (_GPE)` posiziona i gestori di eventi
+   - `Scope (_GPE)` places event handlers
 
       ```swift
       Scope (_GPE)
@@ -102,19 +102,19 @@ Questo è "root Scope".
       }
       ```
 
-      Sì, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con ** `_` ** sono riservati dai sistemi operativi.
+      Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
 
-5. Anche 'Dispositivo (xxxx)' può essere riconosciuto come ambito, contiene varie descrizioni dei dispositivi, ad es. `_ADR`,` _CID`, `_UID`,` _DSM`, `_STA`.
+5. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
 
-6. Il simbolo "\" cita l'ambito radice; "^" cita l'ambito superiore. Allo stesso modo, "^" è superiore a "^^".
+6. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
 
-7. Il simbolo "_" non ha significato, completa solo i 4 caratteri, ad esempio "_OSI".
+7. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
 
-8. Per una migliore comprensione, ACPI rilascia "ASL + (ASL2.0)", introduce il linguaggio C "+ - * / =", "<<", ">>" e il giudizio logico "==", " ! = "eccetera.
+8. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
 
-9. I metodi in ASL possono accettare fino a 7 argomenti, sono rappresentati da `Arg0` a` Arg6` e non possono essere personalizzati.
+9. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customised.
 
-10. Le variabili locali in ASL possono accettare fino a 8 argomenti, sono rappresentate da `Local0` ~` Local7` Le definizioni non sono necessarie, ma dovrebbero essere inizializzate, in altre parole, è necessaria l'assegnazione.
+10. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialised, in other words, assignment is needed.
 
 ## Tipo comune di dati ASL
 
