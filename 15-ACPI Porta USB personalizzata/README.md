@@ -3,12 +3,12 @@
 ## Descrizione
 
 - Questo metodo realizza la personalizzazione della porta USB modificando il file ACPI.
-- L'operazione di questo metodo richiede di eliminare un file ACPI. In circostanze normali, OpenCore ** non è consigliato ** per farlo, le porte USB personalizzate generalmente utilizzano lo strumento *** Hackintool.app ***.
+- L'operazione di questo metodo richiede di eliminare un file ACPI. In circostanze normali, OpenCore **non è consigliato** per farlo, le porte USB personalizzate generalmente utilizzano lo strumento ***Hackintool.app***.
 - Questo metodo è dedicato ai fan.
 
 ## Campo di applicazione
 
-- XHC e il suo "_UPC" esistono in un file ACPI separato
+- XHC e il suo `_UPC` esistono in un file ACPI separato
 - Questo metodo non è applicabile ai dispositivi in cui `_UPC` esiste in DSDT (ad esempio ASUS)
 
 ## Specifica `_UPC`
@@ -25,13 +25,13 @@ _UPC, Package ()
 
 ### Spiegazione
 
-1. ** `xxxx` **
+1. **`xxxx`**
    - `0x00` significa che questa porta non esiste
-   - Altri valori (di solito "0x0F") rappresentano l'esistenza di questa porta
+   - Altri valori (di solito `0x0F`) rappresentano l'esistenza di questa porta
 
-2. ** `yyyy` **
+2. **`yyyy`**
 
-   ** `yyyy` ** definisce il tipo di porta, fare riferimento alla tabella seguente
+   **`yyyy`** definisce il tipo di porta, fare riferimento alla tabella seguente
 
    | **`yyyy`** | Tipo Porta |
    | :------: | ----------------------------- |
@@ -65,17 +65,17 @@ _UPC, Package ()
 
    - `config\ACPI\Block\` `rilascia i file ACPI nei metodi` (decimal) e metodi `TableSignature`. Ad esempio:
 
-     ** dell5480**: **`TableLength`** = `2001`, **`TableSignature`** = `53534454` (SSDT)
+     **dell5480**: **`TableLength`** = `2001`, **`TableSignature`** = `53534454` (SSDT)
 
-     ** Xiaoxin PRO13 (i5)**: **`TableLength`** = `12565`, **`TableSignature`** = `53534454` (SSDT)
+     **Xiaoxin PRO13 (i5)**: **`TableLength`** = `12565`, **`TableSignature`** = `53534454` (SSDT)
 
 - Personalizza il file di patch SSDT
 
-  - Trascina il file ACPI originale che deve essere rilasciato sul desktop, ** raccomandazione: **
+  - Trascina il file ACPI originale che deve essere rilasciato sul desktop, **raccomandazione:**
 
     - Salva come formato `.asl / .dsl`
-    - Modifica il nome del file. Ad esempio: *** SSDT-xh_OEMBD_XHC.dsl ***, *** SSDT-CB-01_XHC.dsl ***
-    - Modifica l '"ID tabella OEM" nel file con il tuo nome preferito.
+    - Modifica il nome del file. Ad esempio: ***SSDT-xh_OEMBD_XHC.dsl***, ***SSDT-CB-01_XHC.dsl***
+    - Modifica l'`ID tabella OEM` nel file con il tuo nome preferito.
     - Elimina gli errori.
 
   - Aggiungere il seguente codice all'inizio di `_UPC` di tutte le porte nel file SSDT:
@@ -101,11 +101,11 @@ _UPC, Package ()
 - Personalizza la porta USB in base alla specifica `_UPC`. Cioè, i valori di xxxx e yyyy vengono corretti.
 
     - Se la porta non esiste
-      -**`xxxx`** = `0x00`
-      -**`yyyy`** = `0x00`
+      - **`xxxx`** = `0x00`
+      - **`yyyy`** = `0x00`
     - Se la porta esiste
-      -**`xxxx`** = `0xFF`
-      -**`yyyy`**
+      - **`xxxx`** = `0xFF`
+      - **`yyyy`**
 
     > Fare riferimento alla tabella sopra
   
