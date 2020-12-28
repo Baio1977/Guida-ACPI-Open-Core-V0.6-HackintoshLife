@@ -8,12 +8,12 @@
 
 ## Rinomina speciale
 
-PNLF rinominato XNLF
+PNLF renamed XNLF
 
-`` testo
-Trova: 504E4C46
-Sostituisci: 584E4C46
-`` `
+```text
+Find:     504E4C46
+Replace:  584E4C46
+```
 
 C'è una variabile `PNLF` nel DSDT di alcune macchine Asus. Se "PNLF" e la patch di luminosità hanno lo stesso nome, potrebbero esserci dei conflitti. Usa il cambio di nome sopra per evitarlo.
 
