@@ -58,16 +58,16 @@ _UPC, Package ()
 
 -rilascia il file ACPI
 
-  -Confermare XHC e includere il file ACPI di `_UPC`
-    > Come *** SSDT-2-xh_OEMBD.aml *** di dell5480
-    >
-    > Come *** SSDT-8-CB-01.aml *** di Xiaoxin PRO13 (i5) (la macchina senza display indipendente è *** SSDT-6-CB-01.aml ***)
+   -Confermare XHC e includere il file ACPI di `_UPC`
+     > Come  ***SSDT-2-xh_OEMBD.aml*** di dell5480
+     >
+     > Come ***SSDT-8-CB-01.aml*** of Xiaoxin PRO13 (i5) (la macchina senza display indipendente è ***SSDT-6-CB-01.aml***)
 
-  -`config \ ACPI \ Block \ `rilascia i file ACPI nei metodi` TableLength` (decimale) e `TableSignature`. Ad esempio:
+   -`config\ACPI\Block\` `rilascia i file ACPI nei metodi` (decimal) e metodi `TableSignature`. Ad esempio:
 
-    ** dell5480 **: ** `TableLength` ** =` 2001`, ** `TableSignature` ** =` 53534454` (SSDT)
+     **dell5480**: **`TableLength`** = `2001`, **`TableSignature`** = `53534454` (SSDT)
 
-    ** Xiaoxin PRO13 (i5) **: ** `TableLength` ** =` 12565`, ** `TableSignature` ** =` 53534454` (SSDT)
+     **Xiaoxin PRO13 (i5)**: **`TableLength`** = `12565`, **`TableSignature`** = `53534454` (SSDT)
 
 -Personalizza il file di patch SSDT
 
