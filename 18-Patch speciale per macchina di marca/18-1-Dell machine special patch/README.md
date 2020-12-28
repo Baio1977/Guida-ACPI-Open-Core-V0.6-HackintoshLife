@@ -26,9 +26,9 @@ C'è una variabile `PNLF` nel DSDT di alcune macchine Dell. Se `PNLF` e la patch
     - `ACOS`> = `0x20`, il tasto di scelta rapida della luminosità funziona
     - `ACOS` = `0x80`,` ACSE` = 0 è la modalità win7, in questa modalità, la luce del respiro lampeggia durante il sonno
     - `ACOS` = `0x80`,` ACSE` = 1 è la modalità win8, in questa modalità, la luce del respiro è spenta durante il sonno
-  -Il contenuto specifico delle due variabili nel metodo `OSID` dipende dal sistema operativo stesso. È necessario utilizzare **patch del sistema operativo** o utilizzare **questa patch** nello stato mela nera per modificare queste due variabili per soddisfare requisiti specifici.
+  - Il contenuto specifico delle due variabili nel metodo `OSID` dipende dal sistema operativo stesso. È necessario utilizzare **patch del sistema operativo** o utilizzare **questa patch** nello stato mela nera per modificare queste due variabili per soddisfare requisiti specifici.
 
--Fissa la combinazione di patch di Fn + tasto funzione Inserisci
+- Fissa la combinazione di patch di Fn + tasto funzione Inserisci
   
   - ***SSDT-PTSWAK*** Vedi `PTSWAK Comprehensive Extension Patch`
   - ***SSDT-EXT3-WakeScreen*** Vedi `PTSWAK Comprehensive Extension Patch`
