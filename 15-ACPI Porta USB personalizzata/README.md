@@ -1,17 +1,17 @@
-# ACPI custom USB port
+# Porta USB personalizzata ACPI
 
-## Description
+## Descrizione
 
--This method realizes the customization of the USB port by modifying the ACPI file.
--The operation of this method needs to drop an ACPI file. Under normal circumstances, OpenCore **not recommended** to do so, custom USB ports generally use the ***Hackintool.app*** tool.
--This method is dedicated to fans.
+-Questo metodo realizza la personalizzazione della porta USB modificando il file ACPI.
+-L'operazione di questo metodo richiede di eliminare un file ACPI. In circostanze normali, OpenCore ** non è consigliato ** per farlo, le porte USB personalizzate generalmente utilizzano lo strumento *** Hackintool.app ***.
+-Questo metodo è dedicato ai fan.
 
-## Scope of application
+## Campo di applicazione
 
--XHC and its `_UPC` exist in a separate ACPI file
--This method is not applicable to devices where `_UPC` exists in DSDT (e.g. ASUS)
+-XHC e il suo "_UPC" esistono in un file ACPI separato
+-Questo metodo non è applicabile ai dispositivi in cui `_UPC` esiste in DSDT (ad esempio ASUS)
 
-## `_UPC` Specification
+## Specifica `_UPC`
 
 ```Swift
 _UPC, Package ()
@@ -23,62 +23,62 @@ _UPC, Package ()
 }
 ```
 
-### Explanation
+### Spiegazione
 
-1. **`xxxx`**
-   -`0x00` means this port does not exist
-   -Other values ​​(usually `0x0F`) represent the existence of this port
+1. ** `xxxx` **
+   -`0x00` significa che questa porta non esiste
+   -Altri valori (di solito "0x0F") rappresentano l'esistenza di questa porta
 
-2. **`yyyy`**
+2. ** `yyyy` **
 
-   **`yyyy`** defines the port type, refer to the following table
+   ** `yyyy` ** definisce il tipo di porta, fare riferimento alla tabella seguente
 
-   | **`yyyy`** | Port Type |
-   | :------: | ----------------------------- |
-   | `0x00` | USB Type `A` |
+   | ** `yyyy` ** | Tipo di porta |
+   | : ------: | ----------------------------- |
+   | `0x00` | USB tipo "A" |
    | `0x01` | USB `Mini-AB` |
-   | `0x02` | USB Smart Card |
-   | `0x03` | USB 3 Standard Type `A` |
-   | `0x04` | USB 3 Standard Type `B` |
+   | "0x02" | Smart Card USB |
+   | `0x03` | USB 3 standard tipo "A" |
+   | `0x04` | USB 3 standard tipo "B" |
    | `0x05` | USB 3 `Micro-B` |
    | `0x06` | USB 3 `Micro-AB` |
    | `0x07` | USB 3 `Power-B` |
-   | `0x08` | USB Type `C` **(Only USB 2)** |
-   | `0x09` | USB Type `C` **(With diverter)** |
-   | `0x0A` | USB Type `C` **(without diverter)** |
-   | `0xFF` | Built-in |
+   | `0x08` | USB tipo `C` ** (solo USB 2) ** |
+   | `0x09` | USB tipo `C` ** (con deviatore) ** |
+   | `0x0A` | USB tipo `C` ** (senza deviatore) ** |
+   | `0xFF` | Incorporato |
 
-   > If both the front and back of the USB-C are plugged into the same port in Hackintool, it means that the port has a redirector
+   > Se sia la parte anteriore che quella posteriore dell'USB-C sono collegate alla stessa porta in Hackintool, significa che la porta ha un redirector
    >
-   > Conversely, if two ports are occupied on both sides, it means there is no diverter
+   > Viceversa, se due porte sono occupate su entrambi i lati, significa che non è presente alcun deviatore
 
-## USB customization process
+## Processo di personalizzazione USB
 
--Clear patches, drivers, etc. of other customization methods.
+-Cancella patch, driver, ecc. Di altri metodi di personalizzazione.
 
--drop ACPI file
+-rilascia il file ACPI
 
-  -Confirm XHC and include the ACPI file of `_UPC`
-    > Such as ***SSDT-2-xh_OEMBD.aml*** of dell5480
+  -Confermare XHC e includere il file ACPI di `_UPC`
+    > Come *** SSDT-2-xh_OEMBD.aml *** di dell5480
     >
-    > Such as ***SSDT-8-CB-01.aml*** of Xiaoxin PRO13 (i5) (the machine without independent display is ***SSDT-6-CB-01.aml***)
+    > Come *** SSDT-8-CB-01.aml *** di Xiaoxin PRO13 (i5) (la macchina senza display indipendente è *** SSDT-6-CB-01.aml ***)
 
-  -`config\ACPI\Block\` drop ACPI files in `TableLength` (decimal) and `TableSignature` methods. Such as:
+  -`config \ ACPI \ Block \ `rilascia i file ACPI nei metodi` TableLength` (decimale) e `TableSignature`. Ad esempio:
 
-    **dell5480**: **`TableLength`** = `2001`, **`TableSignature`** = `53534454` (SSDT)
+    ** dell5480 **: ** `TableLength` ** =` 2001`, ** `TableSignature` ** =` 53534454` (SSDT)
 
-    **Xiaoxin PRO13 (i5)**: **`TableLength`** = `12565`, **`TableSignature`** = `53534454` (SSDT)
+    ** Xiaoxin PRO13 (i5) **: ** `TableLength` ** =` 12565`, ** `TableSignature` ** =` 53534454` (SSDT)
 
--Customize SSDT patch file
+-Personalizza il file di patch SSDT
 
-  -Drag the original ACPI file that needs to be dropped to the desktop, **recommendation:**
+  -Trascina il file ACPI originale che deve essere rilasciato sul desktop, ** raccomandazione: **
 
-    -Save as `.asl / .dsl` format
-    -Modify the file name. Such as: ***SSDT-xh_OEMBD_XHC.dsl***, ***SSDT-CB-01_XHC.dsl***
-    -Modify the `OEM Table ID` in the file to your favorite name.
-    -Eliminate errors.
+    -Salva come formato `.asl / .dsl`
+    -Modifica il nome del file. Ad esempio: *** SSDT-xh_OEMBD_XHC.dsl ***, *** SSDT-CB-01_XHC.dsl ***
+    -Modifica l '"ID tabella OEM" nel file con il tuo nome preferito.
+    -Elimina gli errori.
 
-  -Add the following code to the top of `_UPC` of all ports in the SSDT file:
+  -Aggiungere il seguente codice all'inizio di `_UPC` di tutte le porte nel file SSDT:
 
     ```Swift
     Method (_UPC, 0, NotSerialized)
@@ -97,21 +97,21 @@ _UPC, Package ()
         ...
     }
     ```
+    
+-Personalizza la porta USB in base alla specifica `_UPC`. Cioè, i valori di xxxx e yyyy vengono corretti.
 
-  -Customize the USB port according to the `_UPC` specification. That is, the values ​​of xxxx and yyyy are corrected.
+     -Se la porta non esiste
+       - ** `xxxx` ** =` 0x00`
+       - ** `yyyy` ** =` 0x00`
+     -Se la porta esiste
+       - ** `xxxx` ** =` 0xFF`
+       - ** `yyyy` **
 
-    -If the port does not exist
-      -**`xxxx`** = `0x00`
-      -**`yyyy`** = `0x00`
-    -If the port exists
-      -**`xxxx`** = `0xFF`
-      -**`yyyy`**
-
-    > Refer to the table above
+     > Fare riferimento alla tabella sopra
   
-  -Debug, compile, and put patch files into `ACPI`, add patch list.
+   -Debug, compila e metti i file di patch in `ACPI`, aggiungi l'elenco delle patch.
 
-### Reference example
+### Esempio di riferimento
 
--***SSDT-xh_OEMBD_XHC***
--***SSDT-CB-01_XHC***
+- *** SSDT-xh_OEMBD_XHC ***
+- *** SSDT-CB-01_XHC ***
