@@ -2,7 +2,7 @@
 
 ## Rinomina e patch ACPI
 
-- Il metodo di rinomina non è raccomandato, cerca di evitarlo, ad esempio `HDAS rename HDEF`,` EC0 rename EC`, `SSDT-OC-XOSI`. Una ** cautela ** speciale per coloro che rinominano` MethodObj` (ad esempio _STA , _OSI).
+- Il metodo di rinomina non è raccomandato, cerca di evitarlo, ad esempio `HDAS rename HDEF`,` EC0 rename EC`, `SSDT-OC-XOSI`. Una **cautela** speciale per coloro che rinominano` MethodObj` (ad esempio _STA , _OSI).
 - Parlando in generale:
   - La patch del sistema operativo non è necessaria. Se i componenti sono limitati da un sistema operativo specifico, modificare la patch ACPI di conseguenza. ** Attenzione ** per `OS Patch`
 
