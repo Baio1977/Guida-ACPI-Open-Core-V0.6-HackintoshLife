@@ -2,12 +2,12 @@
 
 ## Descrizione
 
-- Alcune macchine appariranno **"Errore di autotest all'accensione"** all'arresto o al riavvio, causato dal ripristino del CMOS.
+- Alcune macchine appariranno **`Errore di autotest all'accensione`** all'arresto o al riavvio, causato dal ripristino del CMOS.
 - Quando si utilizza Clover, selezionare `ACPI \ FixRTC` per risolvere i problemi di cui sopra.
 - Quando si utilizza OpenCore, vengono fornite ufficialmente le seguenti soluzioni, vedere ***Sample.plist***:
   - Installa **RTCMemoryFixup.kext**
   - `Kernel \ Patch` patch: **__ ZN11BCM5701Enet14getAdapterInfoEv**
-- Questo capitolo fornisce un metodo di patch SSDT per risolvere i problemi di cui sopra. Questa patch SSDT è essenzialmente un RTC contraffatto, vedere "Preset Variable Method" e "Counterfeit Equipment".
+- Questo capitolo fornisce un metodo di patch SSDT per risolvere i problemi di cui sopra. Questa patch SSDT è essenzialmente un RTC contraffatto, vedere `Preset Variable Method` e `Counterfeit Equipment`.
 
 ## soluzione
 
@@ -54,7 +54,7 @@
     }
     `` `
   
-  - Se **RTC** esiste `_STA`, utilizza il metodo delle variabili preimpostate per disabilitare **RTC**. La variabile nell'esempio è "STAS" e si dovrebbe prestare attenzione all'influenza di "STAS" su altre apparecchiature e componenti quando lo si utilizza.
+  - Se **RTC** esiste `_STA`, utilizza il metodo delle variabili preimpostate per disabilitare **RTC**. La variabile nell'esempio è "STAS" e si dovrebbe prestare attenzione all'influenza di `STAS` su altre apparecchiature e componenti quando lo si utilizza.
   
     `` Rapido
     Esterno (STAS, FieldUnitObj)
@@ -73,11 +73,11 @@
 
 - Il nome del dispositivo e il percorso nella patch dovrebbero essere coerenti con l'ACPI originale.
 
-- Se la macchina stessa disabilita RTC per qualche motivo, deve falsificare RTC per funzionare normalmente. In questo caso, viene visualizzato **"Errore di autoverifica all'accensione"**, basta eliminare il numero di interruzione della patch contraffatta:
+- Se la macchina stessa disabilita RTC per qualche motivo, deve falsificare RTC per funzionare normalmente. In questo caso, viene visualizzato **`Errore di autoverifica all'accensione`**, basta eliminare il numero di interruzione della patch contraffatta:
 
   `` Rapido
     IRQNoFlags () / * Elimina questa riga * /
         {8} / * elimina questa riga * /
   `` `
 
-** Grazie ** @Chic Cheung, @Noctis per il tuo duro lavoro!
+**Grazie** @Chic Cheung, @Noctis per il tuo duro lavoro!
