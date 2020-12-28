@@ -21,34 +21,34 @@
 
 -File di patch: *** SSDT-RP01.PXSX-disbale ***
 
-  `` Rapido
-  Esterno (_SB.PCI0.RP01, DeviceObj)
-  Ambito (_SB.PCI0.RP01)
+```Swift
+  External (_SB.PCI0.RP01, DeviceObj)
+  Scope (_SB.PCI0.RP01)
   {
       OperationRegion (DE01, PCI_Config, 0x50, 0x01)
-      Campo (DE01, AnyAcc, NoLock, Preserve)
+      Field (DE01, AnyAcc, NoLock, Preserve)
       {
               , 4,
           DDDD, 1
       }
-  // possibile inizio
-  Metodo (_STA, 0, serializzato)
+  //possible start
+  Method (_STA, 0, Serialized)
   {
-  Se (_OSI ("Darwin"))
+  If (_OSI ("Darwin"))
   {
-  Ritorno (zero)
+  Return (Zero)
   }
   }
-  // possibile fine
+  //possible end
   }
-  Scopo (\)
+  Scope (\)
   {
-      Se (_OSI ("Darwin"))
+      If (_OSI ("Darwin"))
       {
-          \ _SB.PCI0.RP01.DDDD = Uno
+          \_SB.PCI0.RP01.DDDD = One
       }
   }
-  `` `
+  ```
 
 ## Nota
 
@@ -59,4 +59,4 @@
 
 ## Grazie
 
-- @ 哞
+-@哞🌈
