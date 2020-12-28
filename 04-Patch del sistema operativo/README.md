@@ -4,7 +4,7 @@
 
 - **Le patch del sistema operativo** vengono utilizzate per rimuovere le restrizioni del sistema su determinati componenti. In circostanze normali, **"non consigliato"** usa **patch del sistema operativo**. Per i componenti che non possono funzionare normalmente a causa delle limitazioni del sistema, le patch devono essere personalizzate in base alle condizioni specifiche di ACPI.
 
--Per una breve descrizione delle **patch del sistema operativo**, vedere l'appendice "Origine delle patch del sistema operativo".
+- Per una breve descrizione delle **patch del sistema operativo**, vedere l'appendice "Origine delle patch del sistema operativo".
 
 ## Rinomina
 
@@ -31,7 +31,7 @@
   Cerca "OSI" nel DSDT originale. Se ci sono altri campi contenenti "OSI" oltre alla funzione "_OSI" (come "OSID" di notebook Dell, "OSIF" di alcuni ThinkPad e notebook Lenovo), devi prima aggiungere il diritto Questi includono la ridenominazione dei campi "OSI" (come "OSID in XSID", "OSIF in XSIF") e quindi l'aggiunta di "_OSI in XOSI".
      Se non ci sono altri campi che contengono "OSI" eccetto la funzione "_OSI", aggiungi direttamente "_OSI a XOSI".
 
-  ## Patch: *** SSDT-OC-XOSI ***
+  ## Patch: ***SSDT-OC-XOSI***
 
 ```Swift
 Method(XOSI, 1)
@@ -66,7 +66,7 @@ Method(XOSI, 1)
 
 ### Uso
 
--**Valore massimo**
+- **Valore massimo**
 
   Per un singolo sistema, i parametri del sistema operativo possono essere impostati al valore massimo consentito da DSDT. Ad esempio, se il valore massimo di DSDT è `Windows 2018`, impostare `Arg0 ==` Windows 2018 ``. Di solito `Arg0 ==` Windows 2013 `` e versioni successive possono rimuovere le restrizioni del sistema sui componenti.
 
@@ -140,10 +140,10 @@ ACPI definisce anche `OSYS`, la relazione tra `OSYS` e i parametri precedenti è
    - `OSYS = 0x ???? `: Win10 1903, che è` Windows 2019`
   -  ...
 
--Quando il sistema caricato non viene riconosciuto da ACPI, a `OSYS` viene assegnato un valore predefinito. Questo valore varia da macchina a macchina. Alcuni rappresentano `Linux`, altri `Windows2003` e altri hanno altri valori.
+- Quando il sistema caricato non viene riconosciuto da ACPI, a `OSYS` viene assegnato un valore predefinito. Questo valore varia da macchina a macchina. Alcuni rappresentano `Linux`, altri `Windows2003` e altri hanno altri valori.
 
--Diversi sistemi operativi supportano hardware diverso.Ad esempio, i dispositivi I2C sono supportati solo da `Win8`.
+- Diversi sistemi operativi supportano hardware diverso.Ad esempio, i dispositivi I2C sono supportati solo da `Win8`.
 
--Durante il caricamento di macOS, i parametri accettati da `_OSI` non saranno riconosciuti da ACPI e a` OSYS` vengono forniti i valori predefiniti. Questo valore predefinito è solitamente inferiore al valore richiesto da Win8, ovviamente I2C non può funzionare. Ciò richiede una patch per correggere questo errore e la patch del sistema operativo proviene da questo.
+- Durante il caricamento di macOS, i parametri accettati da `_OSI` non saranno riconosciuti da ACPI e a` OSYS` vengono forniti i valori predefiniti. Questo valore predefinito è solitamente inferiore al valore richiesto da Win8, ovviamente I2C non può funzionare. Ciò richiede una patch per correggere questo errore e la patch del sistema operativo proviene da questo.
 
--Alcuni altri componenti possono anche essere correlati a `OSYS`.
+- Alcuni altri componenti possono anche essere correlati a `OSYS`.
