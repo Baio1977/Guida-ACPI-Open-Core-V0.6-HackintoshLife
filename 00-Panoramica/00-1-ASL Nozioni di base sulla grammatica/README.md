@@ -21,28 +21,28 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
 
 1. "Scope" è simile a "{}". Ce n'è uno e solo uno "Scope". Pertanto, DSDT inizia con
 
-   `` rapido
+   ```swift
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
    {
-   `` `
+   ```
 
-   e finì per
+   and ended by
 
-   `` rapido
+   ```swift
    }
-   `` `
+   ```
 
 Questo è "root Scope".
 
-    I parametri `xxxx` si acquistano a` Nome file`,` OEMID`, `ID tabella`,` Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è ** `DSDT` * *, a sua volta, il terzo parametro è` 0x02`. Altri parametri possono essere inseriti liberamente.
+    I parametri `xxxx` si acquistano a` Nome file`,` OEMID`, `ID tabella`,` Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è **`DSDT`**, a sua volta, il terzo parametro è` 0x02`. Altri parametri possono essere inseriti liberamente.
 
 2. Quei metodi e le variabili che iniziano con "_" sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione "_T_X" dopo la decompilazione.
 
    
-3. "Method" può essere definito seguito da "Device" o "Scope". Pertanto, "method" non può essere definito senza "Scope" e le istanze elencate di seguito sono ** non valide **.
+3. "Method" può essere definito seguito da "Device" o "Scope". Pertanto, "method" non può essere definito senza "Scope" e le istanze elencate di seguito sono **non valide**.
 
-   `` rapido
-   Metodo (xxxx, 0, NotSerialized)
+   ```swift
+   Method (xxxx, 0, NotSerialized)
    {
        ...
    }
@@ -50,7 +50,7 @@ Questo è "root Scope".
    {
        ...
    }
-   `` `
+   ```
 
 4. `\ _GPE`,` \ _PR`, `\ _SB`,` \ _SI`, `\ _TZ` appartengono all'ambito radice` \ `.
 
@@ -119,37 +119,37 @@ Sì, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con
 
 ## Tipo comune di dati ASL
 
-| ASL |
-| : -------: |
-| `Integer` |
-| `String` |
-| "Evento" |
-| `Buffer` |
-| `Pacchetto` |
+|    ASL    |  
+| :-------: | 
+| `Integer` | 
+| `String`  |  
+|  `Event`  |  
+| `Buffer`  |  
+| `Package` |
 
 ## Definizione delle variabili ASL
 
 - Definisci numero intero
 
-  `` rapido
-  Nome (TEST, 0)
-  `` `
+  ```swift
+  Name (TEST, 0)
+  ```
 
 - Definisci stringa
   
-  `` rapido
-  Nome (MSTR, "ASL")
-  `` `
+  ```swift
+  Name (MSTR,"ASL")
+  ```
 
 - Definisci pacchetto
 
-  `` rapido
-  Nome (_PRW, pacchetto (0x02)
+  ```swift
+  Name (_PRW, Package (0x02)
   {
       0x0D,
       0x03
   })
-  `` `
+  ```
 
 - Definisci campo buffer
 
@@ -164,67 +164,67 @@ Sì, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con
 | CreateQWordField | 64 bit |
 | CreateField | qualsiasi dimensione |
 
-  `` rapido
+  ```swift
   CreateBitField (AAAA, Zero, CCCC)
   CreateByteField (DDDD, 0x01, EEEE)
   CreateWordField (FFFF, 0x05, GGGG)
   CreateDWordField (HHHH, 0x06, IIII)
   CreateQWordField (JJJJ, 0x14, KKKK)
   CreateField (LLLL, Local0, 0x38, MMMM)
-  `` `
+  ```
 
 Non è necessario annunciare il suo tipo quando si definisce una variabile.
 
 ## Assegnazione ASL
 
-`` rapido
-Store (a, b) / * legacy ASL * /
-b = a / * ASL + * /
-`` `
+```swift
+Store (a,b) /* legacy ASL */
+b = a      /*   ASL+  */
+```
 
 Esempio:
 
-`` rapido
-Negozio (0, Local0)
+```swift
+Store (0, Local0)
 Local0 = 0
 
-Negozio (Local0, Local1)
+Store (Local0, Local1)
 Local1 = Local0
-`` `
+```
 
 ## Calcolo ASL
 
-| ASL + | Legacy ASL | Esempi |
-| : ----: | : --------: | : ------------------------------------------------- ---------- |
-| + | Aggiungi | `Local0 = 1 + 2` <br/>` Aggiungi (1, 2, Local0) `|
-| - | Sottrai | `Local0 = 2 - 1` <br/>` Sottrai (2, 1, Local0) `|
-| * | Moltiplica | `Local0 = 1 * 2` <br/>` Moltiplica (1, 2, Local0) `|
-| / | Dividi | `Local0 = 10 / 9` <br/>` Divide (10, 9, Local1 (resto), Local0 (risultato)) `|
-| % | Mod | `Local0 = 10% 9` <br/>` Mod (10, 9, Local0) `|
-| << | ShiftLeft | `Local0 = 1 << 20` <br />` ShiftLeft (1, 20, Local0) `|
-| >> | ShiftRight | `Local0 = 0x10000 >> 4` <br/>` ShiftRight (0x10000, 4, Local0) `|
-| - | Decremento | `Local0 -` <br/> `Decrement (Local0)` |
-| ++ | Incremento | `Local0 ++` <br/> `Incrementa (Local0)` |
-| & | E | `Local0 = 0x11 & 0x22` <br/>` And (0x11, 0x22, Local0) `|
-| & # 124; | Oppure | `Local0 = 0x01` & # 124;` 0x02` <br/> `Oppure (0x01, 0x02, Local0)` |
-| ~ | Non | `Local0 = ~ (0x00)` <br/> `Non (0x00, Local0)` |
-| | Né | `Nor (0x11, 0x22, Local0)` |
+|  ASL+  |  Legacy ASL  |     Examples                                                         |
+| :----: | :--------: | :----------------------------------------------------------- |
+|   +    |    Add     |    `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                    |
+|   -    |  Subtract  |     `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`               |
+|   *    |  Multiply  |     `Local0 = 1 * 2`<br/>`Multiply (1, 2, Local0)`               |
+|   /    |   Divide   |    `Local0 = 10 / 9`<br/>`Divide (10, 9, Local1(remainder), Local0(result))` |
+|   %    |    Mod     |     `Local0 = 10 % 9`<br/>`Mod (10, 9, Local0)`                  |
+|   <<   | ShiftLeft  |      `Local0 = 1 << 20`<br/>`ShiftLeft (1, 20, Local0)`           |
+|   >>   | ShiftRight |    `Local0 = 0x10000 >> 4`<br/>`ShiftRight (0x10000, 4, Local0)` |
+|   --   | Decrement  |   `Local0--`<br/>`Decrement (Local0)`                          |
+|   ++   | Increment  |   `Local0++`<br/>`Increment (Local0)`                          |
+|   &    |    And     |      `Local0 = 0x11 & 0x22`<br/>`And (0x11, 0x22, Local0)`        |
+| &#124; |     Or     |        `Local0 = 0x01`&#124;`0x02`<br/>`Or (0x01, 0x02, Local0)`  |
+|   ~    |    Not     |   `Local0 = ~(0x00)`<br/>`Not (0x00,Local0)`                   |
+|      |    Nor     |    `Nor (0x11, 0x22, Local0)`                                   |
 
 Leggere "Specifiche ACPI" per i dettagli
 
 ## Logica ASL
 
-| ASL + | Legacy ASL | Esempi |
-| : ----: | : -----------: | : ------------------------------------------------- ---------- |
-| && | LAnd | `If ​​(BOL1 && BOL2)` <br/> `If (LAnd (BOL1, BOL2))` |
-| ! | LNot | `Local0 =! 0` <br/>` Store (LNot (0), Local0) `|
-| & # 124; | LOr | `Local0 = (0` & # 124;` 1) `<br/>` Store (LOR (0, 1), Local0) `|
-| <| Meno | `Local0 = (1 <2)` <br /> `Store (LLess (1, 2), Local0)` |
-| <= | LLessEqual | `Local0 = (1 <= 2)` <br /> `Store (LLessEqual (1, 2), Local0)` |
-| > | LG maggiore | `Local0 = (1> 2)` <br/> `Store (LGuesday (1, 2), Local0)` |
-| > = | LG GreaterEqual | `Local0 = (1> = 2)` <br/> `Store (LGuesdayEqual (1, 2), Local0)` |
-| == | LEqual | `Local0 = (Local0 == Local1)` <br/> `If (LEqual (Local0, Local1))` |
-| ! = | LNotEqual | `Local0 = (0! = 1)` <br/> `Store (LNotEqual (0, 1), Local0)` |
+|  ASL+  |   Legacy ASL  | Examples             |
+| :----: | :-----------: | :----------------------------------------------------------- |
+|   &&   |     LAnd      |  `If (BOL1 && BOL2)`<br/>`If (LAnd(BOL1, BOL2))`              |
+|   !    |     LNot      |  `Local0 = !0`<br/>`Store (LNot(0), Local0)`                  |
+| &#124; |      LOr      |  `Local0 = (0`&#124;`1)`<br/>`Store (LOR(0, 1), Local0)`    |
+|   <    |     LLess     |  `Local0 = (1 < 2)`<br/>`Store (LLess(1, 2), Local0)`         |
+|   <=   |  LLessEqual   |  `Local0 = (1 <= 2)`<br/>`Store (LLessEqual(1, 2), Local0)`   |
+|   >    |   LGreater    |  `Local0 = (1 > 2)`<br/>`Store (LGreater(1, 2), Local0)`      |
+|   >=   | LGreaterEqual |  `Local0 = (1 >= 2)`<br/>`Store (LGreaterEqual(1, 2), Local0)` |
+|   ==   |    LEqual     |  `Local0 = (Local0 == Local1)`<br/>`If (LEqual(Local0, Local1))` |
+|   !=   |   LNotEqual   |  `Local0 = (0 != 1)`<br/>`Store (LNotEqual(0, 1), Local0)`    |
 
 Solo due risultati dal calcolo logico: "0" o "1"
 
@@ -232,90 +232,91 @@ Solo due risultati dal calcolo logico: "0" o "1"
 
 1. Definire un metodo
 
-   `` rapido
-   Metodo (TEST)
+   ```swift
+   Method (TEST)
    {
        ...
    }
-   `` `
+   ```
 
 2. Definire un metodo che contenga 2 parametri e applicare le variabili locali`Local0` ~ `Local7`
 
    I numeri dei parametri sono impostati come "0"
 
-   `` rapido
-   Metodo (MADD, 2)
+   ```swift
+   Method (MADD, 2)
    {
        Local0 = Arg0
        Local1 = Arg1
-       Local0 + = Local1
+       Local0 += Local1
    }
-   `` `
+   ```
 
 
 3. Definire un metodo che contenga un valore di ritorno
   
-   `` rapido
-   Metodo (MADD, 2)
+   ```swift
+   Method (MADD, 2)
    {
        Local0 = Arg0
        Local1 = Arg1
-       Local0 + = Local1
+       Local0 += Local1
 
-       Return (Local0) / * return here * /
+       Return (Local0) /* return here */
    }
-   `` `
-
+   ```
    
-
-   `` rapido
-   Local0 = 1 + 2 / * ASL + * /
-   Negozio (MADD (1, 2), Local0) / * Legacy ASL * /
+   ```swift
+   Local0 = 1 + 2            /* ASL+ */
+   Store (MADD (1, 2), Local0)  /* Legacy ASL */
+   ```
    `` `
 
 4. Definire il metodo serializzato
 
    Se non definire "Serialized" o "NotSerialized", il valore predefinito è "NotSerialized"
 
-   `` rapido
-   Metodo (MADD, 2, serializzato)
+   ```swift
+   Method (MADD, 2, Serialized)
    {
        Local0 = Arg0
        Local1 = Arg1
-       Local0 + = Local1
-       Ritorno (Local0)
+       Local0 += Local1
+       Return (Local0)
    }
-   `` `
+   ```
 
    Sembra una "sincronizzazione multi-thread". In altre parole, solo un'istanza può essere presente nella memoria quando il metodo è dichiarato come "Serializzato". Normalmente l'applicazione crea un oggetto, ad esempio:
 
-   `` rapido
-   Metodo (TEST, serializzato)
+   ```swift
+   Method (TEST, Serialized)
    {
-       Nome (MSTR, "I will success")
+       Name (MSTR,"I will sucess")
    }
-   `` `
+   ```
 
    Se affermiamo `TEST` mostrato sopra ， e lo chiamiamo da due metodi diversi:
 
-   `` rapido
-   Dispositivo (Dev1)
+   ```swift
+   Device (Dev1)
    {
         TEST ()
    }
-   Dispositivo (Dev2)
+   Device (Dev2)
    {
         TEST ()
    }
-   `` `
+   ```
+
 Se eseguiamo `TEST` in` Dev1`, allora `TEST` in` Dev2` aspetterà fino a quando il primo non sarà finalizzato. Se affermiamo:
 
-   `` rapido
-   Metodo (TEST, NotSerialized)
+   ```swift
+   Method (TEST, NotSerialized)
    {
-       Nome (MSTR, "I will success")
+       Name (MSTR, "I will sucess")
    }
-   `` `
+   ```
+   quando uno di `TEST` chiamato da` Devx`, un altro `TEST` non riuscirà a creare` MSTR`.
 
 ## Funzione Preset ACPI
 
@@ -325,12 +326,12 @@ Se eseguiamo `TEST` in` Dev1`, allora `TEST` in` Dev2` aspetterà fino a quando 
 
 "_OSI" richiede una stringa, la stringa deve essere prelevata dalla tabella sottostante.
 
-| OS | String |
-| : ---------------------------------------: | : --------------: |
-| macOS | `" Darwin "` |
-| Linux <br/> (incluso sistema operativo basato su kernel Linux) | "" Linux "` |
-| FreeBSD | `" FreeBSD "` |
-| Windows | `` "Windows 20XX" `|
+|                 OS                  |      String      |
+| :---------------------------------------: | :--------------: |
+|                   macOS                   |    `"Darwin"`    |
+| Linux<br/>(Including OS based on Linux kernel) |    `"Linux"`     |
+|                  FreeBSD                  |   `"FreeBSD"`    |
+|                  Windows                  | `"Windows 20XX"` |
 
 > In particolare ， diverse versioni di Windows richiedono una stringa univoca ， leggi ：
 >
