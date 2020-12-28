@@ -113,5 +113,5 @@ _UPC, Package ()
 
 ### Esempio di riferimento
 
-- *** SSDT-xh_OEMBD_XHC ***
-- *** SSDT-CB-01_XHC ***
+- ***SSDT-xh_OEMBD_XHC***
+- ***SSDT-CB-01_XHC***
