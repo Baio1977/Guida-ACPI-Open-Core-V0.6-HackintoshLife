@@ -54,11 +54,11 @@ _UPC, Package ()
 
 ## Processo di personalizzazione USB
 
--Cancella patch, driver, ecc. Di altri metodi di personalizzazione.
+- Cancella patch, driver, ecc. Di altri metodi di personalizzazione.
 
 - rilascia il file ACPI
 
-   -Confermare XHC e includere il file ACPI di `_UPC`
+   - Confermare XHC e includere il file ACPI di `_UPC`
      > Come  ***SSDT-2-xh_OEMBD.aml*** di dell5480
      >
      > Come ***SSDT-8-CB-01.aml*** of Xiaoxin PRO13 (i5) (la macchina senza display indipendente è ***SSDT-6-CB-01.aml***)
@@ -109,7 +109,7 @@ _UPC, Package ()
 
     > Fare riferimento alla tabella sopra
   
-  -Debug, compila e metti i file di patch in `ACPI`, aggiungi l'elenco delle patch.
+  - Debug, compila e metti i file di patch in `ACPI`, aggiungi l'elenco delle patch.
 
 ### Esempio di riferimento
 
