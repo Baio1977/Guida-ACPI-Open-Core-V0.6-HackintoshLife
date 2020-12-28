@@ -100,18 +100,18 @@ _UPC, Package ()
     
 -Personalizza la porta USB in base alla specifica `_UPC`. Cioè, i valori di xxxx e yyyy vengono corretti.
 
-     -Se la porta non esiste
-       - ** `xxxx` ** =` 0x00`
-       - ** `yyyy` ** =` 0x00`
-     -Se la porta esiste
-       - ** `xxxx` ** =` 0xFF`
-       - ** `yyyy` **
+    -Se la porta non esiste
+      -**`xxxx`** = `0x00`
+      -**`yyyy`** = `0x00`
+    -Se la porta esiste
+      -**`xxxx`** = `0xFF`
+      -**`yyyy`**
 
-     > Fare riferimento alla tabella sopra
+    > Fare riferimento alla tabella sopra
   
-   -Debug, compila e metti i file di patch in `ACPI`, aggiungi l'elenco delle patch.
+  -Debug, compila e metti i file di patch in `ACPI`, aggiungi l'elenco delle patch.
 
 ### Esempio di riferimento
 
-- ***SSDT-xh_OEMBD_XHC***
-- ***SSDT-CB-01_XHC***
+-***SSDT-xh_OEMBD_XHC***
+-***SSDT-CB-01_XHC***
