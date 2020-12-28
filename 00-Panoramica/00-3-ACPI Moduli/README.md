@@ -20,10 +20,10 @@
 
 - Altre patch del modulo
 
-  - **Cancella i `campi di intestazione` di ACPI **
-    - **Metodo patch **: `ACPI \ Quirks \ NormalizeHeaders` =` true`
-    - **Nota**: questa patch è richiesta solo per Mac 10.13
-  - **Riposiziona l'area di memoria ACPI **
+  - **Cancella i `campi di intestazione` di ACPI**
+    - **Metodo patch**: `ACPI \ Quirks \ NormalizeHeaders` =` true`
+    - ** Nota**: questa patch è richiesta solo per Mac 10.13
+  - **Riposiziona l'area di memoria ACPI**
     - **Metodo patch**: `ACPI \ Quirks \ RebaseRegions` =` true`
     - **Spiegazione**: L'area di memoria del foglio ACPI ha indirizzi allocati dinamicamente e indirizzi allocati fissi. La funzione della patch è quella di **riposizionare l'area di memoria ACPI**, questa operazione è molto pericolosa, a meno che questa patch non risolva il problema del crash di avvio, altrimenti non utilizzarla.
   - **FACP.aml**
@@ -54,6 +54,6 @@
     - **Nota**: questa patch è richiesta solo per i sistemi Mac precedenti
   - **ECDT.aml**
     
-    - **Metodo patch**: rinomina globalmente il nome "EC" e il percorso di tutti i moduli ACPI per essere coerente con "Namepath"
+    - **Metodo patch**: rinomina globalmente il nome `EC` e il percorso di tutti i moduli ACPI per essere coerente con "Namepath"
     - **Spiegazione**: Il `Namepath` della forma **ECDT.aml** delle singole macchine (come **Lenovo yoga-s740**) non è coerente con i nomi` EC` di altri moduli ACPI, che causerà l'avvio della macchina Si è verificato un errore ACPI durante il processo. Questo metodo di patch può risolvere meglio il problema di segnalazione degli errori ACPI.
     - **Nota**: non tutte le macchine hanno questa forma
