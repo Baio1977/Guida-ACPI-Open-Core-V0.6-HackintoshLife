@@ -56,7 +56,7 @@ _UPC, Package ()
 
 -Cancella patch, driver, ecc. Di altri metodi di personalizzazione.
 
--rilascia il file ACPI
+- rilascia il file ACPI
 
    -Confermare XHC e includere il file ACPI di `_UPC`
      > Come  ***SSDT-2-xh_OEMBD.aml*** di dell5480
@@ -69,16 +69,16 @@ _UPC, Package ()
 
      **Xiaoxin PRO13 (i5)**: **`TableLength`** = `12565`, **`TableSignature`** = `53534454` (SSDT)
 
--Personalizza il file di patch SSDT
+- Personalizza il file di patch SSDT
 
-  -Trascina il file ACPI originale che deve essere rilasciato sul desktop, ** raccomandazione: **
+  - Trascina il file ACPI originale che deve essere rilasciato sul desktop, ** raccomandazione: **
 
     -Salva come formato `.asl / .dsl`
     -Modifica il nome del file. Ad esempio: *** SSDT-xh_OEMBD_XHC.dsl ***, *** SSDT-CB-01_XHC.dsl ***
     -Modifica l '"ID tabella OEM" nel file con il tuo nome preferito.
     -Elimina gli errori.
 
-  -Aggiungere il seguente codice all'inizio di `_UPC` di tutte le porte nel file SSDT:
+  - Aggiungere il seguente codice all'inizio di `_UPC` di tutte le porte nel file SSDT:
 
     ```Swift
     Method (_UPC, 0, NotSerialized)
@@ -98,7 +98,7 @@ _UPC, Package ()
     }
     ```
     
--Personalizza la porta USB in base alla specifica `_UPC`. Cioè, i valori di xxxx e yyyy vengono corretti.
+- Personalizza la porta USB in base alla specifica `_UPC`. Cioè, i valori di xxxx e yyyy vengono corretti.
 
     -Se la porta non esiste
       -**`xxxx`** = `0x00`
