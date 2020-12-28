@@ -6,7 +6,7 @@ Hai solo bisogno di eseguire lo script una volta per realizzare il sonno disatti
 
 ## metodo di installazione
 
-1. Se brew è stato installato e il software può essere aggiornato normalmente, apri il terminale, trascina install.sh nel terminale e premi Invio per eseguire l'installazione (** consigliato **)
+1. Se brew è stato installato e il software può essere aggiornato normalmente, apri il terminale, trascina install.sh nel terminale e premi Invio per eseguire l'installazione (**consigliato**)
 2. Se brew non è installato o l'installazione non riesce, apri il terminale, trascina install-without-brew.sh nel terminale e premi Invio per eseguire l'installazione
 
 ## Aggiornare
