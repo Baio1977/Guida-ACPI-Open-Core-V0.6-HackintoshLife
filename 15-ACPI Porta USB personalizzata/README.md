@@ -65,18 +65,18 @@ _UPC, Package ()
 
    -`config\ACPI\Block\` `rilascia i file ACPI nei metodi` (decimal) e metodi `TableSignature`. Ad esempio:
 
-     **dell5480**: **`TableLength`** = `2001`, **`TableSignature`** = `53534454` (SSDT)
+     ** dell5480**: **`TableLength`** = `2001`, **`TableSignature`** = `53534454` (SSDT)
 
-     **Xiaoxin PRO13 (i5)**: **`TableLength`** = `12565`, **`TableSignature`** = `53534454` (SSDT)
+     ** Xiaoxin PRO13 (i5)**: **`TableLength`** = `12565`, **`TableSignature`** = `53534454` (SSDT)
 
 - Personalizza il file di patch SSDT
 
   - Trascina il file ACPI originale che deve essere rilasciato sul desktop, ** raccomandazione: **
 
-    -Salva come formato `.asl / .dsl`
-    -Modifica il nome del file. Ad esempio: *** SSDT-xh_OEMBD_XHC.dsl ***, *** SSDT-CB-01_XHC.dsl ***
-    -Modifica l '"ID tabella OEM" nel file con il tuo nome preferito.
-    -Elimina gli errori.
+    - Salva come formato `.asl / .dsl`
+    - Modifica il nome del file. Ad esempio: *** SSDT-xh_OEMBD_XHC.dsl ***, *** SSDT-CB-01_XHC.dsl ***
+    - Modifica l '"ID tabella OEM" nel file con il tuo nome preferito.
+    - Elimina gli errori.
 
   - Aggiungere il seguente codice all'inizio di `_UPC` di tutte le porte nel file SSDT:
 
@@ -113,5 +113,5 @@ _UPC, Package ()
 
 ### Esempio di riferimento
 
--***SSDT-xh_OEMBD_XHC***
--***SSDT-CB-01_XHC***
+- ***SSDT-xh_OEMBD_XHC***
+- ***SSDT-CB-01_XHC***
