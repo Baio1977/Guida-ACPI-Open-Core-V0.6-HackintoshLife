@@ -43,7 +43,7 @@ Sostituisci: `00 A4 0A 0F A3` `Nota:` 00 `=` {`;` A4 0A 0F `=` Return (0x0F) `;`
     }
   ```
 
-**Spiegazione**: si è verificato un errore evidente dopo la modifica del nome, ma questo errore non causerà danni. Prima di tutto, il contenuto dopo `Return (0x0F)` non verrà eseguito. In secondo luogo, l'errore si trova in "{}" e non influirà su altri contenuti.
+**Spiegazione**: si è verificato un errore evidente dopo la modifica del nome, ma questo errore non causerà danni. Prima di tutto, il contenuto dopo `Return (0x0F)` non verrà eseguito. In secondo luogo, l'errore si trova in `{}` e non influirà su altri contenuti.
 
    In realtà, dovremmo fare del nostro meglio per garantire la completezza della grammatica dopo il cambio di nome. Di seguito sono riportati i dati completi di `Trova` e `Sostituisci`.
   
@@ -82,7 +82,7 @@ Sostituisci: `00 A4 0A 0F A3` `Nota:` 00 `=` {`;` A4 0A 0F `=` Return (0x0F) `;`
 
 - `Replace` numero di byte
 
-  `Trova`,` Sostituisci` Il numero di byte è uguale. Ad esempio, se "Trova" è di 10 byte, anche "Sostituisci" è di 10 byte. Se "Sostituisci" è inferiore a 10 byte, riempilo con "A3" (nessuna operazione).
+  `Trova`,` Sostituisci` Il numero di byte è uguale. Ad esempio, se `Trova` è di 10 byte, anche `Sostituisci` è di 10 byte. Se `Sostituisci` è inferiore a 10 byte, riempilo con `A3` (nessuna operazione).
 
 ## Metodo di ricerca dei dati `Find`
 
