@@ -19,14 +19,14 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
    3. Modulo ACPI
    4. Tabella comparativa ASL-AML
 
-1. **Informazioni su "AOAC"**
+1. **Informazioni su `AOAC**
 
-   1. Impedire il sonno "S3"
-   2. "AOAC" disabilita la scheda grafica discreta
+   1. Impedire il sonno `S3`
+   2. `AOAC` disabilita la scheda grafica discreta
    3. Risparmio energetico profondo
-   4. Patch di riattivazione "AOAC"
-   5. Impostare lo stato "ASPM"
-   6. Disattiva automaticamente "WIFI" durante il sonno
+   4. Patch di riattivazione `AOAC`
+   5. Impostare lo stato `ASPM`
+   6. Disattiva automaticamente `WIFI` durante il sonno
 
 2. **Variabile preimpostata**
 
@@ -35,7 +35,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 3. **Dispositivi falsi**
 
-   1. Falsi "EC"
+   1. Falsi `EC`
    2. RTC0
    3. Falso sensore di luce ambientale (ALS)
 
@@ -44,8 +44,8 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 5. **Dispositivi di iniezione**
 
    1. Iniettare X86
-   2. Metodo di iniezione "PNLF"
-   3. Patch "SBUS (SMBU)"
+   2. Metodo di iniezione `PNLF`
+   3. Patch `SBUS (SMBU)`
 
 6. **Aggiungi componenti mancanti**
 
@@ -66,14 +66,14 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 12. **Patch `0D6D`**
 
-    1. Patch generale "060D"
+    1. Patch generale `060D`
     2. Patch HP `060D`
 
 13. **Fake Ethernet e ripristina Ethernet `BSD Name`**
 
 14. **Informazioni su `CMOS`**
 
-    1. Memoria "CMOS" e ***RTCMemoryFixup***
+    1. Memoria `CMOS` e ***RTCMemoryFixup***
 
 15. **Porte `ACPI` Patch` USB`**
 
@@ -83,9 +83,9 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 18. **Patch per marche specifiche**
 
-    1. Patch "Dell"
+    1. Patch `Dell`
     2. Patch `XiaoXin PRO13`
-    3. Patch "ThinkPad"
+    3. Patch `ThinkPad`
 
 19. **Dispositivo `I2C`**
 
@@ -93,8 +93,8 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 **Patch riservate**
 
-   1. Patch "IRQ" della scheda audio
-   2. Patch di ripristino "CMOS"
+   1. Patch `IRQ` della scheda audio
+   2. Patch di ripristino `CMOS`
 
 **Elenchi di carico delle unità comuni**
 
