@@ -66,7 +66,7 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
 ### Esempio (Dell Latitude 5480, percorso del dispositivo: `\ _SB.PCI0.I2C1.TPD1`)
 
--Utilizzare "Legge sulle variabili preimpostate" per vietare "TPD1".
+-Utilizzare "Legge sulle variabili preimpostate" per vietare `TPD1`.
 
   ```Swift
   Scopo (\)
@@ -90,7 +90,7 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
   }
   ```
 
--Modifica il contenuto di "TPXX"
+-Modifica il contenuto di `TPXX`
 
   -Sostituisci tutto `TPD1` con` TPXX`.
   
@@ -110,7 +110,7 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
     }
     ```
   
-  -Cercare "SDS1" (variabile usata quando "TPD1" è proibito) e modificare l'originale "If (SDS1 ...)" in "If (uno)".
+  -Cercare `SDS1` (variabile usata quando `TPD1` è proibito) e modificare l'originale `If (SDS1 ...)` in `If (uno)`.
   
   -Trova `OSYS` ed elimina (commenta) quanto segue:
   
