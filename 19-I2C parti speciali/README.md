@@ -15,24 +15,24 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
 -Proibire il dispositivo I2C originale. Vedere "Rinomina binaria e variabili preimpostate" per i dettagli.
 
-  `` Rapido
-  / *
-   * Abilitazione GPI0
-   * /
-  DefinitionBlock ("", "SSDT", 2, "OCLT", "GPI0", 0)
+  ```Swift
+  /*
+   * GPI0 enable
+   */
+  DefinitionBlock("", "SSDT", 2, "OCLT", "GPI0", 0)
   {
-      Esterno (GPEN, FieldUnitObj)
-      // Esterno (GPHD, FieldUnitObj)
-      Scopo (\)
+      External(GPEN, FieldUnitObj)
+      // External(GPHD, FieldUnitObj)
+      Scope (\)
       {
-          Se (_OSI ("Darwin"))
+          If (_OSI ("Darwin"))
           {
               GPEN = 1
               // GPHD = 2
           }
       }
   }
-  `` `
+  ```
 
 -Crea un nuovo dispositivo I2C `TPXX` e migra tutti i contenuti del dispositivo originale in` TPXX`.
 
@@ -42,19 +42,19 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
   - ** Modifica ** La parte "_STA" è:
 
-    `` Rapido
-    Metodo (_STA, 0, NotSerialized)
+    ```Swift
+    Method (_STA, 0, NotSerialized)
     {
-        Se (_OSI ("Darwin"))
+        If (_OSI ("Darwin"))
         {
-            Ritorno (0x0F)
+            Return (0x0F)
         }
-        Altro
+        Else
         {
-            Ritorno (zero)
+            Return (Zero)
         }
     }
-    `` `
+    ```
 
   - ** Risolto ** per vietare il `contenuto correlato` delle variabili utilizzate nel dispositivo I2C originale, in modo che sia conforme alla relazione logica.
 
@@ -80,16 +80,15 @@ Questo metodo fornisce una soluzione per implementare le patch Hotpatch sui disp
 
 -Crea un nuovo dispositivo `TPXX` e migra tutti i contenuti dell'originale` TPD1` in `TPXX`.
 
-  `` Rapido
-  Esterno (_SB.PCI0.I2C1, DeviceObj)
-  Ambito (_SB.PCI0.I2C1)
+  ```Swift
+  Scope (\)
   {
-      Dispositivo (TPXX)
+      If (_OSI ("Darwin"))
       {
-         Contenuto originale TPD1
+          SDS1 = 0
       }
   }
-  `` `
+  ```
 
 -Modifica il contenuto di "TPXX"
 
