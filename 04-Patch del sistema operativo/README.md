@@ -2,7 +2,7 @@
 
 ## Descrizione
 
-- **Le patch del sistema operativo** vengono utilizzate per rimuovere le restrizioni del sistema su determinati componenti. In circostanze normali, **"non consigliato"** usa **patch del sistema operativo**. Per i componenti che non possono funzionare normalmente a causa delle limitazioni del sistema, le patch devono essere personalizzate in base alle condizioni specifiche di ACPI.
+- **Le patch del sistema operativo** vengono utilizzate per rimuovere le restrizioni del sistema su determinati componenti. In circostanze normali, **`non consigliato`** usa **patch del sistema operativo**. Per i componenti che non possono funzionare normalmente a causa delle limitazioni del sistema, le patch devono essere personalizzate in base alle condizioni specifiche di ACPI.
 
 - Per una breve descrizione delle **patch del sistema operativo**, vedere l'appendice "Origine delle patch del sistema operativo".
 
@@ -28,8 +28,8 @@
   Find:     5F4F5349
   Replace:  584F5349
   ```
-  Cerca "OSI" nel DSDT originale. Se ci sono altri campi contenenti "OSI" oltre alla funzione "_OSI" (come "OSID" di notebook Dell, "OSIF" di alcuni ThinkPad e notebook Lenovo), devi prima aggiungere il diritto Questi includono la ridenominazione dei campi "OSI" (come "OSID in XSID", "OSIF in XSIF") e quindi l'aggiunta di "_OSI in XOSI".
-     Se non ci sono altri campi che contengono "OSI" eccetto la funzione "_OSI", aggiungi direttamente "_OSI a XOSI".
+  Cerca `OSI` nel DSDT originale. Se ci sono altri campi contenenti `OSI` oltre alla funzione `_OSI` (come `OSID` di notebook Dell, `OSIF` di alcuni ThinkPad e notebook Lenovo), devi prima aggiungere il diritto Questi includono la ridenominazione dei campi `OSI` (come *OSID in XSID`, `OSIF in XSIF`) e quindi l'aggiunta di `_OSI in XOSI`.
+     Se non ci sono altri campi che contengono `OSI` eccetto la funzione `_OSI`, aggiungi direttamente `_OSI a XOSI`.
 
   ## Patch: ***SSDT-OC-XOSI***
 
