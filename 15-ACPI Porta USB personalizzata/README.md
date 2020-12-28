@@ -33,7 +33,7 @@ _UPC, Package ()
 
    ** `yyyy` ** definisce il tipo di porta, fare riferimento alla tabella seguente
 
-   | ** `yyyy` ** | Tipo di porta |
+   | **`yyyy`** | Tipo Porta |
    | :------: | ----------------------------- |
    | `0x00` | USB Type `A` |
    | `0x01` | USB `Mini-AB` |
