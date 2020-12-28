@@ -8,7 +8,7 @@
 
 - Rinominato: da `_S3 a XS3`
 
-    `` testo
+    ``
     Find 5F53335F
     Replace 5853335F
     `` `
