@@ -21,8 +21,7 @@ Macchine HP, alcune parti di `ACPI` (relative a` 0D6D`) `_PRW` Il metodo è il s
   } 
   ```In 
 
- in questo caso, è possibile utilizzare il `Metodo variabile preimpostata` per completare `0D / 6D
-       patch`, come ad esempio:
+  Questa situazione può essere realizzata utilizzando il `Metodo variabile preimpostata`Patch 0D/6D , come ad esempio:
 
   ```swift 
   Scope (\) 
