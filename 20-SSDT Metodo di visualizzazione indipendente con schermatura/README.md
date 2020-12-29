@@ -21,7 +21,7 @@
 ## SSDT schermatura processo di visualizzazione indipendente
 
 - Disabilita visualizzazione indipendente durante la fase di inizializzazione.
-- Abilita il display standalone durante la sospensione della macchina per evitare che il display standalone inserisca "S3" quando è disabilitato, il che potrebbe causare l'arresto anomalo del sistema.
+- Abilita il display standalone durante la sospensione della macchina per evitare che il display standalone inserisca `S3` quando è disabilitato, il che potrebbe causare l'arresto anomalo del sistema.
 - isabilitare nuovamente il display indipendente dopo che la macchina si è svegliata.
 
 ## Combinazione di patch
