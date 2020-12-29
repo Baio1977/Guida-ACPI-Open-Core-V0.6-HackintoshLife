@@ -44,11 +44,11 @@ Aggiungendo il codice di debug alla patch ***SSDT-xxxx***, è possibile vedere l
   - Premere il tasto specificato da ***SSDT-BKeyQxx-Debug*** e osservare l'output della console. In circostanze normali, i risultati di visualizzazione sono i seguenti:
 
     ```log
-    13:19:50.542733+0800  kernel  ACPIDebug: { "ABCD-_PTS-Arg0=", 0x3, }
-    13:19:55.541826+0800  kernel  ACPIDebug: { "ABCD-_WAK-Arg0=", 0x3, }
+    13:19:50.542733+0800  kernel  ACPIDebug: { `ABCD-_PTS-Arg0=`, 0x3, }
+    13:19:55.541826+0800  kernel  ACPIDebug: { `ABCD-_WAK-Arg0=`, 0x3, }
     ```
 
-    Il risultato del display sopra è il valore di "Arg0" dopo l'ultimo sonno e risveglio.
+    Il risultato del display sopra è il valore di `Arg0` dopo l'ultimo sonno e risveglio.
 
 ## Osservazioni
 
