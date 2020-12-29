@@ -6,11 +6,11 @@
 - Diverse macchine possono definire `_PRW` in modi diversi, e anche il contenuto e la forma dei loro pacchetti di dati possono essere diversificati. L'attuale `patch 0D / 6D` dovrebbe dipendere dalla situazione specifica. Vedere la descrizione di seguito.
 - Ci aspettiamo che le versioni successive di OpenCore risolvano il problema `0D / 6D`.
 
-### Parti che potrebbero richiedere `0D / 6D
-  patch »
+### Parti che potrebbero richiedere patch `0D / 6D`
 
 - Dispositivo USB
-- `ADR` indirizzo: `0x001D0000`, nome parte:` EHC1` [6a generazione prima]
+
+  - `ADR` indirizzo: `0x001D0000`, nome parte:` EHC1` [prima della 6a generazione]
   - `ADR` indirizzo: `0x001A0000`, nome parte:` EHC2` [prima della 6a generazione]
   - `ADR` indirizzo: `0x00140000`, nome parte:` XHC`, `XHCI`,` XHC1` ecc.
   - `ADR` indirizzo: `0x00140001`, nome parte:` XDCI`
@@ -20,11 +20,11 @@
 
   - prima della 6a generazione, indirizzo `ADR`:` 0x00190000`, nome della parte: `GLAN`,` IGBE`, ecc.
   - 6a generazione e successive, indirizzo `ADR`:` 0x001F0006`, nome della parte: `GLAN`,` IGBE` ecc.
-  - Suono
+  
+- Scheda Audio integrata
 
-carta
--Prima della 6a generazione, indirizzo `ADR`:` 0x001B0000`, nome della parte: `HDEF`,` AZAL` ecc.
-  -6a generazione e successive, indirizzo `ADR`:` 0x001F0003`, nome della parte: `HDAS`,` AZAL` ecc.
+  - Prima della 6a generazione, indirizzo `ADR`:` 0x001B0000`, nome della parte: `HDEF`,` AZAL` ecc.
+  - 6a generazione e successive, indirizzo `ADR`:` 0x001F0003`, nome della parte: `HDAS`,` AZAL` ecc.
 
   **Nota 1**: Il metodo per confermare le parti precedenti cercando il nome non è affidabile. Il metodo affidabile è cercare `indirizzo ADR`, `_PRW`.
 
@@ -48,6 +48,7 @@ Questo tipo di `0D/6D patch` è adatto per modificare `0x03` (or `0x04`) to `0x0
 - Name0D renamed .plist 
   - `Name0D-03` to` 00` 
   - `Name0D-04` to` 00` 
+  
 - Name6D renamed .plist 
   - `Name6D-03` to` 00` 
   - `Name6D-04` to `00` 
@@ -65,7 +66,7 @@ Questo tipo di `0D/6D patch` è adatto per modificare `0x03` (or `0x04`) to `0x0
   - ***SSDT-GPRW*** (binary renamed data in the patch file) 
   - ***SSDT-UPRW*** (binary renamed data in the patch file ) -`Method type`
 
-Ⅱ : `Scope` 
+- Metodo : `Scope` 
 
   ```Swift 
     Scope (_SB.PCI0.XHC) 
