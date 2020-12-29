@@ -149,19 +149,19 @@ Else /* PNP0C0D sleep*/
 
   Nota 1: SLPB è il nome del dispositivo `PNP0C0E` Se confermi che non esiste un dispositivo `PNP0C0E`, aggiungi una patch: SSDT-SLPB (che si trova in `Aggiungi parti mancanti `).
 
-  Nota 2: il nome e il percorso del dispositivo "PNP0C0D" devono essere coerenti con ACPI.
+  Nota 2: il nome e il percorso del dispositivo `PNP0C0D` devono essere coerenti con ACPI.
 
 ### `PNP0C0E` Funzioni di sospensione
 
--Il processo di sonno è leggermente più veloce.
--Il processo di sospensione non può essere terminato.
+- Il processo di sonno è leggermente più veloce.
+- Il processo di sospensione non può essere terminato.
 
 ### `PNP0C0D` Funzioni di sospensione
 
--Durante il sonno, premere nuovamente il pulsante di sospensione per interrompere immediatamente il sonno.
+- Durante il sonno, premere nuovamente il pulsante di sospensione per interrompere immediatamente il sonno.
 
--Quando il display esterno è collegato, dopo aver premuto il pulsante sleep, lo schermo di lavoro diventa il display esterno (lo schermo interno è spento); premendo nuovamente il pulsante sleep, i display interno ed esterno sono normali.
+- Quando il display esterno è collegato, dopo aver premuto il pulsante sleep, lo schermo di lavoro diventa il display esterno (lo schermo interno è spento); premendo nuovamente il pulsante sleep, i display interno ed esterno sono normali.
 
 ## Precauzioni
 
--`PNP0C0E` e `PNP0C0D` nomi e percorsi dei dispositivi devono essere coerenti con ACPI.
+- `PNP0C0E` e `PNP0C0D` nomi e percorsi dei dispositivi devono essere coerenti con ACPI.
