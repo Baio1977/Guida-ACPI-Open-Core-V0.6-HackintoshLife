@@ -39,7 +39,7 @@
 ## Appendice: Definizione della memoria **CMOS** 00-3F 
 
 | Descrizione indirizzo
-| ----- | ------------------------------------------- ------- ----------------------------- |
+| ----| ------------------------------------------- ------- ----------------------------- |
 | `0` | secondi
 | `1` | Secondo allarme
 | `2` | punto |
@@ -66,14 +66,14 @@
 | `17` | Byte basso di memoria estesa |
 | `18` | Byte alto di memoria estesa |
 | `19` | Primo tipo di disco rigido principale |
-| 1A | Primo tipo di disco rigido slave |
+| `1A` | Primo tipo di disco rigido slave |
 | `1B - 1C` | Riservato |
 | `1D - 24` | Il cilindro, la testata, l'allineamento, ecc. Del primo disco rigido principale |
-| `25—2C` | Il primo cilindro del disco rigido slave, testina magnetica, coassiale, ecc. |
-| `2D` | Riservato |
+| `25—2C`   | Il primo cilindro del disco rigido slave, testina magnetica, coassiale, ecc. |
+| `2D`      | Riservato |
 | `2E - 2F` | checksum CMOS (somma 10-2D di ogni byte) |
-| `30` | Memoria estesa byte basso |
-| `31` | Byte alto di memoria estesa |
-| `32` | Data secolo Byte (19H: XIX secolo) |
-| `33` | Cartello informativo |
-| `34—3F` | Riservato |
+| `30`      | Memoria estesa byte basso |
+| `31`      | Byte alto di memoria estesa |
+| `32`      | Data secolo Byte (19H: XIX secolo) |
+| `33`      | Cartello informativo |
+| `34—3F`   | Riservato |
