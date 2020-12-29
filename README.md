@@ -21,12 +21,12 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 1. **Informazioni su `AOAC**
 
-   1. Impedire il sonno `S3`
-   2. `AOAC` disabilita la scheda grafica discreta
+   1. Impedire lo sleep `S3`
+   2. `AOAC` disabilitare la scheda grafica discreta
    3. Risparmio energetico profondo
    4. Patch di riattivazione `AOAC`
    5. Impostare lo stato `ASPM`
-   6. Disattiva automaticamente `WIFI` durante il sonno
+   6. Disattivazione automatica di `WIFI` durante il sonno
 
 2. **Variabile preimpostata**
 
@@ -58,18 +58,18 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
    3. Patch indicatore di stato della batteria
    4. Esempi
 
-9. **Disabilita EHCx**
+9. **Disabilitazione EHCx**
 
-10. **Patch estensionale `PTSWAK`**
+10. **Patch delle estensioni `PTSWAK`**
 
-11. **Metodo di regolazione del sonno `PNP0C0E`**
+11. **Metodo di regolazione dello sleep `PNP0C0E`**
 
 12. **Patch `0D6D`**
 
     1. Patch generale `060D`
     2. Patch HP `060D`
 
-13. **Fake Ethernet e ripristina Ethernet `BSD Name`**
+13. **Fake Ethernet e ripristino Ethernet `BSD Name`**
 
 14. **Informazioni su `CMOS`**
 
@@ -77,7 +77,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 15. **Porte `ACPI` Patch` USB`**
 
-16. **Disabilita i dispositivi `PCI`**
+16. **Disabilitazione dei dispositivi `PCI`**
 
 17. **ACPIDebug**
 
@@ -89,7 +89,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 19. **Dispositivo `I2C`**
 
-20. **Disabilita la scheda grafica discreta tramite `SSDT`**
+20. **Disabilitazione della scheda grafica discreta tramite `SSDT`**
 
 **Patch riservate**
 
