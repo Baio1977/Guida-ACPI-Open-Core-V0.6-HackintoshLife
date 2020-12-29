@@ -38,42 +38,42 @@
 
 ## Appendice: Definizione della memoria **CMOS** 00-3F 
 
-| Descrizione indirizzo
-| --------  | -------------------------------------------------------------------------------------------------|
-| `0`       | secondi|
-| `1`       | Secondo allarme|
-| `2`       | punto |
-| `3`       | Sub-alert |
-| `4`       | Orario lavorativo
-| `5`.      | Allarme puntuale |
-| `6`       | settimana |
-| `7`       | giorno |
-| `8`       | Mese |
-| `9`       |anno |
-| `A`       | Registro di stato A |
-| `B`       | Registro di stato B |
-| `C`       | Registro di stato C |
-| `D`       | Registro di stato D (0: batteria guasta; 80: batteria valida) |
-| `E`       | Byte di stato diagnostico |
-| `F`       | Byte di stato di arresto (definizione per diagnosi di avvio) |
-| `10`      | Tipo di unità disco floppy (Bit 7-4: Unità A, Bit 3-0: Unità B 1-360KB; 2-1,2MB; 6-1,44MB; 7-720KB)|
-| `11`      | Riservato |
-| `12`      | Tipo di disco rigido (bit 7-4: unità C, bit 3-0: unità D) |
-| `13`      | Riservato |
-| `14`      | Byte del dispositivo (numero di unità floppy, tipo di visualizzazione, coprocessore) |
-| `15`      | Low byte di memoria di base |
-| `16`      | Byte alto di memoria di base |
-| `17`      | Byte basso di memoria estesa |
-| `18`      | Byte alto di memoria estesa |
-| `19`      | Primo tipo di disco rigido principale |
-| `1A`      | Primo tipo di disco rigido slave |
-| `1B - 1C` | Riservato |
-| `1D - 24` | Il cilindro, la testata, l'allineamento, ecc. Del primo disco rigido principale |
-| `25—2C`   | Il primo cilindro del disco rigido slave, testina magnetica, coassiale, ecc. |
-| `2D`      | Riservato |
-| `2E - 2F` | checksum CMOS (somma 10-2D di ogni byte) |
-| `30`      | Memoria estesa byte basso |
-| `31`      | Byte alto di memoria estesa |
-| `32`      | Data secolo Byte (19H: XIX secolo) |
-| `33`      | Cartello informativo |
-| `34—3F`   | Riservato |
+| Descrizione |indirizzo
+|------------ | -------------------------------------------------------------------------------------------------|
+| `0`         | secondi|
+| `1`         | Secondo allarme|
+| `2`         | punto |
+| `3`         | Sub-alert |
+| `4`         | Orario lavorativo
+| `5`.        | Allarme puntuale |
+| `6`         | settimana |
+| `7`         | giorno |
+| `8`         | Mese |
+| `9`         |anno |
+| `A`         | Registro di stato A |
+| `B`         | Registro di stato B |
+| `C`         | Registro di stato C |
+| `D`         | Registro di stato D (0: batteria guasta; 80: batteria valida) |
+| `E`         | Byte di stato diagnostico |
+| `F`         | Byte di stato di arresto (definizione per diagnosi di avvio) |
+| `10`        | Tipo di unità disco floppy (Bit 7-4: Unità A, Bit 3-0: Unità B 1-360KB; 2-1,2MB; 6-1,44MB; 7-720KB)|
+| `11`        | Riservato |
+| `12`        | Tipo di disco rigido (bit 7-4: unità C, bit 3-0: unità D) |
+| `13`        | Riservato |
+| `14`        | Byte del dispositivo (numero di unità floppy, tipo di visualizzazione, coprocessore) |
+| `15`        | Low byte di memoria di base |
+| `16`        | Byte alto di memoria di base |
+| `17`        | Byte basso di memoria estesa |
+| `18`        | Byte alto di memoria estesa |
+| `19`        | Primo tipo di disco rigido principale |
+| `1A`        | Primo tipo di disco rigido slave |
+| `1B - 1C`   | Riservato |
+| `1D - 24`   | Il cilindro, la testata, l'allineamento, ecc. Del primo disco rigido principale |
+| `25—2C`     | Il primo cilindro del disco rigido slave, testina magnetica, coassiale, ecc. |
+| `2D`        | Riservato |
+| `2E - 2F`   | checksum CMOS (somma 10-2D di ogni byte) |
+| `30`        | Memoria estesa byte basso |
+| `31`        | Byte alto di memoria estesa |
+| `32`        | Data secolo Byte (19H: XIX secolo) |
+| `33`        | Cartello informativo |
+| `34—3F`     | Riservato |
