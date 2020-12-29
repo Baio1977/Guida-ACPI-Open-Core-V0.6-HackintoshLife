@@ -8,7 +8,7 @@
 
   - La patch per i tasti di luminosità della tastiera non è necessaria per alcune macchine. Applicando invece `PS2 Keyboard Mapping & Brightness Function`.
 
-  - Finora, la stragrande maggioranza delle macchine risolve il problema del "risveglio istantaneo" tramite la "patch 0D6D".
+  - Finora, la stragrande maggioranza delle macchine risolve il problema del 'risveglio istantaneo' tramite la 'patch 0D6D'.
 
   - Per le batterie, se è richiesta la suddivisione dei dati, le ridenominazioni e le patch per la batteria sono necessarie.
   
