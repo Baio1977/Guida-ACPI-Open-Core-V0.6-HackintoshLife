@@ -1,34 +1,34 @@
-# CMOS related
+# CMOS correlato
 
-## CMOS reset patch
+## Patch di ripristino CMOS
 
-### Description
+### Descrizione
 
-- Some machines will appear **`Power-on self-test error`** when shutting down or restarting, which is caused by the resetting of CMOS.
-- When using Clover, check `ACPI\FixRTC` to solve the above problems.
-- When using OpenCore, the following solutions are officially provided, see ***Sample.plist***:
-  - Install **RTCMemoryFixup.kext**
-  - `Kernel\Patch` patch: **__ZN11BCM5701Enet14getAdapterInfoEv**
-- This chapter provides an SSDT patch method to solve the above problems. This SSDT patch is essentially a counterfeit RTC, see `Preset Variable Method` and `Counterfeit Equipment`.
+- Alcune macchine appariranno **`Errore di autotest all'accensione`** all'arresto o al riavvio, causato dal ripristino del CMOS.
+- Quando si utilizza Clover, selezionare `ACPI \ FixRTC` per risolvere i problemi di cui sopra.
+- Quando si utilizza OpenCore, vengono fornite ufficialmente le seguenti soluzioni, vedere ***Sample.plist***:
+  - Installa **RTCMemoryFixup.kext**
+  - Patch `Kernel \ Patch`: **__ ZN11BCM5701Enet14getAdapterInfoEv**
+- Questo capitolo fornisce un metodo patch SSDT per risolvere i problemi di cui sopra. Questa patch SSDT è essenzialmente un RTC contraffatto, vedere `Preset Variable Method` e `Counterfeit Equipment`.
 
-### solution
+### soluzione
 
-See `15-1-CMOS Reset Patch` for details.
+Vedere `Patch di ripristino 15-1-CMOS` per i dettagli.
 
-## **CMOS** Memory and RTCMemoryFixup
+## **CMOS** Memoria e RTCMemoryFixup
 
-- When **AppleRTC** and **BIOS** conflict, you can try to use **RTCMemoryFixup** to simulate **CMOS** memory to avoid the conflict.
-- **RTCMemoryFixup** download link: <https://github.com/acidanthera/RTCMemoryFixup>
+- Quando **AppleRTC** e **BIOS** sono in conflitto, puoi provare a utilizzare **RTCMemoryFixup** per simulare la memoria **CMOS** per evitare il conflitto.
+- **RTCMemoryFixup** link per il download: <https://github.com/acidanthera/RTCMemoryFixup>
 
-### **CMOS** Memory
+### **CMOS** Memoria
 
-- **CMOS** The memory stores important data such as date, time, hardware configuration information, auxiliary settings information, startup settings, and sleep information.
-- Some **CMOS** memory space definitions:
-  - Date and time: `00-0D`
-  - Sleep information storage area: `80-AB`
-  - Power management: `B0-B4`
-  - Other
+- **CMOS** La memoria memorizza dati importanti come data, ora, informazioni sulla configurazione hardware, informazioni sulle impostazioni ausiliarie, impostazioni di avvio e informazioni sul sonno.
+- Alcune definizioni di spazio di memoria **CMOS**:
+  - Data e ora: `00-0D`
+  - Area di memorizzazione delle informazioni sul sonno: `80-AB`
+  - Risparmio energetico: `B0-B4`
+  - Altro
 
-### Simulation **CMOS** memory method
+### Metodo di memoria **CMOS** di simulazione
 
-See `15-2-CMOS Memory and RTCMemoryFixup` for details.
+Vedere `Memoria 15-2-CMOS e RTCMemoryFixup` per i dettagli.
