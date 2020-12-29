@@ -56,8 +56,8 @@ Uno dei seguenti metodi può risolvere questo problema:
 
 #### Descrizione di due modalità di sospensione
 
-- `MODE` = 1 modalità: quando si preme il pulsante di sospensione, ***patch del pulsante di sospensione*** rende `FNOK = 1`. ***SSDT-PTSWAK*** ha catturato "FNOK" come "1" e forza "Arg0 = 3" (altrimenti "Arg0 = 5"). Ripristina "FNOK = 0" dopo il risveglio. Un processo completo di sospensione e riattivazione `PNP0C0E` è terminato.
-- `MODE` = modalità 0: quando viene premuto il pulsante di sospensione, oltre a completare il processo sopra, ***SSDT-LIDpatch*** acquisisce anche `FNOK = 1` e restituisce` _LID` a `Zero` ed esegue Sonno `PNP0C0D`. Ripristina "FNOK = 0" dopo il risveglio. Un processo completo di sospensione e riattivazione di `PNP0C0D` è terminato.
+- `MODE` = 1 modalità: quando si preme il pulsante di sospensione, ***patch del pulsante di sospensione*** rende `FNOK = 1`. ***SSDT-PTSWAK*** ha catturato `FNOK` come `1` e forza `Arg0 = 3` (altrimenti `Arg0 = 5`). Ripristina `FNOK = 0` dopo il risveglio. Un processo completo di sospensione e riattivazione `PNP0C0E` è terminato.
+- `MODE` = modalità 0: quando viene premuto il pulsante di sospensione, oltre a completare il processo sopra, ***SSDT-LIDpatch*** acquisisce anche `FNOK = 1` e restituisce` _LID` a `Zero` ed esegue Sonno `PNP0C0D`. Ripristina `FNOK = 0` dopo il risveglio. Un processo completo di sospensione e riattivazione di `PNP0C0D` è terminato.
 
 Di seguito sono riportati i contenuti principali di ***SSDT-LIDpatch***:
 
@@ -110,7 +110,7 @@ Else /* PNP0C0D sleep*/
 
   Combinazione di patch:
 
-  - ***SSDT-PTSWAK***: patch completa Imposta "MODALITÀ" in base alle tue esigenze.
+  - ***SSDT-PTSWAK***: patch completa Imposta `MODALITÀ` in base alle tue esigenze.
   - ***SSDT-LIDpatch***: patch di stato del coperchio.
   - ***SSDT-FnInsert_BTNV-dell***: patch pulsante di sospensione.
 
@@ -128,9 +128,9 @@ Else /* PNP0C0D sleep*/
   - ***SSDT-LIDpatch***: patch di stato del coperchio Modifica `LID0` in `LID` nella patch.
   - ***SSDT-FnF4_Q13-X1C5th***: patch pulsante di sospensione.
   
-  **Nota 1 **: il pulsante di sospensione di X1C5th è Fn + 4 e il pulsante di sospensione di alcuni TP è Fn + F4.
+  **Nota 1**: il pulsante di sospensione di X1C5th è Fn + 4 e il pulsante di sospensione di alcuni TP è Fn + F4.
   
-  **Nota 2**: il nome del controller "LPC" della macchina TP può essere "LPC" o "LPCB".
+  **Nota 2**: il nome del controller `LPC` della macchina TP può essere `LPC` o `LPCB`.
 
 ### Altre macchine riparano il sonno `PNP0C0E`
 
