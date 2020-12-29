@@ -104,7 +104,8 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
    4. liste di caricamento di config-4-I2C + PS2
    5. Liste di caricamento dei drvices della tastiera config-5-PS2Smart
    6. liste di caricamento delle unità wireless e bluetooth config-6-Intel
-
+   
+##
 ### Credits 
 
 - Credits to：
@@ -113,4 +114,4 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
   - [Team Acidanthera](https://github.com/acidanthera) per [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg)**
 
 
-# If you need help please contact us on [Telegram](https://t.me/HackintoshLife_it) or [Web](https://www.hackintoshlife.it/)
+# Se hai bisogno di supporto qui [Telegram](https://t.me/HackintoshLife_it) o [Web](https://www.hackintoshlife.it/)
