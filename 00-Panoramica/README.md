@@ -1,33 +1,35 @@
 # Panoramica
 
-## Rinomina e patch ACPI
+## ACPI Rinomina e Patch
 
-- Il metodo di ridenominazione non è consigliato, cercare di evitarlo, ad esempio: `HDAS rename HDEF`,` EC0 rename EC`, `SSDT-OC-XOSI`. Una particolare attenzione per chi rinomina `MethodObj` (ad esempio _STA , _OSI).
-- Parlando in generale:
-  - La patch del sistema operativo non è necessaria. Se i componenti sono limitati da un sistema operativo specifico, modificare la patch ACPI di conseguenza. **Attenzione** alla `OS Patch`
+- Il metodo di rinominazione non è raccomandato, cercare di evitarlo, ad esempio `HDAS rinomina HDEF` , `EC0 rinomina EC` , `SSDT-OC-XOSI`. Una speciale **cauzione** per coloro che rinominano `MethodObj` (ad esempio _STA、 _OSI).
+- In generale:
+  - La patch del sistema operativo non è necessaria. Se i componenti sono limitati da uno specifico OS, si prega di modificare la patch ACPI di conseguenza. **Attenzione** per la `Patch OS`.
 
-  - La patch per i tasti di luminosità della tastiera non è necessaria per alcune macchine. Applicando invece `PS2 Keyboard Mapping & Brightness Function`.
+  - La patch di luminosità dei tasti della tastiera non è necessaria per alcune macchine. Si applica invece la `PS2 Keyboard Mapping & Brightness Function`.
 
-  - Finora, la stragrande maggioranza delle macchine risolve il problema del 'risveglio istantaneo' tramite la 'patch 0D6D'.
+  - Finora, la stragrande maggioranza delle macchine risolve la "scia istantanea" attraverso la "patch 0D6D".
 
-  - Per le batterie, se è richiesta la suddivisione dei dati, le ridenominazioni e le patch per la batteria sono necessarie.
+  - Per le batterie, se è necessario dividere i dati, sono necessari i nomi e le patch per la batteria.
   
-  - La maggior parte delle macchine Thinkpad richiede la `patch dell'estensione PTSWAK` per risolvere i problemi relativi al night shift.
+  - La maggior parte delle macchine Thinkpad richiede la `PTSWAK extensional patch` per risolvere i problemi relativi alla luce respiratoria.
   
-  - Il `Metodo di regolazione dello sleep PNP0C0E` è utile per quelle macchine che hanno il tasto sleep `💤` o `🌙`.
+  - Il `PNP0C0E Sleep Adjust Method` è utile per quelle macchine che hanno il tasto 💤 o 🌙. 
   
 
-- Potrebbe essere necessario disabilitare o abilitare un componente per risolvere un problema specifico. I metodi sono:
-  -`Binary Renames & Preset Variables` ----- il metodo binary rename è particolarmente efficace. **Attenzione**, è necessario valutare gli impatti negativi per i multi-boot, poiché il binary rename si applica a tutti i sistemi.
+- Potrebbe essere necessario disabilitare o abilitare un componente per risolvere un problema spcifico. I metodi sono:
+  - `Binary Renames & Preset Variables`-----Il metodo di rinomina binaria è particolarmente efficace. **Attenzione**, si dovrebbero valutare gli impatti negativi per i multi-sistemi, dato che la rinomina binaria si applica a tutti i sistemi.
   
-  - Il metodo `Fake Devices` è affidabile. **Consigliato**
+  - Il metodo dei "falsi dispositivi" è affidabile. **Raccomandare** 
 
 ## Patch importanti
 
-- ***SSDT-RTC0*** ——in `Fake devices`
+- ***SSDT-RTC0*** --under`Fake Devices`-
 
-  RTC 【PNP0B00】 in alcune macchine è disabilitato, causando un kernel panic nella fase iniziale. Usa ***SSDT-RTC0*** per patcharlo.
+  RTC【PNP0B00】 in alcune macchine è disabilitato, portando al panico nella fase iniziale. Utilizzare ***SSDT-RTC0***** per rattopparlo.
 
-- ***SSDT-EC*** ——Under`Fake EC`
+- ***SSDT-EC***** --Fake EC` -Under`Fake EC`.
 
-  Per **MacOS 10.15+**,***SSDT-EC*** è necessario se `Embedded Controller` non è denominato `EC`, altrimenti causerà un kernel panic.
+  Per **MacOS 10.15+**,***SSDT-EC*** è necessario se il `Embedded Controller` non è nominato come `EC`, altrimenti il panico.
+
+Tradotto con www.DeepL.com/Translator (versione gratuita)
