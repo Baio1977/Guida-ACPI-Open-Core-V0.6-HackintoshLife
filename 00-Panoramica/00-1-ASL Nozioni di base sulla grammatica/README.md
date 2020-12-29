@@ -12,27 +12,27 @@ Non sono uno sviluppatore di BIOS, i seguenti contenuti si basano sulla comprens
 
 ## Descrizione
 
-Prima di tutto, è necessario differenziare DSDT (Campi della tabella di descrizione del sistema differenziato) e SSDT (Campi della tabella di descrizione del sistema secondario). Sono tutte forme di "Configurazione avanzata e interfaccia di alimentazione", di cui è abbreviato in "ACPI". , lo percepiamo come una serie di tabelle per descrivere le interfacce. Di conseguenza, la funzione principale di `ACPI` è quella di fornire ai sistemi operativi alcuni servizi e informazioni. DSDT e SSDT non sono esclusi. Una caratteristica notevole di ACPI è l'utilizzo di un linguaggio specifico per creare tabelle ACPI. Questo linguaggio, ASL (ACPI Source Language), è il fulcro di questo articolo. Compiliamo ASL to AML (ACPI Machine Language) da software specifici, a loro volta, eseguiti dal sistema operativo. L'ASL è un tipo di linguaggio, deve avere i suoi ruoli.
+Prima di tutto, è necessario differenziare DSDT (Differentiated System Description Table, letteralmente Campi della tabella di descrizione del sistema differenziato) e SSDT (Secondary System Description Table, letteralmente Campi della tabella di descrizione del sistema secondario). Sono tutte forme di "Advanced Configuration and Power Interface", "Configurazione avanzata e interfaccia di alimentazione", di cui è abbreviato in "ACPI". , lo percepiamo come una serie di tabelle per descrivere le interfacce. Di conseguenza, la funzione principale di `ACPI` è quella di fornire ai sistemi operativi alcuni servizi e informazioni. DSDT e SSDT non sono esclusi. Una caratteristica notevole di ACPI è l'utilizzo di un linguaggio specifico per creare tabelle ACPI. Questo linguaggio, ASL (ACPI Source Language), è il fulcro di questo articolo. Compiliamo ASL to AML (ACPI Machine Language) da software specifici, a loro volta, eseguiti dal sistema operativo. L'ASL è un tipo di linguaggio, deve avere i suoi ruoli.
 
 ## Ruoli ASL
 
 1. La variabile non deve superare 4
 caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, senza eccezioni.
 
-2. `Scope` è simile a `{}`. Ce n'è uno e solo uno `Scope`. Pertanto, DSDT inizia con
+2. `Scope` è simile a `{}`. È presente uno e un solo `Scope`. Pertanto, DSDT inizia con
 
    ```swift
    DefinitionBlock ("xxxx", "DSDT", 0x02, "xxxx", "xxxx", xxxx)
    {
    ```
 
-   and ended by
+   e termina con
 
    ```swift
    }
    ```
 
-   Questo è `root Scope`.
+   Questo è il `root Scope`.
 
    I parametri `xxxx` si acquistano a` Nome file`,` OEMID`, `ID tabella`,` Versione OEM`. Il terzo parametro è basato sul secondo parametro. Come mostrato sopra, se il secondo parametro è **DSDT**, a sua volta, il terzo parametro è` 0x02`. Altri parametri possono essere inseriti liberamente.
 
@@ -40,7 +40,7 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
 3. Quei metodi e le variabili che iniziano con `_` sono riservati dai sistemi operativi, ecco perché alcune tabelle ASL contengono avvisi di attivazione `_T_X` dopo la decompilazione.
 
 
-4. `Method` can be defined followed by `Device` or `Scope`. As such, `method` cannot be defined without `Scope`, and the instances listed below are **invalid**.
+4. Il `Method` può essere definito se seguito da `Device` o `Scope`. In quanto, `method` non può essere definito senza `Scope`, e le istanze elencate qui sotto sono **invalid**.
 
    ```swift
    Method (xxxx, 0, NotSerialized)
@@ -53,17 +53,17 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
    }
    ```
 
-5. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` belong to root scope `\`.
+5. `\_GPE`,`\_PR`,`\_SB`,`\_SI`,`\_TZ` appartengono al root scope `\`.
 
-   - `\_GPE`--- ACPI Event handlers
+   - `\_GPE`--- Gestori degli Eventi ACPI (ACPI Event handlers)
    - `\_PR` --- CPU
-   - `\_SB` --- Devices and buses
-   - `\_SI` --- System indicator
-   - `\_TZ` --- Thermal zone
+   - `\_SB` --- Dispositivi e bus
+   - `\_SI` --- Indicatori di sistema
+   - `\_TZ` --- Gestione delle temperature
 
-   > **Components with different atrributes place under corresponding scopes. For examples:**
+   > **I componenti con attributi diversi si inseriscono al di sotto degli scope corrispondenti. Per esempio:**
 
-   - `Device (PCI0)` places under `Scope (\_SB)`
+   - `Device (PCI0)` si inseriscono sotto `Scope (\_SB)`
 
      ```swift
      Scope (\_SB)
@@ -76,9 +76,9 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
      }
      ```
 
-   - Components relate to CPU place under
+   - Componenti che riguardano la CPU da inserire
 
-     > different CPUs place variously, common scopes for instance `_PR`,`_SB`,`SCK0`
+     > Con CPU diverse si inserisce in un modo differente, ecco degli scope comuni per l'istanza `_PR`,`_SB`,`SCK0`
 
      ```swift
      Scope (_PR)
@@ -91,7 +91,7 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
      }
      ```
 
-   - `Scope (_GPE)` places event handlers
+   - `Scope (_GPE)` inserisce diversi gestori di eventi
 
       ```swift
       Scope (_GPE)
@@ -104,19 +104,19 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
       }
       ```
 
-      Yes, methods can be placed here. Caution, methods begin with **`_`** are reserved by operating systems.
+      Si, i metodi possono essere inseriti qui. Attenzione, i metodi che iniziano con **`_`** sono riservati ai sistemi operativi.
 
-6. `Device (xxxx)` also can be recognised as a scope, it cotains various descriptions to devices, e.g. `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
+6. `Device (xxxx)` viene anche riconosciuto come uno scope, contiene varie descrizioni dei dispositivi, per esempio `_ADR`,`_CID`,`_UID`,`_DSM`,`_STA`.
 
-7. Symbol `\` quotes the root scope; `^` quotes the superior scope. Similarly,`^` is superior to `^^`.
+7. Il simbolo `\` cita il root scope; `^` cita il superior scope. Allo stesso modo,`^` è superiore a `^^`.
 
-8. Symbol `_` is meaningless, it only completes the 4 characters, e.g. `_OSI`.
+8. Il simbolo `_` non ha alcun significato, semplicemente fa raggiungere 4 caratteri, per esempio `_OSI`.
 
-9. For better understanding, ACPI releases `ASL+(ASL2.0)`, it introduces C language's `+-*/=`, `<<`, `>>` and logical judgment `==`, `!=` etc.
+9. Per una migliore comprensione, le release ACPI `ASL+(ASL2.0)`, introducono dal linguaggio C `+-*/=`, `<<`, `>>` e gli operatori logici `==`, `!=` ecc.
 
-10. Methods in ASL can accept up to 7 arguments; they are represented by `Arg0` to `Arg6` and cannot be customised.
+10. I methods in ASL possono accettare fino a 7 argomenti; sono rappresentati da `Arg0` a `Arg6` e non sono personalizzabili.
 
-11. Local Variables in ASL can accept up to 8 arguments；they are represented by `Local0`~`Local7`. Definitions is not necessary, but should be initialised, in other words, assignment is needed.
+11. Le variabili locali in ASL possono accettare fino a 8 argomenti；sono rappresentati da `Local0` fino a `Local7`. Non è necessario definirli ma vanno inizializzati, in altre parole, è necessaria un'attribuzione.
 
 ## Tipo comune di dati ASL
 
@@ -130,19 +130,19 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
 
 ## Definizione delle variabili ASL
 
-- Definisci numero intero
+- Definizione di un integer
 
   ```swift
   Name (TEST, 0)
   ```
 
-- Definisci stringa
+- Definizione di una stringa
   
   ```swift
   Name (MSTR,"ASL")
   ```
 
-- Definisci pacchetto
+- Definizione di un pacchetto
 
   ```swift
   Name (_PRW, Package (0x02)
@@ -152,18 +152,18 @@ caratteri non iniziare con i digitali. Controlla solo eventuali DSDT / SSDT, sen
   })
   ```
 
-- Definisci campo buffer
+- Definizione di un buffer field
 
-  > Buffer Field 6 tipi in totale:
+  > Il buffer field si distingue in 6 tipi in totale:
 
-|     Create statement     |   size   |
-| :--------------: | :------: |
-|  CreateBitField  |  1-Bit   |
-| CreateByteField  |  8-Bit   |
-| CreateWordField  |  16-Bit  |
-| CreateDWordField |  32-Bit  |
-| CreateQWordField |  64-Bit  |
-|   CreateField    | any sizes |
+| Creazione dell'istruzione |   dimensione   |
+| :-----------------------: | :------------: |
+|       CreateBitField      |      1-Bit     |
+|       CreateByteField     |      8-Bit     |
+|       CreateWordField     |      16-Bit    | 
+|       CreateDWordField    |      32-Bit    |
+|       CreateQWordField    |      64-Bit    |
+|       CreateField         |      qualsiasi |
 
   ```swift
   CreateBitField (AAAA, Zero, CCCC)
@@ -195,21 +195,21 @@ Local1 = Local0
 
 ## Calcolo ASL
 
-|  ASL+  |  Legacy ASL  |     Examples                                                         |
-| :----: | :--------: | :----------------------------------------------------------- |
-|   +    |    Add     |    `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                    |
-|   -    |  Subtract  |     `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`               |
-|   *    |  Multiply  |     `Local0 = 1 * 2`<br/>`Multiply (1, 2, Local0)`               |
-|   /    |   Divide   |    `Local0 = 10 / 9`<br/>`Divide (10, 9, Local1(remainder), Local0(result))` |
-|   %    |    Mod     |     `Local0 = 10 % 9`<br/>`Mod (10, 9, Local0)`                  |
-|   <<   | ShiftLeft  |      `Local0 = 1 << 20`<br/>`ShiftLeft (1, 20, Local0)`           |
-|   >>   | ShiftRight |    `Local0 = 0x10000 >> 4`<br/>`ShiftRight (0x10000, 4, Local0)` |
-|   --   | Decrement  |   `Local0--`<br/>`Decrement (Local0)`                          |
-|   ++   | Increment  |   `Local0++`<br/>`Increment (Local0)`                          |
-|   &    |    And     |      `Local0 = 0x11 & 0x22`<br/>`And (0x11, 0x22, Local0)`        |
-| &#124; |     Or     |        `Local0 = 0x01`&#124;`0x02`<br/>`Or (0x01, 0x02, Local0)`  |
-|   ~    |    Not     |   `Local0 = ~(0x00)`<br/>`Not (0x00,Local0)`                   |
-|      |    Nor     |    `Nor (0x11, 0x22, Local0)`                                   |
+|  ASL+  | ASL Legacy |     Esempi                                                                    |
+| :----: | :--------: | :-----------------------------------------------------------------------------|
+|   +    |    Add     |    `Local0 = 1 + 2`<br/>`Add (1, 2, Local0)`                                  |
+|   -    |  Subtract  |     `Local0 = 2 - 1`<br/>`Subtract (2, 1, Local0)`                            |
+|   *    |  Multiply  |     `Local0 = 1 * 2`<br/>`Multiply (1, 2, Local0)`                            |
+|   /    |   Divide   |    `Local0 = 10 / 9`<br/>`Divide (10, 9, Local1(remainder), Local0(result))`  |
+|   %    |    Mod     |     `Local0 = 10 % 9`<br/>`Mod (10, 9, Local0)`                               |
+|   <<   | ShiftLeft  |      `Local0 = 1 << 20`<br/>`ShiftLeft (1, 20, Local0)`                       |
+|   >>   | ShiftRight |    `Local0 = 0x10000 >> 4`<br/>`ShiftRight (0x10000, 4, Local0)`              |
+|   --   | Decrement  |   `Local0--`<br/>`Decrement (Local0)`                                         |
+|   ++   | Increment  |   `Local0++`<br/>`Increment (Local0)`                                         |
+|   &    |    And     |      `Local0 = 0x11 & 0x22`<br/>`And (0x11, 0x22, Local0)`                    |
+| &#124; |     Or     |        `Local0 = 0x01`&#124;`0x02`<br/>`Or (0x01, 0x02, Local0)`              |
+|   ~    |    Not     |   `Local0 = ~(0x00)`<br/>`Not (0x00,Local0)`                                  |
+|        |    Nor     |    `Nor (0x11, 0x22, Local0)`                                                 |
 
 Leggere `Specifiche ACPI` per i dettagli
 
