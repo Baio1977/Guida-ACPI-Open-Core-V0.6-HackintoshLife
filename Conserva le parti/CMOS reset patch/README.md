@@ -54,7 +54,7 @@
     }
     `` `
   
-  - Se **RTC** esiste `_STA`, utilizza il metodo delle variabili preimpostate per disabilitare **RTC**. La variabile nell'esempio è "STAS" e si dovrebbe prestare attenzione all'influenza di `STAS` su altre apparecchiature e componenti quando lo si utilizza.
+  - Se **RTC** esiste `_STA`, utilizza il metodo delle variabili preimpostate per disabilitare **RTC**. La variabile nell'esempio è `STAS` e si dovrebbe prestare attenzione all'influenza di `STAS` su altre apparecchiature e componenti quando lo si utilizza.
   
     `` Rapido
     Esterno (STAS, FieldUnitObj)
