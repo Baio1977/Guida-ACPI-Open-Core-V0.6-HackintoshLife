@@ -58,7 +58,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
    3. Patch indicatore di stato della batteria
    4. Esempi
 
-9. **Disabilitazione EHCx**
+9. **Disattivazione EHCx**
 
 10. **Patch delle estensioni `PTSWAK`**
 
@@ -77,7 +77,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 15. **Porte `ACPI` Patch` USB`**
 
-16. **Disabilitazione dei dispositivi `PCI`**
+16. **Disattivazione dei dispositivi `PCI`**
 
 17. **ACPIDebug**
 
@@ -89,7 +89,7 @@ Questo repository si basa su GitBook e utilizza le azioni Github per creare il s
 
 19. **Dispositivo `I2C`**
 
-20. **Disabilitazione della scheda grafica discreta tramite `SSDT`**
+20. **Disattivazione della scheda grafica discreta tramite `SSDT`**
 
 **Patch riservate**
 
