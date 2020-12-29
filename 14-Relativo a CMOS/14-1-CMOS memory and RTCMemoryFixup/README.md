@@ -66,7 +66,7 @@
 | `17` | Byte basso di memoria estesa |
 | `18` | Byte alto di memoria estesa |
 | `19` | Primo tipo di disco rigido principale |
-| `1A` | Primo tipo di disco rigido slave |
+| 1A | Primo tipo di disco rigido slave |
 | `1B - 1C` | Riservato |
 | `1D - 24` | Il cilindro, la testata, l'allineamento, ecc. Del primo disco rigido principale |
 | `25—2C` | Il primo cilindro del disco rigido slave, testina magnetica, coassiale, ecc. |
