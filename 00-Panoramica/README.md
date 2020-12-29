@@ -24,7 +24,7 @@
 
 ## Patch importanti
 
-- ***SSDT-RTC0*** ——in `Dispositivi falsi`
+- ***SSDT-RTC0*** ——in `Fake devices`
 
   RTC 【PNP0B00】 in alcune macchine è disabilitato, causando un kernel panic nella fase iniziale. Usa ***SSDT-RTC0*** per patcharlo.
 
