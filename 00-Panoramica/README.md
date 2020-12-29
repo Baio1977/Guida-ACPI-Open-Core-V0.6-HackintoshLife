@@ -2,9 +2,9 @@
 
 ## Rinomina e patch ACPI
 
-- Il metodo di rinomina è consigliabile evitarlo, ad esempio `HDAS rename HDEF`,` EC0 rename EC`, `SSDT-OC-XOSI`. Usare con cautela , speciale per coloro che rinominano` MethodObj` (ad esempio _STA , _OSI).
+- Il metodo di ridenominazione non è consigliato, cercare di evitarlo, ad esempio: `HDAS rename HDEF`,` EC0 rename EC`, `SSDT-OC-XOSI`. Una particolare attenzione per chi rinomina `MethodObj` (ad esempio _STA , _OSI).
 - Parlando in generale:
-  - La patch del sistema operativo non è necessaria. Se i componenti sono limitati da un sistema operativo specifico, modificare la patch ACPI di conseguenza. **Attenzione** per `OS Patch`
+  - La patch del sistema operativo non è necessaria. Se i componenti sono limitati da un sistema operativo specifico, modificare la patch ACPI di conseguenza. **Attenzione** alla `OS Patch`
 
   - La patch per i tasti di luminosità della tastiera non è necessaria per alcune macchine. Applicando invece `PS2 Keyboard Mapping & Brightness Function`.
 
