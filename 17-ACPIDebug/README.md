@@ -14,7 +14,7 @@ Aggiungendo il codice di debug alla patch ***SSDT-xxxx***, è possibile vedere l
 
 ## Debug
 
-- Apri la **Console** e cerca **`Keyword`** (**` Keyword` ** da ***Patch personalizzate***)
+- Apri la **Console** e cerca **`Keyword`** (**` Keyword`** da ***Patch personalizzate***)
 - Osservare l'output della console
 
 ## Esempio
