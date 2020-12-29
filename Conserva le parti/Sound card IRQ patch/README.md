@@ -1,6 +1,6 @@
 ## Descrizione
 
-- La scheda audio della prima macchina richiede parti **HPET** **`PNP0103`** Fornisci il numero di interrupt` 0` e `8`, altrimenti la scheda audio non funzionerà normalmente. Infatti, quasi tutte le macchine '**HPET** non fornisce alcun numero di interrupt. Normalmente, i numeri di interrupt `0` e` 8` sono occupati rispettivamente da **RTC** **`PNP0B00`**, **TIMR** **`PNP0100`**
+- La scheda audio della prima macchina richiede parti **HPET** **`PNP0103`** Fornisci il numero di interrupt` 0` e `8`, altrimenti la scheda audio non funzionerà normalmente. Infatti, quasi tutte le macchine **HPET** non fornisce alcun numero di interrupt. Normalmente, i numeri di interrupt `0` e` 8` sono occupati rispettivamente da **RTC** **`PNP0B00`**, **TIMR** **`PNP0100`**
 - Per risolvere i problemi di cui sopra, è necessario correggere **HPET**, **RTC**, **TIMR** contemporaneamente.
 
 ## Principio della patch
