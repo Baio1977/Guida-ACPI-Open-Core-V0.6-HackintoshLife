@@ -1,5 +1,3 @@
-Patch # 0D / 6D
-
 ## Panoramica
 
 - `_PRW` definisce il metodo di attivazione di un componente. Il "Return" è un pacchetto composto da 2 o più byte. Per i dettagli su "_PRW", fare riferimento alla specifica ACPI.
