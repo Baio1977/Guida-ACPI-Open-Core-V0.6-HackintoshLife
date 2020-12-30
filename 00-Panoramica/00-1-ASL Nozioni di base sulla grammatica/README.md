@@ -215,7 +215,7 @@ Leggere `Specifiche ACPI` per i dettagli
 
 ## Logica ASL
 
-|  ASL+  |   Legacy ASL  | Examples             |
+|  ASL+  |   ASL Legacy  | Esempi             |
 | :----: | :-----------: | :----------------------------------------------------------- |
 |   &&   |     LAnd      |  `If (BOL1 && BOL2)`<br/>`If (LAnd(BOL1, BOL2))`              |
 |   !    |     LNot      |  `Local0 = !0`<br/>`Store (LNot(0), Local0)`                  |
@@ -227,7 +227,7 @@ Leggere `Specifiche ACPI` per i dettagli
 |   ==   |    LEqual     |  `Local0 = (Local0 == Local1)`<br/>`If (LEqual(Local0, Local1))` |
 |   !=   |   LNotEqual   |  `Local0 = (0 != 1)`<br/>`Store (LNotEqual(0, 1), Local0)`    |
 
-Solo due risultati dal calcolo logico: `0` o `1`
+Dal calcolo logico sono possibili solo due risultati : `0` o `1`
 
 ## Definizione di metodo ASL
 
@@ -275,7 +275,7 @@ Solo due risultati dal calcolo logico: `0` o `1`
 
 4. Definire il metodo serializzato
 
-   Se non definire `Serialized` o `NotSerialized`, il valore predefinito è `NotSerialized`
+   Se non si definisce `Serialized` o `NotSerialized`, il valore predefinito sarà `NotSerialized`
 
    ```swift
    Method (MADD, 2, Serialized)
@@ -287,7 +287,7 @@ Solo due risultati dal calcolo logico: `0` o `1`
    }
    ```
 
-   Sembra una `sincronizzazione multi-thread`. In altre parole, solo un'istanza può essere presente nella memoria quando il metodo è dichiarato come `Serializzato`. Normalmente l'applicazione crea un oggetto, ad esempio:
+   È un concetto molto simile alla `sincronizzazione multi-thread`. In altre parole, solo un'istanza può essere presente nella memoria quando il metodo è dichiarato come `Serialized`. Normalmente l'applicazione crea un oggetto, ad esempio:
 
    ```swift
    Method (TEST, Serialized)
@@ -335,7 +335,7 @@ Se eseguiamo `TEST` in` Dev1`, allora `TEST` in` Dev2` aspetterà fino a quando 
 |                  FreeBSD                  |   `"FreeBSD"`    |
 |                  Windows                  | `"Windows 20XX"` |
 
-> In particolare ， diverse versioni di Windows richiedono una stringa univoca ， leggi ：
+> In particolare ， diverse versioni di Windows richiedono una stringa univoca ， è possibile consultare il documento ufficiale di Microsoft ：
 >
 > <https://docs.microsoft.com/en-us/windows-hardware/drivers/acpi/winacpi-osi>
 
@@ -347,28 +347,28 @@ If (_OSI ("Darwin")) /* giudica se il sistema attuale è macOS */
 
 ### `_STA` (Stato)
 
-**Caution⚠️: two types of `_STA`，do not mix up`_STA`from`PowerResource`！！！**
+**Attenzione⚠️: Esistono due tipi di `_STA`，non si deve confondere `_STA` con `PowerResource`！！！**
 
-5 types of bit can be return from `_STA` method, explanations are listed below:
+5 tipi di bit possono essere restituiti dal metodo `_STA`, qui sotto sono indicate le spiegazioni:
 
 | Bit   | Explanations                           |
 | :-----: | :----------------------------- |
-| Bit [0] | Set if the device is present.                   |
-| Bit [1] | Set if the device is enabled and decoding its resources. |
-| Bit [2] | Set if the device should be shown in the UI.         |
-| Bit [3] | Set if the device is functioning properly (cleared if device failed its diagnostics).            |
-| Bit [4] | Set if the battery is present.             |
+| Bit [0] | Se il dispositivo è connesso.                   |
+| Bit [1] | Seil dispositivo è abilitato e sta decodificando le sue risorse. |
+| Bit [2] | Se il dispositivo deve essere mostrato nell'interfaccia utente.         |
+| Bit [3] | Se il dispositivo funziona correttamente (azzerato se il dispositivo fallisce le sue operazioni di diagnostica).            |
+| Bit [4] | Se la batteria è presente.             |
 
-Dobbiamo trasferire questi bit da esadecimale a binario. "0x0F" trasferito a `1111`, che significa abilitarlo (i primi quattro bit); mentre `Zero` significa disabilitare.
+Dobbiamo convertire questi bit da esadecimale a binario. "0x0F" viene convertito in `1111`, che significa "completamente abilitato" (i primi quattro bit); mentre `Zero` significa "completamente disabilitato".
 
-Incontriamo anche `0x0B`, `0x1F`. `1011` è una forma binaria di `0x0B`, il che significa che il dispositivo è abilitato e non autorizzato a decodificare le sue risorse. `0X0B` spesso usato in **`SSDT-PNLF`**. `0x1F` (`11111`) sembra descrivere solo il dispositivo batteria dal laptop, l'ultimo bit è utilizzato per informare il metodo di controllo del dispositivo batteria `PNP0C0A` che la batteria è presente.
+Incontriamo anche `0x0B`, `0x1F`. `1011` è una forma binaria di `0x0B`, il che significa che il dispositivo è abilitato e non autorizzato a decodificare le sue risorse. `0X0B` spesso usato in **`SSDT-PNLF`**. `0x1F` (`11111`) sarà presente solo quando sarà rilevato un controller di batteria di un laptop, l'ultimo bit è utilizzato per notfiicare al Control Method Battery Device (Metodo di controllo del dispositivo della batteria) `PNP0C0A` che la batteria è presente.
 
-> In termini di `_STA` da` PowerResource`
+> Ancora una parola di `_STA` e di` PowerResource`
 >
-> `_STA` da` PowerResource` restituisce solo` One` o` Zero`. Si prega di leggere `Specifiche ACPI` per i dettagli.
+> `_STA` da` PowerResource` restituisce solo` One` o` Zero`. Leggere `Specifiche ACPI` per i dettagli.
 
 ### `_CRS` (Impostazioni correnti delle risorse)
-`_CRS` restituisce un` Buffer`, è spesso utilizzato per acquisire dispositivi toccabili '`GPIO Pin`,` APIC Pin` per controllare la modalità di interruzione.
+`_CRS` restituisce un` Buffer`, è spesso utilizzato per acquisire dispositivi touch '`GPIO Pin`,` APIC Pin` per controllare la modalità di interruzione del dispositivo.
 
 
 ## Controllo del flusso ASL
@@ -387,11 +387,11 @@ ASL ha anche il suo metodo per controllare il flusso.
   - ElseIf
 - Stall
 
-### Branch control `If` & `Switch`
+### Controllo dei rami `If` e `Switch`
 
 #### `If`
 
-   I seguenti codici controllano se il sistema è `Darwin`, se sì allora`OSYS = 0x2710`
+   I seguenti codici controllano se il sistema è `Darwin`, se sì allora `OSYS = 0x2710`
 
    ```swift
    If (_OSI ("Darwin"))
@@ -402,7 +402,7 @@ ASL ha anche il suo metodo per controllare il flusso.
 
 #### `ElseIf`, `Else`
 
-   I seguenti codici controllano se il sistema è `Darwin`, e se il sistema non lo è `Linux`, se sì allora `OSYS = 0x07D0`
+   I seguenti codici controllano se il sistema è `Darwin`, se non lo è allora viene controllato se è `Linux`, altrimenti `OSYS = 0x07D0`
 
    ```swift
    If (_OSI ("Darwin"))
@@ -481,11 +481,11 @@ While (Local0 < 8)
 }
 ```
 
-## Citazione `Esterno`
+## Riferimento `Esterno`
 
-|    Quote Types    | External SSDT Quote| Quoted    |
+|    Tipo di riferimento    | Riferimento dell'SSDT esterno| riferito    |
 | :------------: | :------------: |  :------------------------------------ |
-|   UnknownObj    | `External (\_SB.EROR, UnknownObj`             | (avoid to use)                          |
+|   UnknownObj    | `External (\_SB.EROR, UnknownObj`             | (evitarne l'utilizzo)                          |
 |     IntObj        | `External (TEST, IntObj`                      | `Name (TEST, 0)`                                                        |
 |     StrObj        | `External (\_PR.MSTR, StrObj`                 | `Name (MSTR,"ASL")`                                                     |
 |    BuffObj       | `External (\_SB.PCI0.I2C0.TPD0.SBFB, BuffObj` | `Name (SBFB, ResourceTemplate ()`<br/>`Name (BUF0, Buffer() {"abcde"})` |
@@ -501,7 +501,7 @@ While (Local0 < 8)
 | ThermalZoneObj    | `External (\_TZ.THRM, ThermalZoneObj`         | `ThermalZone (THRM)`                                                    |
 |  BuffFieldObj      | `External (\_SB.PCI0._CRS.BBBB, BuffFieldObj` | `CreateField (AAAA, Zero, BBBB)`                                        |
 
-> DDBHandleObj is rare, no discussion
+> DDBHandleObj è, niente discussioni
 
 ## ASL CondRefOf
 
@@ -526,7 +526,7 @@ Method (SSCN, 0, NotSerialized)
 }
 ```
 
-I codici sono citati **`SSDT-I2CxConf`** Quando il sistema non è MacOS e `XSCN` esiste in `I2C0`, restituisce il valore originale.
+Questi sono codici estratti da **`SSDT-I2CxConf`**. Quando si avvia un sistema non MacOS, se è presente XSCN in I2C0 (in precedenza SSCN, è stato rinominato XSCN, creare una nuova funzione e utilizzare il nome originale SSCN), quindi restituire il valore restituito dalla funzione originale
 
 ## Conclusione
-Spero che questo articolo ti aiuti quando stai modificando DSDT / SSDT.
+Spero che questo articolo ti aiuti nella modifica di un DSDT / SSDT.
