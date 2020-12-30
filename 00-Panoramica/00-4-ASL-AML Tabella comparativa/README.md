@@ -1,6 +1,6 @@
-# Tabella comparativa binaria ACPI e ASL
+# Tabella di confronto ACPI Binario vs ASL
 
-> ASL è l'abbreviazione di ACPI Sourse Language, che letteralmente significa "codice sorgente ACPI"
+> ASL è l'abbreviazione di ACPI Sourse Language, che letteralmente significa 'codice sorgente ACPI'.
 
 |          ASL           |   Binary    |
 | :--------------------: | :---------: |
@@ -71,7 +71,7 @@
 |          Arg4          |   `0x6c`    |
 |          Arg5          |   `0x6d`    |
 |          Arg6          |   `0x6e`    |
-| **##################** | **-------** |
+| | ##################** | **-------** |
 |         Store          |   `0x70`    |
 |         Refor          |   `0x71`    |
 |          Add           |   `0x72`    |
@@ -127,7 +127,8 @@
 |      BREAK_POINT       |   `0xcc`    |
 |          ONES          |   `0xff`    |
 | **##################** | **-------** |
-| ** Operazione estesa EXT ** | ** `0x5b` ** || **##################** | **-------** |
+| **operazione_estesa EXT** | ** ** **`0x5b`** |
+| **##################** | **-------** |
 |         MUTEX          |   `0x01`    |
 |         EVENT          |   `0x02`    |
 |      COND_REF_OF       |   `0x12`    |
@@ -157,3 +158,4 @@
 |      INDEX_FIELD       |   `0x86`    |
 |       BANK_FIELD       |   `0x87`    |
 |      DATA_REGION       |   `0x88`    |
+
