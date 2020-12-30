@@ -1,22 +1,22 @@
-# Proibisci il sonno `S3`
+# Proibire il sonno 'S3' #
 
 ## Descrizione
 
-- **`S3` Sonno vietato** viene utilizzato per risolvere il problema di **interruzione del sonno** causato da alcune macchine per qualche motivo. **Interruzione del sonno** significa: la macchina non può essere riattivata normalmente dopo la sospensione, viene visualizzata come un crash, riavvio, spegnimento dopo il risveglio, ecc
+- **Disabilitare il `S3` sonno** viene utilizzato per risolvere il problema del **sonno di sonno** causato da alcune macchine per alcuni motivi. **Fallimento del sonno** è: la macchina non può essere svegliata normalmente dopo il sonno, si presenta come morta, si riavvia o si spegne dopo il risveglio, ecc.
 
-## Metodo patch
+## Metodo Patch
 
-- Rinominato: da `_S3 a XS3`
+- Cambiare il nome: `_S3 in XS3`.
 
-    ``
-    Find 5F53335F
-    Replace 5853335F
-    `` `
+  ````testo
+  Find 5F53335F
+  Replace 5853335F
+  ```
 
 - Patch
-    - ***SSDT-NameS3-disable***: È adatto per `ACPI` per descrivere il metodo di` S3` come il tipo di `Name`. Questo è il caso della maggior parte delle macchine.
-    - ***SSDT-MethodS3-disable***: Applicabile a `ACPI` per descrivere il metodo di` S3` come il tipo di `Method`.
+  - ***SSDT-NameS3-disable***: si applica se `ACPI` descrive che il metodo `S3` è del tipo `Name`, che è il caso della maggior parte delle macchine.
+  - ***SSDT-MethodS3-disable*** : Si applica se `ACPI` descrive il metodo `S3` come di tipo `Method`.
 
-## Precauzioni
+## Attenzione
 
-- Selezionare la patch corrispondente in base alla descrizione originale `ACPI` della macchina del metodo `S3`.
+- Selezionare la patch corrispondente in base alla descrizione originale `ACPI` del metodo `S3` della macchina.
