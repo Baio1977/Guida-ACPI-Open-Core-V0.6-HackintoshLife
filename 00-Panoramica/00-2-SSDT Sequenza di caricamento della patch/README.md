@@ -31,7 +31,7 @@
     }
   ```
   
-- `Add` loading sequence
+- Aggiungere la sequenza di caricamento
 
   ```XML
   Item 1
