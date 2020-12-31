@@ -1,4 +1,4 @@
-# Parti riservate
+# Parti conservate
 
-- Il nuovo driver PS2 supporta già i tasti di scelta rapida della luminosità e il componente `Tasti di scelta rapida della luminosità` non è più necessario
-- `CMOS Reset Patch` e `Sound Card IRQ Patch` non sono più applicabili
+- Il nuovo driver PS2 supporta già i Brightness Shortcuts, quindi il widget Brightness Shortcuts non è più necessario
+- Le patch di reset CMOS e le patch IRQ per schede audio non sono più disponibili
