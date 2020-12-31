@@ -29,3 +29,7 @@ Si tratta di uno script per MAC per disattivare automaticamente il WIFI Bluetoot
 
 1. modificare il rilevamento dell'installazione della birra (non più auto-installazione, richiede l'installazione manuale da parte dell'utente)
 2. necessità di cambiare la sovrascrittura per aggiungere, pulire i file spazzatura
+
+### v1.1
+
+1. Modifica la sorgente bluetil
