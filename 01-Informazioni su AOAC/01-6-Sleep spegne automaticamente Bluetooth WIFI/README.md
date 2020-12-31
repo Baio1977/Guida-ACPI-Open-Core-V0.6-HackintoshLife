@@ -1,34 +1,31 @@
 ## Introduzione
 
-Questo è uno script per MAC per disattivare automaticamente il WIFI Bluetooth in modalità di sospensione e attivare il WIFI Bluetooth al risveglio
+Si tratta di uno script per MAC per disattivare automaticamente il WIFI Bluetooth quando si dorme e per attivare il WIFI Bluetooth quando ci si sveglia.
 
-Hai solo bisogno di eseguire lo script una volta per realizzare il sonno disattivare la funzione Bluetooth WIFI
+È necessario eseguire questo script una sola volta per disattivare il WIFI Bluetooth dallo sleep
 
-## metodo di installazione
+## Metodo di installazione
 
-1. Se brew è stato installato e il software può essere aggiornato normalmente, apri il terminale, trascina install.sh nel terminale e premi Invio per eseguire l'installazione (**consigliato**)
-2. Se brew non è installato o l'installazione non riesce, apri il terminale, trascina install-without-brew.sh nel terminale e premi Invio per eseguire l'installazione
+1. Se avete installato brew e potete aggiornare il software normalmente, aprite il terminale, trascinate install.sh nel terminale ed entrate per eseguire l'installazione (**raccomandato**)
+2. Se non è installato il brew o se l'installazione fallisce, aprire il terminale, trascinare l'install-without-brew.sh nel terminale ed entrare per l'installazione.
 
-## Aggiornare
+## Aggiornamento
 
 ### V1.5
 
-  1. Risolvi il problema per cui il WIFI non può essere attivato dopo il risveglio
+ 1. Risolvere il problema che il WIFI non può essere acceso dopo il risveglio
 
-  2. Aggiungere lo script di disinstallazioneinstall.sh
+ 2. Aggiungere lo script uninstall uninstall.sh
 
 ### v1.4
 
-1. Risolvi il problema relativo all'impossibilità di disattivare il Bluetooth
+1. risolvere il problema che il bluetooth non può essere spento
 
 ### V1.3
 
-1. Non aggiungere alcun metodo di installazione della birra, non testato, auto-test
+1. aggiungere metodo di installazione no-brew, non testato, prova da solo
 
 ### v1.2
 
-1. Modificare il rilevamento dell'installazione della birra (non più installazione automatica, è necessaria l'installazione manuale)
-2. È necessario modificare la sovrascrittura da aggiungere per ripulire i file spazzatura
-
-### v1.1
-1. Modificare la sorgente bluetil
+1. modificare il rilevamento dell'installazione della birra (non più auto-installazione, richiede l'installazione manuale da parte dell'utente)
+2. necessità di cambiare la sovrascrittura per aggiungere, pulire i file spazzatura
