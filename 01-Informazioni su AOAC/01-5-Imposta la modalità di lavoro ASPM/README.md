@@ -2,79 +2,76 @@
 
 ## Descrizione
 
-- ASPM è l'acronimo di Active State Power Management, che è una soluzione di gestione dei collegamenti di alimentazione supportata dal sistema. In Gestione ASPM, prova ad accedere alla modalità di risparmio energetico quando il dispositivo PCI è inattivo.
+- ASPM, **Active State Power Management**, è uno schema di gestione dei collegamenti elettrici supportato a livello di sistema. Sotto la gestione ASPM, i dispositivi PCI tentano di entrare in modalità di risparmio energetico quando sono inattivi.
 
-- ASPM diverse modalità di lavoro
-  - L0: modalità normale.
-  - L0s: modalità Standby. La modalità L0s può entrare o uscire rapidamente dallo stato di inattività Dopo essere entrato nello stato di inattività, il dispositivo viene posto in un consumo energetico inferiore.
-  - L1 — Modalità standby a basso consumo energetico. Rispetto a L0s, L1 ridurrà ulteriormente il consumo di energia. Ma il tempo per entrare o uscire dallo stato di inattività è più lungo di L0s.
-  - L2 — Modalità alimentazione ausiliaria. leggermente.
+- L'ASPM opera in diverse modalità
+  - Modalità L0-Normale.
+  - Modalità L0s-Standby. la modalità L0s consente di entrare e uscire velocemente dallo stato di inattività. il dispositivo viene posto ad un consumo di energia inferiore dopo essere entrato nello stato di inattività.
+  - L1-Low power standby mode. l1 ridurrà ulteriormente il consumo di energia rispetto a L0s. Tuttavia, il tempo per entrare o uscire dallo stato di inattività è più lungo di L0s.
+  - L2-Modalità di alimentazione ausiliaria. Un po'.
 
-- Per macchine con tecnologia `AOAC`, provare a cambiare la modalità ASPM di `scheda di rete wireless` e `SSD` per ridurre il consumo energetico della macchina.
+- Per le macchine con tecnologia `AOAC`, provare a cambiare la modalità ASPM di `Wireless NIC`, `SSD` per ridurre il consumo di energia della macchina.
 
-## Imposta la modalità di lavoro ASPM
+## Impostare il modo operativo ASPM
 
-### Metodo di iniezione delle proprietà [**Uso preferito**]
+### metodo di iniezione "Properties" [**uso preferito**].
 
-- Iniettare `pci-aspm-default` separatamente dal PCI **dispositivo genitore** e dal suo **dispositivo figlio**
+- Iniettare il `pci-aspm-default` nel **dispositivo genitore** del PCI e nel suo **dispositivo per bambini** rispettivamente
 
   - **Dispositivo genitore**
-    - Modalità L0s / L1: `pci-aspm-default` =` 03000000` [dati]
-    - Modalità L1: `pci-aspm-default` =` 02000000` [dati]
-    - Forbido ASPM: `pci-aspm-default` =` 00000000` [dati]
-  - **Dispositivo secondario**
-    - Modalità L0s / L1: `pci-aspm-default` =` 03010000` [dati]
-    - Modalità L1: `pci-aspm-default` =` 02010000` [dati]
-    - Forbido ASPM: `pci-aspm-default` =` 00000000` [dati]
+    - Modo L0s/L1: `pci-aspm-default` = `03000000` [dati].
+    - Modo L1: `pci-aspm-default` = `02000000` [dati
+    - Disattivare ASPM: `pci-aspm-default` = `0000000000` [dati
+  - **sottodispositivo**
+    - Modo L0s/L1: `pci-aspm-default` = `03010000` [dati
+    - Modo L1: `pci-aspm-default` = `02010000` [dati
+    - Disattivare ASPM: `pci-aspm-default` = `0000000000` [dati
 
 - Esempio
 
-  L'ASPM predefinito della scheda di rete wireless Xiaoxin PRO13 è L0s / L1 e il percorso del dispositivo è: `PciRoot (0x0) / Pci (0x1C, 0x0) / Pci (0x0,0x0)`, facendo riferimento al metodo precedente, iniettando `pci-aspm-default `Cambia ASPM in L1. come segue:
+  L'ASPM di default della scheda wireless Xiaoxin PRO13 è L0s/L1, e il percorso del dispositivo è: `PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)` , fare riferimento al metodo sopra descritto, cambiare l'ASPM a L1 iniettando `pci-aspm-default` come segue
   
-  `` testo
-  PciRoot (0x0) / Pci (0x1C, 0x0)
-  pci-aspm-default = 02000000
+  ``testo
+  PciRoot(0x0)/Pci(0x1C,0x0)
+  pci-aspm-default = 0200000000
   ......
-  PciRoot (0x0) / Pci (0x1C, 0x0) / Pci (0x0,0x0)
+  PciRoot(0x0)/Pci(0x1C,0x0)/Pci(0x0,0x0)
   pci-aspm-default = 02010000
-  `` `
+  ```
 
-#### Metodo patch `SSDT`
+#### Metodo della patch "SSDT
 
-- La patch SSDT può anche impostare la modalità di lavoro ASPM. Ad esempio, impostare l'ASPM di un determinato dispositivo sulla modalità L1, vedere l'esempio per i dettagli.
+- La patch SSDT può anche impostare il modo operativo ASPM. Ad esempio, impostare un dispositivo ASPM in modalità L1, vedere l'esempio.
 
-- Il principio della patch è lo stesso di `Proibire dispositivi PCI`, fare riferimento ad esso.
+- Il principio della patch è lo stesso di ``Disable PCI Devices``, vedi.
 
 - Esempio: ***SSDT-PCI0.RPXX-ASPM***
 
-  ```Swift
-  External (_SB.PCI0.RP05, DeviceObj)
-  Scope (_SB.PCI0.RP05)
-  {
+  ````Swift
+  Esterno (_SB.PCI0.RP05, DeviceObj)
+  Ambito di applicazione (_SB.PCI0.RP05)
+  Ambito di applicazione (_SB.PCI0.RP05) {
       OperationRegion (LLLL, PCI_Config, 0x50, 0x01)
-      Field (LLLL, AnyAcc, NoLock, Preserve)
+      Campo (LLLL, AnyAcc, NoLock, Preserve)
       {
-          L1,   1
+          L1, 1
       }
   }
   
-  Scope (\)
+  Ambito di applicazione (\)
   {
-      If (_OSI ("Darwin"))
+      Se (_OSI ("Darwin"))
       {
-          \_SB.PCI0.RP05.L1 = Zero  /* Set ASPM = L1 */
+          \_SB.PCI0.RP05.L1 = Zero /* Set ASPM = L1 */
       }
   }
   ```
-  
-  **Nota 1**: il percorso della scheda di rete wireless Xiaoxin PRO13 è `_SB.PCI0.RP05`.
 
-  **Nota 2**: Quando `\ _SB.PCI0.RP05.L1 = 1`, ASPM = L0s / L1; quando` \ _SB.PCI0.RP05.L1 = 0`, ASPM = L1.
+**Nota 1**: Il percorso della scheda wireless Xiaoxin PRO13 è `_SB.PCI0.RP05`.
 
-  ## Precauzioni
+**Nota 2**: `\_SB.PCI0.RP05.L1 = 1`, ASPM = L0s/L1; `\_SB.PCI0.RP05.L1 = 0`, ASPM = L1.
 
-  - Lo strumento ***Hackintool.app*** può visualizzare la modalità di lavoro ASPM del dispositivo.
-  - Dopo aver modificato l'ASPM, se si verifica una situazione anomala, ripristinare l'ASPM.
-  Ulteriori informazioni su questo testo di originePer avere ulteriori informazioni sulla traduzione è necessario il testo di origine
-  Invia commenti
-  Riquadri laterali
+## Attenzione.
+
+- Il tool ***Hackintool.app*** consente di visualizzare la modalità di funzionamento dell'apparecchio ASPM.
+- Dopo aver cambiato ASPM, si prega di ripristinare ASPM se si verifica una condizione anomala.
