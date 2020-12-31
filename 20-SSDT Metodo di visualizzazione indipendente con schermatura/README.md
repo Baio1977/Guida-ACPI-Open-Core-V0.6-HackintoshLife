@@ -2,21 +2,20 @@
 
 ## Due metodi per bloccare il display Solo
 
-- metodo `config
+- metodo `config'
 
-  - `DeviceProperties\Add\PciRoot(0x0)/Pci(0x2,0x0)` Add
+-`DeviceProperties\Add\PciRoot(0x0)/Pci(0x2,0x0)` add
 
-    ``testo
-    disattivare-esterno-gpu 0100000000
+    ```text
+    disable-external-gpu 01000000
     ```
 
-  - Aggiungere parametri di avvio
+  -Add boot parameters
 
-    ``testo
+    ```text
     boot-args -wegnoegpu
     ```
-
-- Questo metodo** -- Metodo SSDT shield solo
+- **Questo metodo** -- Metodo SSDT shield solo
 
 ## Processo di Mascheramento SSDT Solo
 
