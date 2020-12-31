@@ -68,6 +68,6 @@
   - ***SSDT-RTC_Y-AWAC_N*** delle variabili di rinomina binaria e di preimpostazione
   - Ufficiale di OC ***SSDT-AWAC****
   - Dispositivi di contraffazione" o il funzionario di OC ***SSDT-RTC0***
-  - La patch di reset CMOS ***SSDT-RTC0-NoFlags*** ***SSDT-RTC0-NoFlags***
+  - La patch di reset CMOS ***SSDT-RTC0-NoFlags***
 - Il nome `LPCB`, il nome **Tri-Part** e il nome `IPIC` dovrebbero essere gli stessi del nome originale della parte `ACPI`.
-- Se il cerotto tre in uno non si risolve, provare ***SSDT-IPIC*** con il cerotto tre in uno al suo posto. Disattivare il dispositivo ***IPIC*** come descritto sopra per ***HPET***, ***RTC*** e ***TIMR***, quindi impersonare un dispositivo ***IPI0*** con il contenuto del dispositivo ***IPIC*** o ***PIC*** nell'originale `DSDT', e infine Basta rimuovere `IRQNoFlags{2}`, fare riferimento all'esempio.
+- Se il cerotto tre in uno non si risolve, provare ***SSDT-IPIC*** con il cerotto tre in uno al suo posto. Disattivare il dispositivo ***IPIC*** come descritto sopra per ***HPET***, ***RTC*** e ***TIMR***, quindi impersonare un dispositivo ***IPI0*** con il contenuto del dispositivo ***IPIC*** o ***PIC*** nell'originale DSDT , e infine Basta rimuovere `IRQNoFlags{2}`, fare riferimento all'esempio.
