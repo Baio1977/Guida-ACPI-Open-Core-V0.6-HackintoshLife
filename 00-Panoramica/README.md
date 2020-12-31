@@ -8,7 +8,7 @@
 
   - La patch di luminosità dei tasti della tastiera non è necessaria per alcune macchine. Si applica invece la `PS2 Keyboard Mapping & Brightness Function`.
 
-  - Finora, la stragrande maggioranza delle macchine risolve la "scia istantanea" attraverso la "patch 0D6D".
+  - Finora, la stragrande maggioranza delle macchine risolve la `scia istantanea` attraverso la `patch 0D6D`.
 
   - Per le batterie, se è necessario dividere i dati, sono necessari i nomi e le patch per la batteria.
   
@@ -20,15 +20,15 @@
 - Potrebbe essere necessario disabilitare o abilitare un componente per risolvere un problema spcifico. I metodi sono:
   - `Binary Renames & Preset Variables`-----Il metodo di rinomina binaria è particolarmente efficace. **Attenzione**, si dovrebbero valutare gli impatti negativi per i multi-sistemi, dato che la rinomina binaria si applica a tutti i sistemi.
   
-  - Il metodo dei "falsi dispositivi" è affidabile. **Raccomandare** 
+  - Il metodo dei `falsi dispositivi` è affidabile. **Raccomandare** 
 
 ## Patch importanti
 
 - ***SSDT-RTC0*** --under`Fake Devices`-
 
-  RTC【PNP0B00】 in alcune macchine è disabilitato, portando al panico nella fase iniziale. Utilizzare ***SSDT-RTC0***** per rattopparlo.
+  RTC【PNP0B00】 in alcune macchine è disabilitato, portando al panico nella fase iniziale. Utilizzare ***SSDT-RTC0*** per rattopparlo.
 
-- ***SSDT-EC***** --Fake EC` -Under`Fake EC`.
+- ***SSDT-EC*** --Fake EC` -Under`Fake EC`.
 
   Per **MacOS 10.15+**,***SSDT-EC*** è necessario se il `Embedded Controller` non è nominato come `EC`, altrimenti il panico.
 
