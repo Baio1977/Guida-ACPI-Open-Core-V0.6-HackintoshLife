@@ -1,12 +1,12 @@
-# Proibire il sonno 'S3' #
+# Disabilitare lo sleep 'S3' #
 
 ## Descrizione
 
-- **Disabilitare il `S3` sonno** viene utilizzato per risolvere il problema del **sonno di sonno** causato da alcune macchine per alcuni motivi. **Fallimento del sonno** è: la macchina non può essere svegliata normalmente dopo il sonno, si presenta come morta, si riavvia o si spegne dopo il risveglio, ecc.
+- **Disabilitare lo sleep `S3`** viene utilizzato per risolvere il problema dello **Sleep perenne** causato da alcune macchine per alcuni motivi. Lo **Sleep perenne** in sintesi consiste nel non poter più "risvegliare" la macchina normalmente dopo lo sleep, presentandosi come morta, oppure che si riavvii o si spenga dopo il risveglio, ecc.
 
-## Metodo Patch
+## Metodo di Patch
 
-- Cambiare il nome: `_S3 in XS3`.
+- Rinominando: `_S3` in `XS3`.
 
   ````testo
   Find 5F53335F
