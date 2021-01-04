@@ -1,4 +1,4 @@
-# Il lignuaggio di programmazione ACPI
+# L'ACPI Source Language (ASL)
 
 > Questa guida è tradotta da PCBeta, Pubblicata il 2011-11-21 11:16:20, Dall'autore: suhetao.
 >
