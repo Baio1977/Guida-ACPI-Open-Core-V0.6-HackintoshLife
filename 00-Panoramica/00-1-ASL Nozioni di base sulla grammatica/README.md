@@ -1,8 +1,8 @@
-# ACPI linguaggio del codice
+# Il lignuaggio di programmazione ACPI
 
-> Questa guida è citata da PCBeta, Pubblicato il 2011-11-21 11:16:20, Autore: suhetao.
+> Questa guida è tradotta da PCBeta, Pubblicata il 2011-11-21 11:16:20, Dall'autore: suhetao.
 >
-> Contrassegnato e corretto da Bat.bat (williambj1) il 14-2-2020.
+> Contrassegnata e corretta da Bat.bat (williambj1) il 14-2-2020.
 >
 > <http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=944566&archive=2&extra=page%3D1&page=1>
 
