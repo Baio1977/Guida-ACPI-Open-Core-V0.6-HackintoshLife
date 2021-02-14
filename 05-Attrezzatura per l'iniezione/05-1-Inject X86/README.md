@@ -22,7 +22,7 @@ Iniettare X86 per realizzare la gestione energetica della CPU.
       }
   ```
 
-In base al risultato della query, seleziona il file di iniezione *** SSDT-PLUG-_PR.CPU0 ***
+In base al risultato della query, seleziona il file di iniezione ***SSDT-PLUG-_PR.CPU0***
 
    Un altro esempio:
 
@@ -48,9 +48,9 @@ In base al risultato della query, seleziona il file di iniezione *** SSDT-PLUG-_
       }
   ```
 
-In base al risultato della query, seleziona il file di iniezione: *** SSDT-PLUG-_SB.PR00 ***
+In base al risultato della query, seleziona il file di iniezione: ***SSDT-PLUG-_SB.PR00***
 
--Se il risultato della query e il nome del file della patch ** non possono corrispondere **, scegliere un file come campione e modificare il contenuto del file della patch da soli.
+-Se il risultato della query e il nome del file della patch **non possono corrispondere**, scegliere un file come campione e modificare il contenuto del file della patch da soli.
 
 ## Nota
 
