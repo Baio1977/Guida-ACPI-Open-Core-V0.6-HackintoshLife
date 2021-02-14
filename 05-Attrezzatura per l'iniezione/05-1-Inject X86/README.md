@@ -6,7 +6,7 @@ Iniettare X86 per realizzare la gestione energetica della CPU.
 
 ## Istruzioni per l'uso
 
--Cerca "Processore" in DSDT, come ad esempio:
+-Cerca "Processore" in DSDT, esempio:
 
   ```Swift
       Scope (_PR)
@@ -21,10 +21,7 @@ Iniettare X86 per realizzare la gestione energetica della CPU.
           Processor (CPU7, 0x08, 0x00001810, 0x06){}
       }
   ```
-
-In base al risultato della query, seleziona il file di iniezione ***SSDT-PLUG-_PR.CPU0***
-
-   Un altro esempio:
+  altro esempio:
 
   ```Swift
       Scope (_SB)
@@ -48,9 +45,9 @@ In base al risultato della query, seleziona il file di iniezione ***SSDT-PLUG-_P
       }
   ```
 
-In base al risultato della query, seleziona il file di iniezione: ***SSDT-PLUG-_SB.PR00***
+In base al risultato della ricerca, seleziona il file di iniezione ***SSDT-PLUG-_PR.CPU0*** oppure ***SSDT-PLUG-_SB.PR00*** .
 
--Se il risultato della query e il nome del file della patch **non possono corrispondere**, scegliere un file come campione e modificare il contenuto del file della patch da soli.
+-Se il risultato della ricerca e il nome del file della patch **non possono corrispondere**, scegliere un file come campione e modificare il contenuto del file della patch da soli.
 
 ## Nota
 
